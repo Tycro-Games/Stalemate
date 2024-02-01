@@ -45,16 +45,18 @@ public class Board : MonoBehaviour
         {
             // Create square
             var index = x + y * sizeX;
-            squares[index] = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            squares[index] = new GameObject();
+            squares[index].AddComponent<BoxCollider2D>();
             var square = squares[index].transform;
             square.parent = transform;
             square.name = (x, y).ToString();
             square.position = new Vector2(x, y);
-            var squareMaterial = ResetSquareColours(squareShader, index);
 
-            squareRenderers[x, y] = square.gameObject.GetComponent<MeshRenderer>();
+            //var squareMaterial = ResetSquareColours(squareShader, index);
 
-            squareRenderers[x, y].material = squareMaterial;
+            //squareRenderers[x, y] = square.gameObject.GetComponent<MeshRenderer>();
+
+            //squareRenderers[x, y].material = squareMaterial;
 
             //// Create piece sprite renderer for current square
             //var pieceRenderer = new GameObject("Piece").AddComponent<SpriteRenderer>();
