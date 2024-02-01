@@ -49,8 +49,7 @@ public class Board : MonoBehaviour
             var square = squares[index].transform;
             square.parent = transform;
             square.name = (x, y).ToString();
-            square.position = new Vector3(x, 0, y);
-            square.rotation = Quaternion.LookRotation(-Vector3.up);
+            square.position = new Vector2(x, y);
             var squareMaterial = ResetSquareColours(squareShader, index);
 
             squareRenderers[x, y] = square.gameObject.GetComponent<MeshRenderer>();
