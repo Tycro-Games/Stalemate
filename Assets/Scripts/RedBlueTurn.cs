@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class RedBlueTurn : MonoBehaviour
 {
     private int maxPoints = 0;
+    private int currentPoints = 0;
     private bool isRedFirst = false;
     [SerializeField] private UnityEvent onNextTurn;
     [SerializeField] private UnityEvent onRedTurn;
@@ -29,5 +30,7 @@ public class RedBlueTurn : MonoBehaviour
         {
             onBlueTurn?.Invoke();
         }
+
+        currentPoints = maxPoints;
     }
 }
