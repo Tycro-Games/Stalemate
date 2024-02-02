@@ -46,7 +46,8 @@ public class Board : MonoBehaviour
             var index = x + y * sizeX;
             squares[index] = new GameObject();
             squares[index].AddComponent<BoxCollider2D>();
-            var spriteRenderer = squares[index].AddComponent<SpriteRenderer>();
+            var spriteRenderer = new GameObject().AddComponent<SpriteRenderer>();
+            spriteRenderer.transform.parent = squares[index].transform;
             var square = squares[index].transform;
             square.parent = transform;
             square.name = (x, y).ToString();
