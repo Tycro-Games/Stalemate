@@ -7,7 +7,7 @@ namespace Bogadanul.Assets.Scripts.Utility
     {
         private Transform cursorTransform = null;
 
-        [SerializeField] private float smooth = 5.0f;
+        [SerializeField] private float speed = 5.0f;
 
         private Vector2 lastPos = Vector2.zero;
         private Camera mainCam;
@@ -40,7 +40,7 @@ namespace Bogadanul.Assets.Scripts.Utility
         private void Update()
         {
             transform.position = Vector2.Lerp(transform.position, mainCam.ScreenToWorldPoint(MousePosition(true)),
-                smooth * Time.unscaledDeltaTime);
+                speed * Time.unscaledDeltaTime);
         }
 
         private void Start()
