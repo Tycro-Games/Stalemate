@@ -19,7 +19,7 @@ internal struct DotLineCoordinates
     }
 }
 
-[ExecuteInEditMode]
+
 public class Board : MonoBehaviour
 {
     [SerializeField] private int sizeX = 4;
@@ -29,6 +29,7 @@ public class Board : MonoBehaviour
     [SerializeField] private Sprite middleVerticalLines;
     [SerializeField] private List<DotLineCoordinates> dotLinesCoordinates = new();
     [SerializeField] private Sprite dotLine;
+    [HideInInspector] public bool shouldUpdate;
 
 
     public GameObject[] squares;
@@ -43,15 +44,18 @@ public class Board : MonoBehaviour
             var board = (Board)target;
 
             // Create a button outside the inspector
-            if (GUILayout.Button("Manual Update"))
+            if (GUILayout.Button("Manual Update") || board.shouldUpdate)
+            {
                 // Call the CreateBoard method when the button is clicked
                 board.CreateBoard();
+                board.shouldUpdate = false;
+            }
         }
     }
 #endif
     private void OnValidate()
     {
-        CreateBoard();
+        shouldUpdate = true;
     }
 
     private void CreateBoard()
@@ -131,14 +135,13 @@ public class Board : MonoBehaviour
 
     private void DeleteBoard()
     {
-        // Check if the squares array is not null
+        if (squares == null)
+            squares = new GameObject[sizeX * sizeY];
+
         if (squares.Length > 0)
             for (var x = 0; x < squares.Length; x++)
                 // Check if the element in the array is not null
                 if (squares[x] != null)
-                    // Destroy the game object
                     DestroyImmediate(squares[x]);
-
-        squares = new GameObject[sizeX * sizeY];
     }
 }
