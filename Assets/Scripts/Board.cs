@@ -1,8 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+
+[Serializable]
+internal struct DotLineCoordinates
+{
+    public int x;
+    public int y;
+    public float isUp;
+
+    public DotLineCoordinates(int x, int y, float sign)
+    {
+        this.x = x;
+        this.y = y;
+        isUp = sign;
+    }
+}
 
 [ExecuteInEditMode]
 public class Board : MonoBehaviour
@@ -11,6 +26,9 @@ public class Board : MonoBehaviour
     [SerializeField] private int sizeY = 5;
 
     [SerializeField] private Sprite[] spritesOrder;
+    [SerializeField] private Sprite middleVerticalLines;
+    [SerializeField] private List<DotLineCoordinates> dotLinesCoordinates = new();
+    [SerializeField] private Sprite dotLine;
 
 
     public GameObject[] squares;
@@ -25,12 +43,17 @@ public class Board : MonoBehaviour
             var board = (Board)target;
 
             // Create a button outside the inspector
-            if (GUILayout.Button("Create Board"))
+            if (GUILayout.Button("Manual Update"))
                 // Call the CreateBoard method when the button is clicked
                 board.CreateBoard();
         }
     }
 #endif
+    private void OnValidate()
+    {
+        CreateBoard();
+    }
+
     private void CreateBoard()
     {
         DeleteBoard();
@@ -46,26 +69,62 @@ public class Board : MonoBehaviour
             var index = x + y * sizeX;
             squares[index] = new GameObject();
             squares[index].AddComponent<BoxCollider2D>();
-            var spriteRenderer = new GameObject().AddComponent<SpriteRenderer>();
-            spriteRenderer.transform.parent = squares[index].transform;
+
             var square = squares[index].transform;
             square.parent = transform;
             square.name = (x, y).ToString();
             square.position = new Vector2(x, y);
 
+            if (y == sizeY / 2)
+            {
+                for (var j = 0; j < 2; j++)
+                {
+                    float sign = j == 0 ? 1 : -1;
 
-            spriteRenderer.sprite = spritesOrder[y];
+                    if (dotLinesCoordinates.Contains(new DotLineCoordinates(x, y, sign)))
+                        continue;
+                    var spriteRenderer = new GameObject().AddComponent<SpriteRenderer>();
+                    spriteRenderer.transform.parent = squares[index].transform;
+
+                    spriteRenderer.transform.localPosition = new Vector2(0.0f, 0.5f * sign);
+
+                    spriteRenderer.sprite = spritesOrder[y];
+                }
+
+                var middle = new GameObject().AddComponent<SpriteRenderer>();
+                middle.transform.parent = squares[index].transform;
+
+                middle.transform.localPosition = new Vector2(0.0f, 0.0f);
+
+                middle.sprite = middleVerticalLines;
+            }
+            else
+            {
+                var spriteRenderer = new GameObject().AddComponent<SpriteRenderer>();
+                spriteRenderer.transform.parent = squares[index].transform;
+                spriteRenderer.transform.localPosition = new Vector2(0.0f, 0.0f);
+                spriteRenderer.sprite = spritesOrder[y];
+            }
             //var squareMaterial = ResetSquareColours(squareShader, index);
-
             //squareRenderers[x, y] = square.gameObject.GetComponent<MeshRenderer>();
-
             //squareRenderers[x, y].material = squareMaterial;
-
             //// Create piece sprite renderer for current square
             //var pieceRenderer = new GameObject("Piece").AddComponent<SpriteRenderer>();
             //pieceRenderer.transform.parent = square;
             //pieceRenderer.transform.position = square.position;
             //squarePieceRenderers[x, y] = pieceRenderer;
+        }
+
+        for (var i = 0; i < dotLinesCoordinates.Count; i++)
+        {
+            var x = dotLinesCoordinates[i].x;
+            var y = dotLinesCoordinates[i].y;
+            var index = x + y * sizeX;
+
+            var dotLineRender = new GameObject().AddComponent<SpriteRenderer>();
+            dotLineRender.transform.parent = squares[index].transform;
+            dotLineRender.sprite = dotLine;
+            dotLineRender.transform.localPosition = new Vector2(0.0f, 0.5f * dotLinesCoordinates[i].isUp);
         }
     }
 
