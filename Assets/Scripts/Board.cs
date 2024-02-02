@@ -7,14 +7,13 @@ using static UnityEngine.GraphicsBuffer;
 [ExecuteInEditMode]
 public class Board : MonoBehaviour
 {
-    [SerializeField] private static int sizeX = 4;
-    [SerializeField] private static int sizeY = 5;
+    [SerializeField] private int sizeX = 4;
+    [SerializeField] private int sizeY = 5;
 
-    [SerializeField] private Color top = Color.red;
-    [SerializeField] private Color middle = Color.yellow;
-    [SerializeField] private Color buttom = Color.blue;
+    [SerializeField] private Sprite[] spritesOrder;
 
-    public GameObject[] squares = new GameObject[sizeX * sizeY];
+
+    public GameObject[] squares;
 #if UNITY_EDITOR
     [CustomEditor(typeof(Board))]
     public class BoardEditor : Editor
@@ -47,11 +46,14 @@ public class Board : MonoBehaviour
             var index = x + y * sizeX;
             squares[index] = new GameObject();
             squares[index].AddComponent<BoxCollider2D>();
+            var spriteRenderer = squares[index].AddComponent<SpriteRenderer>();
             var square = squares[index].transform;
             square.parent = transform;
             square.name = (x, y).ToString();
             square.position = new Vector2(x, y);
 
+
+            spriteRenderer.sprite = spritesOrder[y];
             //var squareMaterial = ResetSquareColours(squareShader, index);
 
             //squareRenderers[x, y] = square.gameObject.GetComponent<MeshRenderer>();
@@ -66,28 +68,17 @@ public class Board : MonoBehaviour
         }
     }
 
-    private Material ResetSquareColours(Shader shader, int index)
-    {
-        var material = new Material(shader);
-        //replace with switch
-
-
-        if (index < sizeX) material.color = buttom;
-        if (index >= sizeX * (sizeY - 1)) material.color = top;
-        if (index >= sizeX * 2 && index < sizeX * 3) material.color = middle;
-
-        return material;
-    }
 
     private void DeleteBoard()
     {
         // Check if the squares array is not null
-        if (squares != null)
-            for (var y = 0; y < sizeY; y++)
-            for (var x = 0; x < sizeX; x++)
+        if (squares.Length > 0)
+            for (var x = 0; x < squares.Length; x++)
                 // Check if the element in the array is not null
-                if (squares[x + y * sizeX] != null)
+                if (squares[x] != null)
                     // Destroy the game object
-                    DestroyImmediate(squares[x + y * sizeX]);
+                    DestroyImmediate(squares[x]);
+
+        squares = new GameObject[sizeX * sizeY];
     }
 }
