@@ -16,6 +16,11 @@ public class UnitRenderer : MonoBehaviour
         Draw();
     }
 
+    private void Reset()
+    {
+        unitSettings = null;
+    }
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();

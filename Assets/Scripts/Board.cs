@@ -1,8 +1,11 @@
+using Bogadanul.Assets.Scripts.Utility;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Playables;
 
 [Serializable]
 internal struct DotLineCoordinates
@@ -22,6 +25,25 @@ internal struct DotLineCoordinates
 
 public class Board : MonoBehaviour
 {
+    //raycaster
+    [SerializeField] private LayerMask layerToPlace = 0;
+    private Camera cam;
+    private CursorController cursorController;
+
+    private void Start()
+    {
+        cam = Camera.main;
+        cursorController = FindObjectOfType<CursorController>();
+        cursorController.OnMovement += Place;
+    }
+
+    private void OnDisable()
+    {
+        cursorController.OnMovement -= Place;
+    }
+
+
+    //board
     [SerializeField] private int sizeX = 4;
     [SerializeField] private int sizeY = 5;
 
@@ -72,7 +94,7 @@ public class Board : MonoBehaviour
             // Create square
             var index = x + y * sizeX;
             squares[index] = new GameObject();
-            squares[index].AddComponent<BoxCollider2D>();
+            squares[index].AddComponent<BoxCollider>();
 
             var square = squares[index].transform;
             square.parent = transform;
@@ -132,6 +154,12 @@ public class Board : MonoBehaviour
         }
     }
 
+    public GameObject NodeFromInput(Vector2 position)
+    {
+        if (Physics.Raycast(cam.ScreenPointToRay(position), out var hit, 50, layerToPlace))
+            return hit.collider.gameObject;
+        return null;
+    }
 
     private void DeleteBoard()
     {
@@ -143,5 +171,49 @@ public class Board : MonoBehaviour
                 // Check if the element in the array is not null
                 if (squares[x] != null)
                     DestroyImmediate(squares[x]);
+    }
+
+    public void Place(Vector3 input)
+    {
+        var place = NodeFromInput(input);
+        if (place == null) return;
+
+        Debug.Log("hover over:" + place.name);
+        //decide which row is okay to place on red/ blue
+
+        //check if the place is full or not
+//        if (currentTree != null)
+//        {
+
+//            hasPlaced = false;
+//#if UNITY_ANDROID
+//                if (first)
+//                {
+//                    first = false;
+//                }
+//#endif
+//            if (placeable)
+//            {
+//                Node n = raycaster.NodeFromInput(input);
+//                if (n == null)
+//                {
+//#if UNITY_ANDROID
+//                        //CancelPlacing();
+//#endif
+//                    return;
+//                }
+//                if (!Fruit)
+//                    CheckNode(n);
+//                else if (n.FruitPlaceable())
+//                {
+//                    CheckPlacerPath.ToSpawn(n, currentTree);
+//                    Instantiate(EffectOnPlace, n.worldPosition, Quaternion.identity);
+
+
+//                    hasPlaced = true;
+
+//                    Placing(n);
+//                }
+//            }
     }
 }
