@@ -9,6 +9,7 @@ public class UnitRenderer : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private ScriptableUnitSettings unitSettings;
+    [SerializeField] private float alpha = 1.0f;
 
     public void SetUnitSettings(ScriptableUnitSettings settings)
     {
@@ -29,7 +30,8 @@ public class UnitRenderer : MonoBehaviour
     public void Draw()
     {
         spriteRenderer.sprite = unitSettings.sprite;
-        spriteRenderer.color = unitSettings.color;
+        var color = unitSettings.color;
+        spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
         spriteRenderer.flipY = unitSettings.flipY;
     }
 }

@@ -18,7 +18,7 @@ namespace Bogadanul.Assets.Scripts.Utility
             Vector2 mousePos = transform.position;
 #if !UNITY_ANDROID
             mousePos = Input.mousePosition;
-            if (eventTrigger && Input.GetMouseButtonDown(0))
+            if (eventTrigger)
                 OnMovement?.Invoke(mousePos);
             return mousePos;
 #endif

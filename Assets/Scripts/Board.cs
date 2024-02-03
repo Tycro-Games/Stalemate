@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Playables;
 
 [Serializable]
@@ -29,6 +30,8 @@ public class Board : MonoBehaviour
     [SerializeField] private LayerMask layerToPlace = 0;
     private Camera cam;
     private CursorController cursorController;
+    [SerializeField] private UnityEvent onHover;
+    [SerializeField] private UnityEvent onNoHover;
 
     private void Start()
     {
@@ -54,7 +57,7 @@ public class Board : MonoBehaviour
     [HideInInspector] public bool shouldUpdate;
 
 
-    public GameObject[] squares;
+    public List<GameObject> squares;
 #if UNITY_EDITOR
     [CustomEditor(typeof(Board))]
     public class BoardEditor : Editor
@@ -82,18 +85,23 @@ public class Board : MonoBehaviour
 
     private void CreateBoard()
     {
+        if (sizeY == 0 || sizeX == 0)
+            return;
         DeleteBoard();
 
         var squareShader = Shader.Find("Unlit/Color");
         var squareRenderers = new MeshRenderer[sizeX, sizeY];
         //var squarePieceRenderers = new SpriteRenderer[sizeX, sizeY];
-
+        squares = new List<GameObject>(sizeX * sizeY);
         for (var y = 0; y < sizeY; y++)
         for (var x = 0; x < sizeX; x++)
         {
             // Create square
             var index = x + y * sizeX;
-            squares[index] = new GameObject();
+
+            squares.Add(new GameObject());
+
+            squares[index].layer = LayerMask.NameToLayer("Grid");
             squares[index].AddComponent<BoxCollider>();
 
             var square = squares[index].transform;
@@ -163,20 +171,21 @@ public class Board : MonoBehaviour
 
     private void DeleteBoard()
     {
-        if (squares == null)
-            squares = new GameObject[sizeX * sizeY];
-
-        if (squares.Length > 0)
-            for (var x = 0; x < squares.Length; x++)
-                // Check if the element in the array is not null
-                if (squares[x] != null)
-                    DestroyImmediate(squares[x]);
+        if (squares.Count > 0)
+            for (var x = 0; x < squares.Count; x++)
+                DestroyImmediate(squares[x]);
     }
 
     public void Place(Vector3 input)
     {
         var place = NodeFromInput(input);
-        if (place == null) return;
+        if (place == null)
+        {
+            onNoHover?.Invoke();
+            return;
+        }
+
+        onHover?.Invoke();
 
         Debug.Log("hover over:" + place.name);
         //decide which row is okay to place on red/ blue
