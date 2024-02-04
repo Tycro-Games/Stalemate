@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class CellFinder : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private LayerMask layerToPlace = 0;
+    private Camera cam;
+
+    private void Start()
     {
-        
+        cam = Camera.main;
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject NodeFromInput(Vector2 position)
     {
-        
+        if (Physics.Raycast(cam.ScreenPointToRay(position), out var hit, 50, layerToPlace))
+            return hit.collider.gameObject;
+        return null;
     }
 }
