@@ -11,10 +11,10 @@ public class PhaseSystem : MonoBehaviour
 
     private void Start()
     {
-        StartPhase();
+        StartNextPhase();
     }
 
-    public void StartPhase()
+    public void StartNextPhase()
     {
         Debug.Log("Starting phase " + phases[index].name);
 

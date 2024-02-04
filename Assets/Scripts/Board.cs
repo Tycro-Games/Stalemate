@@ -23,6 +23,11 @@ internal struct DotLineCoordinates
     }
 }
 
+public enum SquareType
+{
+    RED,
+    BLUE
+};
 
 public class Board : MonoBehaviour
 
@@ -170,6 +175,15 @@ public class Board : MonoBehaviour
         }
     }
 
+    public GameObject[] GetSquares(SquareType type)
+    {
+        if (type == SquareType.RED)
+            return squares.FindAll(x => x.transform.GetChild(0).name == "Red").ToArray();
+        else if (type == SquareType.BLUE)
+            return squares.FindAll(x => x.transform.GetChild(0).name == "Blue").ToArray();
+        else
+            return null;
+    }
 
     private void DeleteBoard()
     {
