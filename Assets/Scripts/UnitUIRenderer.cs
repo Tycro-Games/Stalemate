@@ -15,6 +15,9 @@ public class UnitUIRenderer : MonoBehaviour
 
     public void TriggerOnUnitSettings()
     {
+        var cost = unitSettings.cost;
+        var remainingPoints = RedBlueTurn.CurrentPoints;
+        if (cost > remainingPoints) return;
         onUnitSettingsChanged?.Invoke(unitSettings);
     }
 

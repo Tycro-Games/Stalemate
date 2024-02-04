@@ -115,35 +115,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6583449546303256958}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 982e94074ef6f2c4f8f6b4e399e41972, type: 3}
+  m_Script: {fileID: 11500000, guid: a8bdf3ad6cc0772429b962f6ef5d15ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8470445901098047814}
-  unitSettings: {fileID: 11400000, guid: 2eafdf4679cbdd34b9c97404a59adcac, type: 2}
+  unitSettings: {fileID: 0}
   onUnitSettingsChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnitRenderer, Assembly-CSharp
-        m_MethodName: SetUnitSettings
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnitPlacer, Assembly-CSharp
-        m_MethodName: SetUnitSettings
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []

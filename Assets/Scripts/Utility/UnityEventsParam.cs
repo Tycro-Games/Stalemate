@@ -15,6 +15,16 @@ namespace Assets.Scripts.Utility
     }
 
     [Serializable]
+    public class StringEvent : UnityEvent<string>
+    {
+    }
+
+    [Serializable]
+    public class IntEvent : UnityEvent<int>
+    {
+    }
+
+    [Serializable]
     public class UnitSettingsEvent : UnityEvent<ScriptableUnitSettings>
     {
     }

@@ -29,6 +29,12 @@ public class UnitRenderer : MonoBehaviour
 
     public void Draw()
     {
+        if (unitSettings == null)
+        {
+            spriteRenderer.sprite = null;
+            return;
+        }
+
         spriteRenderer.sprite = unitSettings.sprite;
         var color = unitSettings.color;
         spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);

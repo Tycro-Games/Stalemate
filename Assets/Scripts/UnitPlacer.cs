@@ -13,7 +13,7 @@ public class UnitPlacer : MonoBehaviour
     [SerializeField] private UnitSettingsEvent onUnitSettingsChanged;
 
 
-    [SerializeField] private UnityEvent onHover;
+    [SerializeField] private Vector3Event onHover;
     [SerializeField] private UnityEvent onClick;
     [SerializeField] private UnityEvent onNoHover;
 
@@ -41,7 +41,12 @@ public class UnitPlacer : MonoBehaviour
 
     private void Reset()
     {
-        unitSettings = null;
+        SetUnitSettings(null);
+    }
+
+    private void CheckRemainingPoints()
+    {
+        if (RedBlueTurn.CurrentPoints < unitSettings.cost) Reset();
     }
 
     public void Place(Vector3 input)
@@ -53,11 +58,31 @@ public class UnitPlacer : MonoBehaviour
             return;
         }
 
-        onHover?.Invoke();
 
         Debug.Log("hover over:" + place.name);
         //decide which row is okay to place on red/ blue
+        var nameTurn = RedBlueTurn.IsRedFirst() == true ? "Red" : "Blue";
+        var selectedRenderer = place.transform.GetChild(0).GetComponent<SpriteRenderer>();
 
+        //this is the color of square that is being hovered over
+        var nameSelected = place.transform.GetChild(1).name;
+        //the right color of the turn and free space
+        if (nameTurn != nameSelected || selectedRenderer.sprite != null)
+        {
+            onNoHover?.Invoke();
+            return;
+        }
+
+        onHover?.Invoke(place.transform.position);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
+            selectedPiece.SetUnitSettings(unitSettings);
+            RedBlueTurn.CurrentPoints -= unitSettings.cost;
+            CheckRemainingPoints();
+            onClick?.Invoke();
+        }
         //check if the place is full or not
         //        if (currentTree != null)
         //        {

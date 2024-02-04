@@ -1,14 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class RedBlueTurn : MonoBehaviour
 {
     private int maxPoints = 0;
-    private int currentPoints = 0;
-    private bool isRedFirst = false;
+    public static int CurrentPoints { get; set; }
+    private static bool isRedFirst = false;
+
+    public static bool IsRedFirst()
+    {
+        return isRedFirst;
+    }
+
+
     [SerializeField] private UnityEvent onNextTurn;
+    [SerializeField] private UnityEvent onFinishPlacement;
+    [SerializeField] private StringEvent onScoreChange;
     [SerializeField] private UnityEvent onRedTurn;
     [SerializeField] private UnityEvent onBlueTurn;
 
@@ -19,7 +29,6 @@ public class RedBlueTurn : MonoBehaviour
 
     public void NextTurn()
     {
-        onNextTurn?.Invoke();
         isRedFirst = !isRedFirst;
         if (isRedFirst)
         {
@@ -31,6 +40,14 @@ public class RedBlueTurn : MonoBehaviour
             onBlueTurn?.Invoke();
         }
 
-        currentPoints = maxPoints;
+        CurrentPoints = maxPoints;
+        onNextTurn?.Invoke();
+        UpdateText();
+    }
+
+    public void UpdateText()
+    {
+        onScoreChange?.Invoke(CurrentPoints.ToString());
+        if (CurrentPoints == 0) onFinishPlacement?.Invoke();
     }
 }

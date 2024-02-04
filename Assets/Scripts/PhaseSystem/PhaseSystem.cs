@@ -16,14 +16,14 @@ public class PhaseSystem : MonoBehaviour
 
     public void StartPhase()
     {
-        Debug.Log("Starting phase" + phases[index].name);
+        Debug.Log("Starting phase " + phases[index].name);
 
         phases[index].OnStart?.Invoke();
     }
 
     public void EndPhase()
     {
-        Debug.Log("Ending phase" + phases[index].name);
+        Debug.Log("Ending phase " + phases[index].name);
         var phase = phases[index];
 
         index = (index + 1) % phases.Count;

@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
   m_Name: DiagonalShooter
   m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: c2b9acf231341004dbb68fa8c733ff28, type: 3}
+  color: {r: 0, g: 0.17745495, b: 1, a: 1}
+  flipY: 0
+  cost: 2

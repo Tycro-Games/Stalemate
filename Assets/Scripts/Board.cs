@@ -25,27 +25,8 @@ internal struct DotLineCoordinates
 
 
 public class Board : MonoBehaviour
+
 {
-    //raycaster
-    [SerializeField] private LayerMask layerToPlace = 0;
-    private Camera cam;
-    private CursorController cursorController;
-    [SerializeField] private UnityEvent onHover;
-    [SerializeField] private UnityEvent onNoHover;
-
-    private void Start()
-    {
-        cam = Camera.main;
-        cursorController = FindObjectOfType<CursorController>();
-        cursorController.OnMovement += Place;
-    }
-
-    private void OnDisable()
-    {
-        cursorController.OnMovement -= Place;
-    }
-
-
     //board
     [SerializeField] private int sizeX = 4;
     [SerializeField] private int sizeY = 5;
@@ -58,6 +39,9 @@ public class Board : MonoBehaviour
 
 
     public List<GameObject> squares;
+
+    public List<GameObject> pieces;
+    [SerializeField] private float pieceSize = 7.0f;
 #if UNITY_EDITOR
     [CustomEditor(typeof(Board))]
     public class BoardEditor : Editor
@@ -93,6 +77,7 @@ public class Board : MonoBehaviour
         var squareRenderers = new MeshRenderer[sizeX, sizeY];
         //var squarePieceRenderers = new SpriteRenderer[sizeX, sizeY];
         squares = new List<GameObject>(sizeX * sizeY);
+        pieces = new List<GameObject>(sizeX * sizeY);
         for (var y = 0; y < sizeY; y++)
         for (var x = 0; x < sizeX; x++)
         {
@@ -100,6 +85,11 @@ public class Board : MonoBehaviour
             var index = x + y * sizeX;
 
             squares.Add(new GameObject());
+            var piece = new GameObject("Piece");
+            piece.transform.localScale = new Vector3(pieceSize, pieceSize, 1.0f);
+            piece.AddComponent<UnitRenderer>();
+            piece.transform.parent = squares[index].transform;
+            pieces.Add(piece);
 
             squares[index].layer = LayerMask.NameToLayer("Grid");
             squares[index].AddComponent<BoxCollider>();
@@ -111,6 +101,9 @@ public class Board : MonoBehaviour
 
             if (y == sizeY / 2)
             {
+                var spriteObj = new GameObject();
+                spriteObj.name = "Middle square";
+                spriteObj.transform.parent = square;
                 for (var j = 0; j < 2; j++)
                 {
                     float sign = j == 0 ? 1 : -1;
@@ -118,15 +111,16 @@ public class Board : MonoBehaviour
                     if (dotLinesCoordinates.Contains(new DotLineCoordinates(x, y, sign)))
                         continue;
                     var spriteRenderer = new GameObject().AddComponent<SpriteRenderer>();
-                    spriteRenderer.transform.parent = squares[index].transform;
+                    spriteRenderer.transform.parent = spriteObj.transform;
 
                     spriteRenderer.transform.localPosition = new Vector2(0.0f, 0.5f * sign);
 
                     spriteRenderer.sprite = spritesOrder[y];
                 }
 
-                var middle = new GameObject().AddComponent<SpriteRenderer>();
-                middle.transform.parent = squares[index].transform;
+                var middle = spriteObj.AddComponent<SpriteRenderer>();
+                middle.transform.parent = spriteObj.transform;
+
 
                 middle.transform.localPosition = new Vector2(0.0f, 0.0f);
 
@@ -138,6 +132,20 @@ public class Board : MonoBehaviour
                 spriteRenderer.transform.parent = squares[index].transform;
                 spriteRenderer.transform.localPosition = new Vector2(0.0f, 0.0f);
                 spriteRenderer.sprite = spritesOrder[y];
+                switch (y)
+                {
+                    //blue
+                    case 0:
+                        spriteRenderer.name = "Blue";
+                        break;
+                    //red
+                    case 4:
+                        spriteRenderer.name = "Red";
+
+                        break;
+                    default:
+                        break;
+                }
             }
             //var squareMaterial = ResetSquareColours(squareShader, index);
             //squareRenderers[x, y] = square.gameObject.GetComponent<MeshRenderer>();
@@ -156,73 +164,17 @@ public class Board : MonoBehaviour
             var index = x + y * sizeX;
 
             var dotLineRender = new GameObject().AddComponent<SpriteRenderer>();
-            dotLineRender.transform.parent = squares[index].transform;
+            dotLineRender.transform.parent = squares[index].transform.GetChild(0);
             dotLineRender.sprite = dotLine;
             dotLineRender.transform.localPosition = new Vector2(0.0f, 0.5f * dotLinesCoordinates[i].isUp);
         }
     }
 
-    public GameObject NodeFromInput(Vector2 position)
-    {
-        if (Physics.Raycast(cam.ScreenPointToRay(position), out var hit, 50, layerToPlace))
-            return hit.collider.gameObject;
-        return null;
-    }
 
     private void DeleteBoard()
     {
         if (squares.Count > 0)
             for (var x = 0; x < squares.Count; x++)
                 DestroyImmediate(squares[x]);
-    }
-
-    public void Place(Vector3 input)
-    {
-        var place = NodeFromInput(input);
-        if (place == null)
-        {
-            onNoHover?.Invoke();
-            return;
-        }
-
-        onHover?.Invoke();
-
-        Debug.Log("hover over:" + place.name);
-        //decide which row is okay to place on red/ blue
-
-        //check if the place is full or not
-//        if (currentTree != null)
-//        {
-
-//            hasPlaced = false;
-//#if UNITY_ANDROID
-//                if (first)
-//                {
-//                    first = false;
-//                }
-//#endif
-//            if (placeable)
-//            {
-//                Node n = raycaster.NodeFromInput(input);
-//                if (n == null)
-//                {
-//#if UNITY_ANDROID
-//                        //CancelPlacing();
-//#endif
-//                    return;
-//                }
-//                if (!Fruit)
-//                    CheckNode(n);
-//                else if (n.FruitPlaceable())
-//                {
-//                    CheckPlacerPath.ToSpawn(n, currentTree);
-//                    Instantiate(EffectOnPlace, n.worldPosition, Quaternion.identity);
-
-
-//                    hasPlaced = true;
-
-//                    Placing(n);
-//                }
-//            }
     }
 }
