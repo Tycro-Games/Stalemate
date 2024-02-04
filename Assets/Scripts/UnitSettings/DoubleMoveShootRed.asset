@@ -12,6 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
   m_Name: DoubleMoveShootRed
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 1e57a3d7380f7a744b3cdc7dfbd7d044, type: 3}
-  color: {r: 1, g: 0, b: 0.003921569, a: 1}
-  flipY: 1
