@@ -46,20 +46,20 @@ public class UnitPlacer : MonoBehaviour
 
     private void CheckRemainingPoints()
     {
-        if (RedBlueTurn.CurrentPoints < unitSettings.cost) Reset();
+        if (RedBlueTurn.currentPoints < unitSettings.cost) Reset();
     }
 
     public void Place(Vector3 input)
     {
         var place = cellFinder.NodeFromInput(input);
-        if (place == null)
+        if (place == null || unitSettings == null)
         {
             onNoHover?.Invoke();
             return;
         }
 
 
-        Debug.Log("hover over:" + place.name);
+        //Debug.Log("hover over:" + place.name);
         //decide which row is okay to place on red/ blue
         var nameTurn = RedBlueTurn.IsRedFirst() == true ? "Red" : "Blue";
         var selectedRenderer = place.transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -79,7 +79,7 @@ public class UnitPlacer : MonoBehaviour
         {
             var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
             selectedPiece.SetUnitSettings(unitSettings);
-            RedBlueTurn.CurrentPoints -= unitSettings.cost;
+            RedBlueTurn.currentPoints -= unitSettings.cost;
             CheckRemainingPoints();
             onClick?.Invoke();
         }

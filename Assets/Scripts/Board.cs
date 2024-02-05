@@ -2,6 +2,7 @@ using Bogadanul.Assets.Scripts.Utility;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -45,7 +46,7 @@ public class Board : MonoBehaviour
 
     public List<GameObject> squares;
 
-    public List<GameObject> pieces;
+    public List<UnitRenderer> pieces;
     [SerializeField] private float pieceSize = 7.0f;
 #if UNITY_EDITOR
     [CustomEditor(typeof(Board))]
@@ -82,7 +83,7 @@ public class Board : MonoBehaviour
         var squareRenderers = new MeshRenderer[sizeX, sizeY];
         //var squarePieceRenderers = new SpriteRenderer[sizeX, sizeY];
         squares = new List<GameObject>(sizeX * sizeY);
-        pieces = new List<GameObject>(sizeX * sizeY);
+        pieces = new List<UnitRenderer>(sizeX * sizeY);
         for (var y = 0; y < sizeY; y++)
         for (var x = 0; x < sizeX; x++)
         {
@@ -90,11 +91,11 @@ public class Board : MonoBehaviour
             var index = x + y * sizeX;
 
             squares.Add(new GameObject());
-            var piece = new GameObject("Piece");
+            var piece = new GameObject("Piece" + (x, y));
             piece.transform.localScale = new Vector3(pieceSize, pieceSize, 1.0f);
-            piece.AddComponent<UnitRenderer>();
+
             piece.transform.parent = squares[index].transform;
-            pieces.Add(piece);
+            pieces.Add(piece.AddComponent<UnitRenderer>());
 
             squares[index].layer = LayerMask.NameToLayer("Grid");
             squares[index].AddComponent<BoxCollider>();
@@ -175,14 +176,14 @@ public class Board : MonoBehaviour
         }
     }
 
-    public GameObject[] GetSquares(SquareType type)
+    public UnitRenderer[] GetSquares(SquareType type)
     {
         if (type == SquareType.RED)
-            return squares.FindAll(x => x.transform.GetChild(0).name == "Red").ToArray();
+            return pieces.TakeLast(sizeX).Where(x => x.GetUnitSettings() == null).ToArray();
         else if (type == SquareType.BLUE)
-            return squares.FindAll(x => x.transform.GetChild(0).name == "Blue").ToArray();
-        else
-            return null;
+            return pieces.Take(sizeX).Where(x => x.GetUnitSettings() == null).ToArray();
+        Debug.Assert(false, "Invalid square type");
+        return null;
     }
 
     private void DeleteBoard()

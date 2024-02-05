@@ -40,7 +40,6 @@ namespace Utility
         [SerializeField] private float maxAccelerationTime = 2.0f;
         [SerializeField] private float waitTime = .3f;
 
-        [SerializeField] private bool startWithFirstWaypointPosition = true;
 
         //[SerializeField]
         [Header("Gizmos settings")] //
@@ -89,6 +88,7 @@ namespace Utility
                 color = Random.ColorHSV();
 
             GetWayPoints();
+            SetUp();
         }
 
 
@@ -106,21 +106,11 @@ namespace Utility
         private void SetUp()
         {
             deviationAxis = deviationAxis.normalized;
-            if (startWithFirstWaypointPosition)
-            {
-                transform.position = waypoints[0].position;
-                currentIndex++;
-            }
+
 
             currentTime = 0.0f;
-
-            FollowPath();
         }
 
-        private void Start()
-        {
-            SetUp();
-        }
 
         public Vector3[] GetPointsInSegment(int i)
         {
@@ -153,7 +143,7 @@ namespace Utility
             return currentTime / maxAccelerationTime; //return values from 0 to 1
         }
 
-        private IEnumerator MoveToTarget(Transform target) //called until it reaches the target in Update
+        private IEnumerator MoveToTarget(Transform target)
         {
             //this function just moves a thing from point A to B
             var initialPosition = transform.position;
@@ -200,7 +190,10 @@ namespace Utility
             {
                 currentIndex++;
                 if (currentIndex >= waypoints.Count)
+                {
                     OnEndPath?.Invoke();
+                    currentIndex = 0;
+                }
             }
 
             yield return new WaitForSeconds(waitTime);

@@ -6,8 +6,9 @@ using UnityEngine.Events;
 
 public class RedBlueTurn : MonoBehaviour
 {
-    private int maxPoints = 0;
-    public static int CurrentPoints { get; set; }
+    [SerializeField] private int startingPoints = 0;
+    public static int maxPoints = 0;
+    public static int currentPoints { get; set; }
     private static bool isRedFirst = false;
 
     public static bool IsRedFirst()
@@ -27,27 +28,34 @@ public class RedBlueTurn : MonoBehaviour
         return isRedFirst;
     }
 
-    public void NextTurn()
+    private void OnEnable()
+    {
+        maxPoints = startingPoints;
+        SetValues();
+    }
+
+    public void SetValues()
     {
         isRedFirst = !isRedFirst;
         if (isRedFirst)
-        {
-            onRedTurn?.Invoke();
             maxPoints++;
-        }
-        else
-        {
-            onBlueTurn?.Invoke();
-        }
-
-        CurrentPoints = maxPoints;
-        onNextTurn?.Invoke();
+        currentPoints = maxPoints;
         UpdateText();
+    }
+
+    public void NextTurn()
+    {
+        if (isRedFirst)
+            onRedTurn?.Invoke();
+        else
+            onBlueTurn?.Invoke();
+
+        onNextTurn?.Invoke();
     }
 
     public void UpdateText()
     {
-        onScoreChange?.Invoke(CurrentPoints.ToString());
-        if (CurrentPoints == 0) onFinishPlacement?.Invoke();
+        onScoreChange?.Invoke(currentPoints.ToString());
+        if (currentPoints == 0) onFinishPlacement?.Invoke();
     }
 }

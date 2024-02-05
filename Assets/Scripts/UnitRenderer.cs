@@ -11,6 +11,11 @@ public class UnitRenderer : MonoBehaviour
     [SerializeField] private ScriptableUnitSettings unitSettings;
     [SerializeField] private float alpha = 1.0f;
 
+    public ScriptableUnitSettings GetUnitSettings()
+    {
+        return unitSettings;
+    }
+
     public void SetUnitSettings(ScriptableUnitSettings settings)
     {
         unitSettings = settings;
