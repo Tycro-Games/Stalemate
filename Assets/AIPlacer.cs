@@ -49,7 +49,11 @@ public class AIPlacer : MonoBehaviour
     {
         weight = Mathf.Min(weight, positions.Count * 5);
         if (positions.Count == 0)
+        {
+            onEnemyPlacement?.Invoke();
             return;
+        }
+
         var enemyList = RedBlueTurn.IsRedFirst() ? blueUnits : redUnits;
         var indexEnemy = new List<int>();
         var unitRenderers = new List<UnitRenderer>();
