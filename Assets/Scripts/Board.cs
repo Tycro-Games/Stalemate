@@ -176,6 +176,12 @@ public class Board : MonoBehaviour
         }
     }
 
+    public UnitRenderer PieceInFront(UnitRenderer piece, Vector2Int inFront)
+    {
+        var index = pieces.FindIndex(p => p == piece);
+        return pieces[index + inFront.x + inFront.y * sizeX];
+    }
+
     public UnitRenderer[] GetSquares(SquareType type)
     {
         if (type == SquareType.RED)

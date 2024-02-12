@@ -14,6 +14,7 @@ namespace Assets.Scripts.Utility
     {
     }
 
+
     [Serializable]
     public class StringEvent : UnityEvent<string>
     {
@@ -26,6 +27,11 @@ namespace Assets.Scripts.Utility
 
     [Serializable]
     public class UnitSettingsEvent : UnityEvent<ScriptableUnitSettings>
+    {
+    }
+
+    [Serializable]
+    public class UnitRenderEvent : UnityEvent<UnitRenderer>
     {
     }
 }

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
-  m_Name: DoubleHealth 1
+  m_Name: BaseShooterBlue
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: d3f01bf0c3e85b94aad5f79e61e17f6c, type: 3}
-  color: {r: 1, g: 0, b: 0.003921569, a: 1}
-  flipY: 1
-  cost: 4
+  sprite: {fileID: 21300000, guid: 003b1c77e9c8e5e47ac71cf4cf94a7fa, type: 3}
+  isRed: 0
+  color: {r: 0, g: 0.17745495, b: 1, a: 1}
+  flipY: 0
+  cost: 1

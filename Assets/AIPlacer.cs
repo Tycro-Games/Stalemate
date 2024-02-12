@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +11,8 @@ using Random = UnityEngine.Random;
 public class AIPlacer : MonoBehaviour
 {
     [SerializeField] private UnityEvent onFogOfWar;
-    [SerializeField] private UnityEvent onEnemyPlacement;
+    [SerializeField] private UnityEvent onEnemyEndTurn;
+    [SerializeField] private UnitRenderEvent onEnemyPlace;
     private Board board;
     [SerializeField] private ScriptableUnitSettings fogOfWarRed;
     [SerializeField] private ScriptableUnitSettings fogOfWarBlue;
@@ -30,7 +32,7 @@ public class AIPlacer : MonoBehaviour
     {
         Debug.Log("AIPlacer.AIFogOfWar");
         weight = RedBlueTurn.maxPoints;
-        //max between 1 and 4
+        // between 1 and 4
         var countEnemies = Random.Range(1 + weight / 6, Mathf.Min(weight, 5));
 
 
@@ -39,7 +41,7 @@ public class AIPlacer : MonoBehaviour
         positions = new List<UnitRenderer>(board.GetSquares(isRed ? SquareType.BLUE : SquareType.RED));
         countEnemies = Mathf.Min(countEnemies, positions.Count);
         GetListOfPositions(ref positions, countEnemies);
-        Debug.Log(positions);
+        //Debug.Log(positions);
         foreach (var unitRenderer in positions) unitRenderer.SetUnitSettings(fogOfWar);
 
         onFogOfWar?.Invoke();
@@ -50,7 +52,7 @@ public class AIPlacer : MonoBehaviour
         weight = Mathf.Min(weight, positions.Count * 5);
         if (positions.Count == 0)
         {
-            onEnemyPlacement?.Invoke();
+            onEnemyEndTurn?.Invoke();
             return;
         }
 
@@ -87,20 +89,25 @@ public class AIPlacer : MonoBehaviour
 
             for (var i = 0; i < indexEnemy.Count; i++)
                 if (unitRenderers[i].GetUnitSettings().cost < 5)
-                    unitRenderers[i].SetUnitSettings(enemyList[enemyIndicies[i]]);
+                    SetUnitRenderer(unitRenderers[i], enemyList[enemyIndicies[i]]);
                 else
-                    unitRenderers[i].SetUnitSettings(enemyList[enemyList.Count - 1]);
+                    SetUnitRenderer(unitRenderers[i], enemyList[enemyList.Count - 1]);
         }
         else
 
         {
             for (var i = 0; i < unitRenderers.Count; i++)
-                unitRenderers[i].SetUnitSettings(enemyList[indexEnemy[i]]);
+                SetUnitRenderer(unitRenderers[i], enemyList[indexEnemy[i]]);
         }
 
-        onEnemyPlacement?.Invoke();
+        onEnemyEndTurn?.Invoke();
     }
 
+    private void SetUnitRenderer(UnitRenderer unitRenderer, ScriptableUnitSettings settings)
+    {
+        unitRenderer.SetUnitSettings(settings);
+        onEnemyPlace?.Invoke(unitRenderer);
+    }
 
     private ScriptableUnitSettings ChooseEnemy(int minWeight, int maxWeight, List<ScriptableUnitSettings> enemies)
     {

@@ -14,7 +14,13 @@ public class UnitPlacer : MonoBehaviour
 
 
     [SerializeField] private Vector3Event onHover;
-    [SerializeField] private UnityEvent onClick;
+
+    [Tooltip("Triggered where the unit was placed")] [SerializeField]
+    private UnitRenderEvent onClick;
+
+    [Tooltip("Triggered after the unit placement")] [SerializeField]
+    private UnityEvent onPlace;
+
     [SerializeField] private UnityEvent onNoHover;
 
 
@@ -79,9 +85,10 @@ public class UnitPlacer : MonoBehaviour
         {
             var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
             selectedPiece.SetUnitSettings(unitSettings);
+            onClick?.Invoke(selectedPiece);
             RedBlueTurn.currentPoints -= unitSettings.cost;
             CheckRemainingPoints();
-            onClick?.Invoke();
+            onPlace?.Invoke();
         }
         //check if the place is full or not
         //        if (currentTree != null)
