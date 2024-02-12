@@ -12,6 +12,7 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private float timeBeforeMove = 1.0f;
     [SerializeField] private float timeAfterMove = 1.0f;
     [SerializeField] private UnityEvent onMoveEnd;
+    [SerializeField] private UnityEvent onAttackEnd;
     private Board board;
 
     private void Start()
@@ -33,6 +34,21 @@ public class UnitManager : MonoBehaviour
         StartCoroutine(Movement(RedBlueTurn.IsRedFirst()));
     }
 
+    public void AttackCurrentSide()
+    {
+        StartCoroutine(Attack(RedBlueTurn.IsRedFirst()));
+    }
+
+    public void MoveOtherSide()
+    {
+        StartCoroutine(Movement(!RedBlueTurn.IsRedFirst()));
+    }
+
+    public void AttackOtherSide()
+    {
+        StartCoroutine(Attack(!RedBlueTurn.IsRedFirst()));
+    }
+
     private IEnumerator Movement(bool isRed)
     {
         yield return new WaitForSeconds(timeBeforeMove);
@@ -44,6 +60,32 @@ public class UnitManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeAfterMove);
         onMoveEnd?.Invoke();
+    }
+
+    private IEnumerator Attack(bool isRed)
+    {
+        yield return new WaitForSeconds(timeBeforeMove);
+        if (isRed)
+        {
+            AttackUnits(ref RedUnits, inFrontRed);
+            CleanNullEnemies(ref BlueUnits);
+        }
+        else
+        {
+            AttackUnits(ref BlueUnits, inFrontBlue);
+            CleanNullEnemies(ref RedUnits);
+        }
+
+
+        yield return new WaitForSeconds(timeAfterMove);
+        onAttackEnd?.Invoke();
+    }
+
+    private void CleanNullEnemies(ref List<UnitRenderer> units)
+    {
+        for (var i = units.Count - 1; i >= 0; i--)
+            if (units[i].GetUnitSettings() == null)
+                units.RemoveAt(i);
     }
 
     private void MoveUnits(ref List<UnitRenderer> units, Vector2Int inFront)
@@ -61,7 +103,21 @@ public class UnitManager : MonoBehaviour
         }
     }
 
-    public void Attack()
+    public void AttackUnits(ref List<UnitRenderer> units, Vector2Int inFront)
     {
+        for (var i = 0; i < units.Count; i++)
+        {
+            var newSquare = board.PieceInFront(units[i], inFront);
+            Debug.Log(units[i].name);
+            var attackedSquareSettings = newSquare.GetUnitSettings();
+            var squareSettings = units[i].GetUnitSettings();
+            if (attackedSquareSettings == null || attackedSquareSettings.isRed == squareSettings.isRed)
+                continue;
+
+            //check health of the unit
+
+            //if health is 0, remove the unit
+            newSquare.SetUnitSettings(null);
+        }
     }
 }
