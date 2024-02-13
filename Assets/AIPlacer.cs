@@ -30,7 +30,7 @@ public class AIPlacer : MonoBehaviour
 
     public void AIFogOfWar()
     {
-        Debug.Log("AIPlacer.AIFogOfWar");
+        //Debug.Log("AIPlacer.AIFogOfWar");
         weight = RedBlueTurn.maxPoints;
         // between 1 and 4
         var countEnemies = Random.Range(1 + weight / 6, Mathf.Min(weight, 5));

@@ -7,8 +7,6 @@ public class UnitManager : MonoBehaviour
 {
     private List<UnitRenderer> RedUnits = new();
     private List<UnitRenderer> BlueUnits = new();
-    [SerializeField] private Vector2Int inFrontRed = Vector2Int.down;
-    [SerializeField] private Vector2Int inFrontBlue = Vector2Int.up;
     [SerializeField] private float timeBeforeMove = 1.0f;
     [SerializeField] private float timeAfterMove = 1.0f;
     [SerializeField] private UnityEvent onMoveEnd;
@@ -53,9 +51,9 @@ public class UnitManager : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBeforeMove);
         if (isRed)
-            MoveUnits(ref RedUnits, inFrontRed);
+            MoveUnits(ref RedUnits);
         else
-            MoveUnits(ref BlueUnits, inFrontBlue);
+            MoveUnits(ref BlueUnits);
 
 
         yield return new WaitForSeconds(timeAfterMove);
@@ -67,12 +65,12 @@ public class UnitManager : MonoBehaviour
         yield return new WaitForSeconds(timeBeforeMove);
         if (isRed)
         {
-            AttackUnits(ref RedUnits, inFrontRed);
+            AttackUnits(ref RedUnits);
             CleanNullEnemies(ref BlueUnits);
         }
         else
         {
-            AttackUnits(ref BlueUnits, inFrontBlue);
+            AttackUnits(ref BlueUnits);
             CleanNullEnemies(ref RedUnits);
         }
 
@@ -88,36 +86,51 @@ public class UnitManager : MonoBehaviour
                 units.RemoveAt(i);
     }
 
-    private void MoveUnits(ref List<UnitRenderer> units, Vector2Int inFront)
+    private void MoveUnits(ref List<UnitRenderer> units)
     {
         for (var i = 0; i < units.Count; i++)
         {
-            var newSquare = board.PieceInFront(units[i], inFront);
-            Debug.Log(units[i].name);
+            var settings = units[i].GetUnitSettings();
+            var sign = settings.isRed ? 1 : -1;
+            //get settings
+            for (var j = 0; j < settings.movePositions.Length; j++)
+            {
+                var newSquare = board.PieceInFrontWithPadding(units[i], settings.movePositions[j] * sign);
+                if (newSquare == null)
+                    continue;
+                Debug.Log(units[i].name);
 
-            if (newSquare.GetUnitSettings() != null)
-                continue;
-            newSquare.SetUnitSettings(units[i].GetUnitSettings());
-            units[i].SetUnitSettings(null);
-            units[i] = newSquare;
+                if (newSquare.GetUnitSettings() != null)
+                    continue;
+                newSquare.SetUnitSettings(settings);
+                units[i].SetUnitSettings(null);
+                units[i] = newSquare;
+            }
         }
     }
 
-    public void AttackUnits(ref List<UnitRenderer> units, Vector2Int inFront)
+    public void AttackUnits(ref List<UnitRenderer> units)
     {
         for (var i = 0; i < units.Count; i++)
         {
-            var newSquare = board.PieceInFront(units[i], inFront);
-            Debug.Log(units[i].name);
-            var attackedSquareSettings = newSquare.GetUnitSettings();
-            var squareSettings = units[i].GetUnitSettings();
-            if (attackedSquareSettings == null || attackedSquareSettings.isRed == squareSettings.isRed)
-                continue;
+            var settings = units[i].GetUnitSettings();
+            var sign = settings.isRed ? 1 : -1;
 
-            //check health of the unit
+            for (var j = 0; j < settings.attackPositions.Length; j++)
+            {
+                var newSquare = board.PieceInFront(units[i], settings.attackPositions[j] * sign);
+                if (newSquare == null) continue;
+                Debug.Log(units[i].name);
+                var attackedSquareSettings = newSquare.GetUnitSettings();
+                var squareSettings = settings;
+                if (attackedSquareSettings == null || attackedSquareSettings.isRed == squareSettings.isRed)
+                    continue;
 
-            //if health is 0, remove the unit
-            newSquare.SetUnitSettings(null);
+                //check health of the unit
+
+                //if health is 0, remove the unit
+                newSquare.SetUnitSettings(null);
+            }
         }
     }
 }

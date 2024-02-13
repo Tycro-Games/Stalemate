@@ -179,7 +179,25 @@ public class Board : MonoBehaviour
     public UnitRenderer PieceInFront(UnitRenderer piece, Vector2Int inFront)
     {
         var index = pieces.FindIndex(p => p == piece);
-        return pieces[index + inFront.x + inFront.y * sizeX];
+        var newIndex = index + inFront.x + inFront.y * sizeX;
+
+        // Check if the new index is within bounds
+        if (newIndex >= 0 && newIndex < pieces.Count)
+            return pieces[newIndex];
+
+        return null;
+    }
+
+    public UnitRenderer PieceInFrontWithPadding(UnitRenderer piece, Vector2Int inFront)
+    {
+        var index = pieces.FindIndex(p => p == piece);
+        var newIndex = index + inFront.x + inFront.y * sizeX;
+
+        // Check if the new index is within bounds
+        if (newIndex >= sizeX && newIndex < pieces.Count - sizeX)
+            return pieces[newIndex];
+
+        return null;
     }
 
     public UnitRenderer[] GetSquares(SquareType type)

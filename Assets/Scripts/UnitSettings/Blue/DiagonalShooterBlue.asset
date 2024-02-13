@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: c2b9acf231341004dbb68fa8c733ff28, type: 3}
   isRed: 0
+  sharedValues: {fileID: 11400000, guid: 20e88f07f2b883647a35a10e6ee5e319, type: 2}
   color: {r: 0, g: 0.17745495, b: 1, a: 1}
   flipY: 0
-  cost: 2

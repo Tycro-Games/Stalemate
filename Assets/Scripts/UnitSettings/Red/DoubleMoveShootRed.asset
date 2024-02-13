@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DoubleMoveShootRed
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 1e57a3d7380f7a744b3cdc7dfbd7d044, type: 3}
+  isRed: 1
+  sharedValues: {fileID: 11400000, guid: d61eaf21f0cf3774fb679a7b888bda50, type: 2}
   color: {r: 1, g: 0, b: 0.003921569, a: 1}
   flipY: 1
-  cost: 5

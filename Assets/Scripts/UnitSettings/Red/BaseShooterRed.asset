@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: BaseShooterRed
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 003b1c77e9c8e5e47ac71cf4cf94a7fa, type: 3}
+  isRed: 1
+  sharedValues: {fileID: 11400000, guid: 1bb7fbba5740eff48a278378ddc11313, type: 2}
   color: {r: 1, g: 0, b: 0.0033779144, a: 1}
   flipY: 1
