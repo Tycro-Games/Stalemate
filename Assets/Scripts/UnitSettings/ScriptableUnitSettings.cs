@@ -16,6 +16,7 @@ public class ScriptableUnitSettings : ScriptableObject
 
     //**
     public int cost => sharedValues.cost;
+    public int hp => sharedValues.hitsToDiePerTurn;
     public bool boost => sharedValues.boost;
     public Vector2Int[] movePositions => sharedValues.movePositions;
     public Vector2Int[] attackPositions => sharedValues.atackPositions;

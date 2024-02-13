@@ -179,6 +179,11 @@ public class Board : MonoBehaviour
     public UnitRenderer PieceInFront(UnitRenderer piece, Vector2Int inFront)
     {
         var index = pieces.FindIndex(p => p == piece);
+        //at the edges
+        if (index % sizeX == 3 && inFront.x == 1)
+            return null;
+        if (index % sizeX == 0 && inFront.x == -1)
+            return null;
         var newIndex = index + inFront.x + inFront.y * sizeX;
 
         // Check if the new index is within bounds
@@ -187,6 +192,7 @@ public class Board : MonoBehaviour
 
         return null;
     }
+
 
     public UnitRenderer PieceInFrontWithPadding(UnitRenderer piece, Vector2Int inFront)
     {

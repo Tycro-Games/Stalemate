@@ -129,7 +129,8 @@ public class UnitManager : MonoBehaviour
                 //check health of the unit
 
                 //if health is 0, remove the unit
-                newSquare.SetUnitSettings(null);
+                if (newSquare.TryToKill())
+                    newSquare.SetUnitSettings(null);
             }
         }
     }
