@@ -11,6 +11,7 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private float timeAfterMove = 1.0f;
     [SerializeField] private UnityEvent onMoveEnd;
     [SerializeField] private UnityEvent onAttackEnd;
+    [SerializeField] private UnityEvent onBoostEnd;
     private Board board;
 
     private void Start()
@@ -47,6 +48,16 @@ public class UnitManager : MonoBehaviour
         StartCoroutine(Attack(!RedBlueTurn.IsRedFirst()));
     }
 
+    public void BoostOtherSide()
+    {
+        StartCoroutine(Boost(!RedBlueTurn.IsRedFirst()));
+    }
+
+    public void BoostCurrentSide()
+    {
+        StartCoroutine(Boost(RedBlueTurn.IsRedFirst()));
+    }
+
     private IEnumerator Movement(bool isRed)
     {
         yield return new WaitForSeconds(timeBeforeMove);
@@ -58,6 +69,19 @@ public class UnitManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeAfterMove);
         onMoveEnd?.Invoke();
+    }
+
+    private IEnumerator Boost(bool isRed)
+    {
+        yield return new WaitForSeconds(timeBeforeMove);
+        if (isRed)
+            BoostUnits(ref RedUnits);
+        else
+            BoostUnits(ref BlueUnits);
+
+
+        yield return new WaitForSeconds(timeAfterMove);
+        onBoostEnd?.Invoke();
     }
 
     private IEnumerator Attack(bool isRed)
@@ -109,6 +133,47 @@ public class UnitManager : MonoBehaviour
         }
     }
 
+    private void BoostUnits(ref List<UnitRenderer> units)
+    {
+        var piecesToBoost = new List<UnitRenderer>();
+        for (var i = 0; i < units.Count; i++)
+        {
+            var settings = units[i].GetUnitSettings();
+            if (!settings.boost)
+                continue;
+            var sign = settings.isRed ? 1 : -1;
+            //this should only be one
+            for (var j = 0; j < settings.movePositions.Length; j++)
+            {
+                var newSquare = board.PieceInFront(units[i], settings.movePositions[j] * sign);
+                if (newSquare == null)
+                    continue;
+                var attackedSquareSettings = newSquare.GetUnitSettings();
+                //move itself
+                if (attackedSquareSettings == null || attackedSquareSettings.isRed != settings.isRed)
+                    piecesToBoost.Add(units[i]);
+                //boost what is infront
+                else
+                    piecesToBoost.Add(newSquare);
+            }
+        }
+
+        if (piecesToBoost.Count == 0)
+            return;
+        var isRed = piecesToBoost[0].GetUnitSettings().isRed;
+        List<UnitRenderer> listToChange;
+
+
+        MoveUnits(ref piecesToBoost);
+        AttackUnits(ref piecesToBoost);
+        CleanNullEnemies(ref RedUnits);
+        CleanNullEnemies(ref BlueUnits);
+        if (isRed)
+            RedUnits.AddRange(piecesToBoost);
+        else
+            BlueUnits.AddRange(piecesToBoost);
+    }
+
     public void AttackUnits(ref List<UnitRenderer> units)
     {
         for (var i = 0; i < units.Count; i++)
@@ -122,8 +187,7 @@ public class UnitManager : MonoBehaviour
                 if (newSquare == null) continue;
                 Debug.Log(units[i].name);
                 var attackedSquareSettings = newSquare.GetUnitSettings();
-                var squareSettings = settings;
-                if (attackedSquareSettings == null || attackedSquareSettings.isRed == squareSettings.isRed)
+                if (attackedSquareSettings == null || attackedSquareSettings.isRed == settings.isRed)
                     continue;
 
                 //check health of the unit

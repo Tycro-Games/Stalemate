@@ -37,7 +37,7 @@ public class UnitRenderer : MonoBehaviour
         unitSettings = null;
     }
 
-    private void Start()
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

@@ -21,7 +21,7 @@ public class AIPlacer : MonoBehaviour
     private int weight;
     private List<UnitRenderer> positions;
 
-    private void Start()
+    private void Awake()
     {
         board = FindObjectOfType<Board>();
         redUnits = redUnits.OrderBy(x => x.cost).ToList();
