@@ -122,7 +122,8 @@ public class UnitManager : MonoBehaviour
                 var newSquare = board.PieceInFrontWithPadding(units[i], settings.movePositions[j] * sign);
                 if (newSquare == null)
                     continue;
-                Debug.Log(units[i].name);
+                Debug.Log("unit " + units[i].name + " moved to:" + newSquare.name);
+
 
                 if (newSquare.GetUnitSettings() != null)
                     continue;
@@ -148,13 +149,22 @@ public class UnitManager : MonoBehaviour
                 var newSquare = board.PieceInFront(units[i], settings.movePositions[j] * sign);
                 if (newSquare == null)
                     continue;
+
                 var attackedSquareSettings = newSquare.GetUnitSettings();
                 //move itself
                 if (attackedSquareSettings == null || attackedSquareSettings.isRed != settings.isRed)
+                {
+                    Debug.Log("unit " + units[i].name + "boosted itself");
+
                     piecesToBoost.Add(units[i]);
+                }
                 //boost what is infront
                 else
+                {
+                    Debug.Log("unit " + units[i].name + "boosted" + newSquare.name);
+
                     piecesToBoost.Add(newSquare);
+                }
             }
         }
 
@@ -185,7 +195,7 @@ public class UnitManager : MonoBehaviour
             {
                 var newSquare = board.PieceInFront(units[i], settings.attackPositions[j] * sign);
                 if (newSquare == null) continue;
-                Debug.Log(units[i].name);
+                Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);
                 var attackedSquareSettings = newSquare.GetUnitSettings();
                 if (attackedSquareSettings == null || attackedSquareSettings.isRed == settings.isRed)
                     continue;

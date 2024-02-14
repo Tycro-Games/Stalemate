@@ -71,6 +71,7 @@ public class UnitPlacer : MonoBehaviour
     {
         foreach (var square in placedSquares)
             onClick?.Invoke(square);
+        placedSquares.Clear();
     }
 
     public void Place(Vector3 input)
