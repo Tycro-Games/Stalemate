@@ -22,10 +22,14 @@ public class UnitPlacer : MonoBehaviour
     private UnityEvent onPlace;
 
     [SerializeField] private UnityEvent onNoHover;
+    [SerializeField] private UnityEvent onValidTurn;
+    [SerializeField] private UnityEvent onNotValidTurn;
 
 
     private CellFinder cellFinder;
     private CursorController cursorController;
+    [SerializeField] private int maxPlacements = 4;
+    private List<UnitRenderer> placedSquares = new();
 
     private void Start()
     {
@@ -55,10 +59,24 @@ public class UnitPlacer : MonoBehaviour
         if (RedBlueTurn.currentPoints < unitSettings.cost) Reset();
     }
 
+    public void ValidTurn()
+    {
+        if (placedSquares.Count == maxPlacements || RedBlueTurn.currentPoints == 0)
+            onValidTurn?.Invoke();
+        else
+            onNotValidTurn?.Invoke();
+    }
+
+    public void SetNewUnitsToBoard()
+    {
+        foreach (var square in placedSquares)
+            onClick?.Invoke(square);
+    }
+
     public void Place(Vector3 input)
     {
         var place = cellFinder.NodeFromInput(input);
-        if (place == null || unitSettings == null)
+        if (place == null)
         {
             onNoHover?.Invoke();
             return;
@@ -67,28 +85,48 @@ public class UnitPlacer : MonoBehaviour
 
         //Debug.Log("hover over:" + place.name);
         //decide which row is okay to place on red/ blue
-        var nameTurn = RedBlueTurn.IsRedFirst() == true ? "Red" : "Blue";
+        var nameTurn = RedBlueTurn.IsRedFirst() ? "Red" : "Blue";
         var selectedRenderer = place.transform.GetChild(0).GetComponent<SpriteRenderer>();
 
         //this is the color of square that is being hovered over
         var nameSelected = place.transform.GetChild(1).name;
         //the right color of the turn and free space
-        if (nameTurn != nameSelected || selectedRenderer.sprite != null)
+        if (nameTurn != nameSelected)
         {
             onNoHover?.Invoke();
             return;
         }
 
-        onHover?.Invoke(place.transform.position);
+        //there is something selected
+        if (selectedRenderer.sprite != null)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
+                var substraction = selectedPiece.GetUnitSettings().cost;
+                if (unitSettings == null)
+                    SetUnitSettings(selectedPiece.GetUnitSettings());
+                RedBlueTurn.currentPoints += substraction;
+                placedSquares.Remove(selectedPiece);
+                selectedPiece.SetUnitSettings(null);
+                onPlace?.Invoke();
+                return;
+            }
 
+            onNoHover?.Invoke();
+        }
+
+
+        onHover?.Invoke(place.transform.position);
+        if (unitSettings == null) return;
         if (Input.GetMouseButtonDown(0))
         {
             var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
             selectedPiece.SetUnitSettings(unitSettings);
-            onClick?.Invoke(selectedPiece);
             RedBlueTurn.currentPoints -= unitSettings.cost;
             CheckRemainingPoints();
             onPlace?.Invoke();
+            placedSquares.Add(selectedPiece);
         }
         //check if the place is full or not
         //        if (currentTree != null)

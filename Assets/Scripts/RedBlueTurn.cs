@@ -56,6 +56,10 @@ public class RedBlueTurn : MonoBehaviour
     public void UpdateText()
     {
         onScoreChange?.Invoke(currentPoints.ToString());
-        if (currentPoints == 0) onFinishPlacement?.Invoke();
+    }
+
+    public void FinishPlacement()
+    {
+        onFinishPlacement?.Invoke();
     }
 }
