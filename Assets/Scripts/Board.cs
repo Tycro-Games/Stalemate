@@ -163,6 +163,7 @@ public class Board : MonoBehaviour
             //squarePieceRenderers[x, y] = pieceRenderer;
         }
 
+        //add the text script for win conditions here
         for (var i = 0; i < dotLinesCoordinates.Count; i++)
         {
             var x = dotLinesCoordinates[i].x;
