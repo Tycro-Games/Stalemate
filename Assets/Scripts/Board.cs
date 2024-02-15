@@ -48,6 +48,7 @@ public class Board : MonoBehaviour
 
     public List<UnitRenderer> pieces;
     [SerializeField] private float pieceSize = 7.0f;
+
 #if UNITY_EDITOR
     [CustomEditor(typeof(Board))]
     public class BoardEditor : Editor
@@ -169,8 +170,11 @@ public class Board : MonoBehaviour
             var x = dotLinesCoordinates[i].x;
             var y = dotLinesCoordinates[i].y;
             var index = x + y * sizeX;
+            var gameObjDotLine = new GameObject();
+            gameObjDotLine.AddComponent<DetectUnitsVertical>();
+            gameObjDotLine.name = "DotLine" + (x, y);
 
-            var dotLineRender = new GameObject().AddComponent<SpriteRenderer>();
+            var dotLineRender = gameObjDotLine.AddComponent<SpriteRenderer>();
             dotLineRender.transform.parent = squares[index].transform.GetChild(0);
             dotLineRender.sprite = dotLine;
             dotLineRender.transform.localPosition = new Vector2(0.0f, 0.5f * dotLinesCoordinates[i].isUp);

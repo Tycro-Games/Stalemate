@@ -7,9 +7,11 @@ using UnityEngine.Events;
 public class RedBlueTurn : MonoBehaviour
 {
     [SerializeField] private int startingPoints = 0;
-    public static int maxPoints = 0;
+    public static int maxPoints;
     public static int currentPoints { get; set; }
-    private static bool isRedFirst = false;
+    [SerializeField] private int endWave = 7;
+    private static bool isRedFirst;
+    [SerializeField] private UnityEvent onWin;
 
     public static bool IsRedFirst()
     {
@@ -30,6 +32,7 @@ public class RedBlueTurn : MonoBehaviour
 
     private void OnEnable()
     {
+        isRedFirst = false;
         maxPoints = startingPoints;
         SetValues();
     }
@@ -45,6 +48,9 @@ public class RedBlueTurn : MonoBehaviour
 
     public void NextTurn()
     {
+        if (currentPoints == endWave)
+            onWin?.Invoke();
+
         if (isRedFirst)
             onRedTurn?.Invoke();
         else

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,18 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private UnityEvent onAttackEnd;
     [SerializeField] private UnityEvent onBoostEnd;
     private Board board;
+
+    public static Action onUnitManipulation;
+
+    public List<UnitRenderer> GetRedUnits()
+    {
+        return RedUnits;
+    }
+
+    public List<UnitRenderer> GetBlueUnits()
+    {
+        return BlueUnits;
+    }
 
     private void Start()
     {
@@ -69,6 +82,7 @@ public class UnitManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeAfterMove);
         onMoveEnd?.Invoke();
+        onUnitManipulation?.Invoke();
     }
 
     private IEnumerator Boost(bool isRed)
@@ -82,6 +96,7 @@ public class UnitManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeAfterMove);
         onBoostEnd?.Invoke();
+        onUnitManipulation?.Invoke();
     }
 
     private IEnumerator Attack(bool isRed)
@@ -101,6 +116,7 @@ public class UnitManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeAfterMove);
         onAttackEnd?.Invoke();
+        onUnitManipulation?.Invoke();
     }
 
     private void CleanNullEnemies(ref List<UnitRenderer> units)
