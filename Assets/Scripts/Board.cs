@@ -34,8 +34,8 @@ public class Board : MonoBehaviour
 
 {
     //board
-    [SerializeField] private int sizeX = 4;
-    [SerializeField] private int sizeY = 5;
+    [SerializeField] private static int sizeX = 4;
+    [SerializeField] private static int sizeY = 5;
 
     [SerializeField] private Sprite[] spritesOrder;
     [SerializeField] private Sprite middleVerticalLines;
@@ -181,7 +181,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    public UnitRenderer PieceInFront(UnitRenderer piece, Vector2Int inFront)
+    public static UnitRenderer PieceInFront(UnitRenderer piece, Vector2Int inFront, List<UnitRenderer> pieces)
     {
         var index = pieces.FindIndex(p => p == piece);
         //at the edges
@@ -199,7 +199,8 @@ public class Board : MonoBehaviour
     }
 
 
-    public UnitRenderer PieceInFrontWithPadding(UnitRenderer piece, Vector2Int inFront)
+    public static UnitRenderer PieceInFrontWithPadding(UnitRenderer piece, Vector2Int inFront,
+        List<UnitRenderer> pieces)
     {
         var index = pieces.FindIndex(p => p == piece);
         var newIndex = index + inFront.x + inFront.y * sizeX;
@@ -217,6 +218,17 @@ public class Board : MonoBehaviour
             return pieces.TakeLast(sizeX).Where(x => x.GetUnitSettings() == null).ToArray();
         else if (type == SquareType.BLUE)
             return pieces.Take(sizeX).Where(x => x.GetUnitSettings() == null).ToArray();
+        Debug.Assert(false, "Invalid square type");
+        return null;
+    }
+
+    public static List<UnitRenderer> GetAllPieces(SquareType type, ref List<UnitRenderer> pieces)
+    {
+        if (type == SquareType.RED)
+            return pieces.FindAll(x => x.GetUnitSettings() != null && x.GetUnitSettings().isRed);
+        else if (type == SquareType.BLUE)
+            return pieces.FindAll(x => x.GetUnitSettings() != null && !x.GetUnitSettings().isRed);
+
         Debug.Assert(false, "Invalid square type");
         return null;
     }

@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 public class UnitManager : MonoBehaviour
 {
-    private List<UnitRenderer> RedUnits = new();
-    private List<UnitRenderer> BlueUnits = new();
+    private List<UnitRenderer> redUnits = new();
+    private List<UnitRenderer> blueUnits = new();
     [SerializeField] private float timeBeforeMove = 1.0f;
     [SerializeField] private float timeAfterMove = 1.0f;
     [SerializeField] private UnityEvent onMoveEnd;
@@ -19,12 +19,12 @@ public class UnitManager : MonoBehaviour
 
     public List<UnitRenderer> GetRedUnits()
     {
-        return RedUnits;
+        return redUnits;
     }
 
     public List<UnitRenderer> GetBlueUnits()
     {
-        return BlueUnits;
+        return blueUnits;
     }
 
     private void Start()
@@ -32,13 +32,11 @@ public class UnitManager : MonoBehaviour
         board = GetComponent<Board>();
     }
 
-    public void AddNewUnit(UnitRenderer unit)
+
+    public void ResetRedBlueUnitLists()
     {
-        var settings = unit.GetUnitSettings();
-        if (settings.isRed)
-            RedUnits.Add(unit);
-        else
-            BlueUnits.Add(unit);
+        redUnits = Board.GetAllPieces(SquareType.RED, ref board.pieces);
+        blueUnits = Board.GetAllPieces(SquareType.BLUE, ref board.pieces);
     }
 
     public void MoveCurrentSide()
@@ -75,9 +73,9 @@ public class UnitManager : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBeforeMove);
         if (isRed)
-            MoveUnits(ref RedUnits);
+            MoveUnits(ref redUnits);
         else
-            MoveUnits(ref BlueUnits);
+            MoveUnits(ref blueUnits);
 
 
         yield return new WaitForSeconds(timeAfterMove);
@@ -89,9 +87,9 @@ public class UnitManager : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBeforeMove);
         if (isRed)
-            BoostUnits(ref RedUnits);
+            BoostUnits(ref redUnits);
         else
-            BoostUnits(ref BlueUnits);
+            BoostUnits(ref blueUnits);
 
 
         yield return new WaitForSeconds(timeAfterMove);
@@ -104,13 +102,13 @@ public class UnitManager : MonoBehaviour
         yield return new WaitForSeconds(timeBeforeMove);
         if (isRed)
         {
-            AttackUnits(ref RedUnits);
-            CleanNullEnemies(ref BlueUnits);
+            AttackUnits(ref redUnits);
+            CleanNullEnemies(ref blueUnits);
         }
         else
         {
-            AttackUnits(ref BlueUnits);
-            CleanNullEnemies(ref RedUnits);
+            AttackUnits(ref blueUnits);
+            CleanNullEnemies(ref redUnits);
         }
 
 
@@ -126,8 +124,11 @@ public class UnitManager : MonoBehaviour
                 units.RemoveAt(i);
     }
 
-    private void MoveUnits(ref List<UnitRenderer> units)
+    public void MoveUnits(ref List<UnitRenderer> units)
     {
+        if (units.Count == 0)
+            return;
+        SortUnits(ref units);
         for (var i = 0; i < units.Count; i++)
         {
             var settings = units[i].GetUnitSettings();
@@ -135,7 +136,7 @@ public class UnitManager : MonoBehaviour
             //get settings
             for (var j = 0; j < settings.movePositions.Length; j++)
             {
-                var newSquare = board.PieceInFrontWithPadding(units[i], settings.movePositions[j] * sign);
+                var newSquare = Board.PieceInFrontWithPadding(units[i], settings.movePositions[j] * sign, board.pieces);
                 if (newSquare == null)
                     continue;
                 Debug.Log("unit " + units[i].name + " moved to:" + newSquare.name);
@@ -150,8 +151,20 @@ public class UnitManager : MonoBehaviour
         }
     }
 
-    private void BoostUnits(ref List<UnitRenderer> units)
+    private static void SortUnits(ref List<UnitRenderer> units)
     {
+        var decreasingSortOrder = !units[0].GetUnitSettings().isRed;
+        if (decreasingSortOrder)
+            units.Sort((a, b) => b.transform.position.y.CompareTo(a.transform.position.y));
+        else
+            units.Sort((a, b) => a.transform.position.y.CompareTo(b.transform.position.y));
+    }
+
+    public void BoostUnits(ref List<UnitRenderer> units)
+    {
+        if (units.Count == 0)
+            return;
+        SortUnits(ref units);
         var piecesToBoost = new List<UnitRenderer>();
         for (var i = 0; i < units.Count; i++)
         {
@@ -162,7 +175,7 @@ public class UnitManager : MonoBehaviour
             //this should only be one
             for (var j = 0; j < settings.movePositions.Length; j++)
             {
-                var newSquare = board.PieceInFront(units[i], settings.movePositions[j] * sign);
+                var newSquare = Board.PieceInFront(units[i], settings.movePositions[j] * sign, board.pieces);
                 if (newSquare == null)
                     continue;
 
@@ -192,16 +205,19 @@ public class UnitManager : MonoBehaviour
 
         MoveUnits(ref piecesToBoost);
         AttackUnits(ref piecesToBoost);
-        CleanNullEnemies(ref RedUnits);
-        CleanNullEnemies(ref BlueUnits);
+        CleanNullEnemies(ref redUnits);
+        CleanNullEnemies(ref blueUnits);
         if (isRed)
-            RedUnits.AddRange(piecesToBoost);
+            redUnits.AddRange(piecesToBoost);
         else
-            BlueUnits.AddRange(piecesToBoost);
+            blueUnits.AddRange(piecesToBoost);
     }
 
     public void AttackUnits(ref List<UnitRenderer> units)
     {
+        if (units.Count == 0)
+            return;
+        SortUnits(ref units);
         for (var i = 0; i < units.Count; i++)
         {
             var settings = units[i].GetUnitSettings();
@@ -209,7 +225,7 @@ public class UnitManager : MonoBehaviour
 
             for (var j = 0; j < settings.attackPositions.Length; j++)
             {
-                var newSquare = board.PieceInFront(units[i], settings.attackPositions[j] * sign);
+                var newSquare = Board.PieceInFront(units[i], settings.attackPositions[j] * sign, board.pieces);
                 if (newSquare == null) continue;
                 Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);
                 var attackedSquareSettings = newSquare.GetUnitSettings();

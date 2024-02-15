@@ -1,8 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
+public struct UnitData
+{
+    public SpriteRenderer spriteRenderer;
+    public ScriptableUnitSettings unitSettings;
+    public float alpha;
+
+    public int hp;
+}
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class UnitRenderer : MonoBehaviour
@@ -10,7 +20,23 @@ public class UnitRenderer : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private ScriptableUnitSettings unitSettings;
     [SerializeField] private float alpha = 1.0f;
+
     private int hp;
+
+    public UnitData Clone()
+    {
+        var clone = new UnitData
+        {
+            spriteRenderer = spriteRenderer,
+            unitSettings = unitSettings,
+            alpha = alpha,
+            hp = hp
+        };
+
+
+        return clone;
+    }
+
 
     public ScriptableUnitSettings GetUnitSettings()
     {
@@ -55,5 +81,13 @@ public class UnitRenderer : MonoBehaviour
         var color = unitSettings.color;
         spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
         spriteRenderer.flipY = unitSettings.flipY;
+    }
+
+    public void SetUnitData(UnitData unitData)
+    {
+        spriteRenderer = unitData.spriteRenderer;
+        alpha = unitData.alpha;
+        hp = unitData.hp;
+        SetUnitSettings(unitData.unitSettings);
     }
 }
