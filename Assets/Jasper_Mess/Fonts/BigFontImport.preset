@@ -74,7 +74,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_text
-    value: Scenario 1
+    value: Super Mario Maker
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_isRightToLeft
@@ -83,11 +83,11 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_fontAsset
     value: 
-    objectReference: {fileID: 11400000, guid: 760017c65f88cff43accf8a8ead6bf4e, type: 2}
+    objectReference: {fileID: 11400000, guid: dc992d3f20645304a93ffbe9e38da9d2, type: 2}
   - target: {fileID: 0}
     propertyPath: m_sharedMaterial
     value: 
-    objectReference: {fileID: 3806191284087648168, guid: 645c3a5f77cd09e4da984a74c3d82c7c, type: 2}
+    objectReference: {fileID: -8776438258474276373, guid: dc992d3f20645304a93ffbe9e38da9d2, type: 2}
   - target: {fileID: 0}
     propertyPath: m_fontSharedMaterials.Array.size
     value: 0
@@ -102,11 +102,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_fontColor32.rgba
-    value: 4278190080
+    value: 4278190335
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_fontColor.r
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_fontColor.g
@@ -222,11 +222,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_fontSize
-    value: 22.75
+    value: 31
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_fontSizeBase
-    value: 22.75
+    value: 31
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_fontWeight
@@ -246,7 +246,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_fontStyle
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_HorizontalAlignment
@@ -270,7 +270,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_lineSpacing
-    value: 0
+    value: 40
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_lineSpacingMax
@@ -374,7 +374,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_margin.z
-    value: 0
+    value: -110.508194
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_margin.w
@@ -390,7 +390,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_hasFontAssetChanged
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_baseMaterial
