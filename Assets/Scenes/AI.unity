@@ -5674,11 +5674,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[1].OnStart.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[2].OnStart.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[9].OnStart.m_PersistentCalls.m_Calls.Array.size
@@ -5819,7 +5819,7 @@ PrefabInstance:
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[2].OnStart.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 924948675}
+      objectReference: {fileID: 1265213075}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[2].OnStart.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -6002,7 +6002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[1].OnStart.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: PlaceEnemiesOtherSide
+      value: AIFogOfWarOtherSide
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[1].OnStart.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -6018,11 +6018,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[2].OnStart.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: AIFogOfWarOtherSide
+      value: PlaceEnemiesOtherSide
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[2].OnStart.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: PlaceEnemiesOtherSide
+      value: EndPhase
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[2].OnStart.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
@@ -6118,7 +6118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[2].OnStart.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: AIPlacer, Assembly-CSharp
+      value: PhaseSystem, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[2].OnStart.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
@@ -6186,7 +6186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[1].OnStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7873768362188834600, guid: deb608e05ba5bd043821f7ca6766330b, type: 3}
       propertyPath: phases.Array.data[1].OnStart.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
