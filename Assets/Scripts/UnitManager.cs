@@ -173,9 +173,9 @@ public class UnitManager : MonoBehaviour
                 continue;
             var sign = settings.isRed ? 1 : -1;
             //this should only be one
-            for (var j = 0; j < settings.movePositions.Length; j++)
+            for (var j = 0; j < settings.boostPositions.Length; j++)
             {
-                var newSquare = Board.PieceInFront(units[i], settings.movePositions[j] * sign, board.pieces);
+                var newSquare = Board.PieceInFront(units[i], settings.boostPositions[j] * sign, board.pieces);
                 if (newSquare == null)
                     continue;
 
@@ -187,7 +187,7 @@ public class UnitManager : MonoBehaviour
 
                     piecesToBoost.Add(units[i]);
                 }
-                //boost what is infront
+                //boost what is in the boost positions
                 else
                 {
                     Debug.Log("unit " + units[i].name + "boosted" + newSquare.name);

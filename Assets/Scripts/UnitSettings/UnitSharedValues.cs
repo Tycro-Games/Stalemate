@@ -7,6 +7,8 @@ public class UnitSharedValues : ScriptableObject
     public Vector2Int[] movePositions;
 
     public Vector2Int[] atackPositions;
+
+    public Vector2Int[] boostPositions;
     public int hitsToDiePerTurn = 1;
     public bool boost = false;
     public int cost;

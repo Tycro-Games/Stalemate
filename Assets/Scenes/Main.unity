@@ -6342,7 +6342,7 @@ MonoBehaviour:
     y: 2
     isUp: 0
   dotLine: {fileID: -323355394, guid: 6c3906e9f2bab4b44a03b2c883760f4b, type: 3}
-  shouldUpdate: 0
+  shouldUpdate: 1
   squares:
   - {fileID: 136693077}
   - {fileID: 1665415041}
@@ -7534,7 +7534,7 @@ GameObject:
   - component: {fileID: 1368794688}
   - component: {fileID: 1368794687}
   m_Layer: 5
-  m_Name: PointTable
+  m_Name: FoodCrisis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11307,7 +11307,7 @@ GameObject:
   - component: {fileID: 2045518576}
   - component: {fileID: 2045518577}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: TurnManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

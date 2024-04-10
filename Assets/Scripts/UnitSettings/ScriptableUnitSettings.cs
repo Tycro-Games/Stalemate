@@ -20,4 +20,5 @@ public class ScriptableUnitSettings : ScriptableObject
     public bool boost => sharedValues.boost;
     public Vector2Int[] movePositions => sharedValues.movePositions;
     public Vector2Int[] attackPositions => sharedValues.atackPositions;
+    public Vector2Int[] boostPositions => sharedValues.boostPositions;
 }
