@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -199,8 +200,8 @@ public class UnitManager : MonoBehaviour
 
         if (piecesToBoost.Count == 0)
             return;
+        piecesToBoost = piecesToBoost.Distinct().ToList();
         var isRed = piecesToBoost[0].GetUnitSettings().isRed;
-        List<UnitRenderer> listToChange;
 
 
         MoveUnits(ref piecesToBoost);
