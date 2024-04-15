@@ -26,7 +26,7 @@ namespace Assets.Scripts.Utility
     }
 
     [Serializable]
-    public class UnitSettingsEvent : UnityEvent<ScriptableUnitSettings>
+    public class UnitSettingsEvent : UnityEvent<UnitBoardInfo>
     {
     }
 

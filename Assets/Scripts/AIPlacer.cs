@@ -14,18 +14,25 @@ public class AIPlacer : MonoBehaviour
     [SerializeField] private UnityEvent onEnemyEndTurn;
     [SerializeField] private UnitRenderEvent onEnemyPlace;
     private Board board;
-    [SerializeField] private ScriptableUnitSettings fogOfWarRed;
-    [SerializeField] private ScriptableUnitSettings fogOfWarBlue;
-    [SerializeField] private List<ScriptableUnitSettings> redUnits;
-    [SerializeField] private List<ScriptableUnitSettings> blueUnits;
+    [SerializeField] private UnitBoardInfo fogOfWarRed;
+    [SerializeField] private UnitBoardInfo fogOfWarBlue;
+    [SerializeField] private Transform redUnitsParent;
+    [SerializeField] private Transform blueUnitsParent;
+    private List<UnitBoardInfo> redUnits = new();
+    private List<UnitBoardInfo> blueUnits = new();
     private int weight;
     private List<UnitRenderer> positions;
 
     private void Awake()
     {
         board = FindObjectOfType<Board>();
-        redUnits = redUnits.OrderBy(x => x.cost).ToList();
-        blueUnits = blueUnits.OrderBy(x => x.cost).ToList();
+        var reds = redUnitsParent.GetComponentsInChildren<UnitUIRenderer>();
+        var blues = blueUnitsParent.GetComponentsInChildren<UnitUIRenderer>();
+        foreach (var red in reds)
+            redUnits.Add(red.GetBoardInfo());
+        foreach (var blue in blues) blueUnits.Add(blue.GetBoardInfo());
+        redUnits = redUnits.OrderBy(x => x.unitSettings.cost).ToList();
+        blueUnits = blueUnits.OrderBy(x => x.unitSettings.cost).ToList();
     }
 
     public void AIFogOfWar()
@@ -85,7 +92,7 @@ public class AIPlacer : MonoBehaviour
             if (min > max)
                 min = max;
             var enemy = ChooseEnemy(min, max, enemyList);
-            var currentW = enemy.cost;
+            var currentW = enemy.unitSettings.cost;
             weight -= currentW;
             var unitRenderer = positions[Random.Range(0, positions.Count)];
             indexEnemy.Add(currentW - 1);
@@ -107,7 +114,7 @@ public class AIPlacer : MonoBehaviour
             }
 
             for (var i = 0; i < indexEnemy.Count; i++)
-                if (unitRenderers[i].GetUnitSettings().cost < 5)
+                if (unitRenderers[i].GetUnitSettings().unitSettings.cost < 5)
                     SetUnitRenderer(unitRenderers[i], enemyList[enemyIndicies[i]]);
                 else
                     SetUnitRenderer(unitRenderers[i], enemyList[enemyList.Count - 1]);
@@ -141,7 +148,7 @@ public class AIPlacer : MonoBehaviour
             if (min > max)
                 min = max;
             var enemy = ChooseEnemy(min, max, enemyList);
-            var currentW = enemy.cost;
+            var currentW = enemy.unitSettings.cost;
             weight -= currentW;
             var unitRenderer = positions[Random.Range(0, positions.Count)];
             indexEnemy.Add(currentW - 1);
@@ -163,7 +170,7 @@ public class AIPlacer : MonoBehaviour
             }
 
             for (var i = 0; i < indexEnemy.Count; i++)
-                if (unitRenderers[i].GetUnitSettings().cost < 5)
+                if (unitRenderers[i].GetUnitSettings().unitSettings.cost < 5)
                     SetUnitRenderer(unitRenderers[i], enemyList[enemyIndicies[i]]);
                 else
                     SetUnitRenderer(unitRenderers[i], enemyList[enemyList.Count - 1]);
@@ -178,15 +185,16 @@ public class AIPlacer : MonoBehaviour
         //  onEnemyEndTurn?.Invoke();
     }
 
-    private void SetUnitRenderer(UnitRenderer unitRenderer, ScriptableUnitSettings settings)
+    private void SetUnitRenderer(UnitRenderer unitRenderer, UnitBoardInfo settings)
     {
         unitRenderer.SetUnitSettings(settings);
         onEnemyPlace?.Invoke(unitRenderer);
     }
 
-    private ScriptableUnitSettings ChooseEnemy(int minWeight, int maxWeight, List<ScriptableUnitSettings> enemies)
+    private UnitBoardInfo ChooseEnemy(int minWeight, int maxWeight, List<UnitBoardInfo> enemies)
     {
-        var temp = enemies.Where(en => en.cost <= maxWeight && en.cost >= minWeight).ToArray();
+        var temp = enemies.Where(en => en.unitSettings.cost <= maxWeight && en.unitSettings.cost >= minWeight)
+            .ToArray();
 
         // return temp[Random.Range(0, temp.Length)]; random
         //max
