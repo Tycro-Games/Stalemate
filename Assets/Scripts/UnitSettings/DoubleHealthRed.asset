@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
   m_Name: DoubleHealthRed
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: d3f01bf0c3e85b94aad5f79e61e17f6c, type: 3}
+  sprite: {fileID: 1604793070, guid: 091d23a1e154d3d4d91b56f6a5861ee4, type: 3}
   movePositions:
   - {x: 0, y: -1}
   attackPositions:

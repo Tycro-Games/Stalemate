@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1956384236168860781
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UnitMaterialBlue
+  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _IsRed: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
+    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
+    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
+    - _Blue_BodyDark: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
+    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
+    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
+    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
+    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
+    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
+    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
+    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
+    - _Red_GunDark: {r: 0.05882353, g: 0.03921569, b: 0.05882353, a: 1}
+    - _Red_GunLight: {r: 0.172549, g: 0.1176471, b: 0.1921569, a: 1}
+    - _Red_GunMid: {r: 0.1098039, g: 0.07450981, b: 0.1254902, a: 1}
+    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
+    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []

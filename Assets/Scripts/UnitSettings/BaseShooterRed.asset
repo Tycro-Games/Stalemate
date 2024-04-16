@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
   m_Name: BaseShooterRed
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 003b1c77e9c8e5e47ac71cf4cf94a7fa, type: 3}
+  sprite: {fileID: 1944492448, guid: 091d23a1e154d3d4d91b56f6a5861ee4, type: 3}
   movePositions:
   - {x: 0, y: -1}
   attackPositions:

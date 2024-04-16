@@ -85,6 +85,7 @@ public class UnitRenderer : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.material = new Material(Resources.Load<Material>("Materials/UnitMaterial"));
     }
 
     public void Draw()
@@ -98,6 +99,7 @@ public class UnitRenderer : MonoBehaviour
 
         hp = settings.hitsToDiePerTurn;
         spriteRenderer.sprite = settings.sprite;
+        spriteRenderer.material.SetFloat("_IsRed", unitSettings.isRed ? 1.0f : 0.0f);
         //var color = unitSettings.color;
         //spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
         //spriteRenderer.flipY = unitSettings.flipY;

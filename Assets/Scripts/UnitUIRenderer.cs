@@ -30,6 +30,9 @@ public class UnitUIRenderer : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<Image>();
+        spriteRenderer.material = new Material(Resources.Load<Material>("Materials/UnitMaterial"));
+        spriteRenderer.material.SetFloat("_IsRed", isRed ? 1.0f : 0.0f);
+
         spriteRenderer.sprite = unitSettings.sprite;
     }
 }
