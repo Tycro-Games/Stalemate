@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
-  m_Name: BaseShooterRed
+  m_Name: 5_Arrow
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1944492448, guid: 091d23a1e154d3d4d91b56f6a5861ee4, type: 3}
+  sprite: {fileID: 1891775062, guid: 091d23a1e154d3d4d91b56f6a5861ee4, type: 3}
   movePositions:
   - {x: 0, y: -1}
   attackPositions:
   - {x: 0, y: -1}
-  boostPositions: []
+  boostPositions:
+  - {x: 0, y: -1}
   hitsToDiePerTurn: 1
-  boost: 0
-  cost: 1
+  boost: 1
+  cost: 5

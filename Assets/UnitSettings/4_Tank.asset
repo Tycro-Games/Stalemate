@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
-  m_Name: DoubleShooterRed
+  m_Name: 4_Tank
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1921941541, guid: 091d23a1e154d3d4d91b56f6a5861ee4, type: 3}
+  sprite: {fileID: 1604793070, guid: 091d23a1e154d3d4d91b56f6a5861ee4, type: 3}
   movePositions:
   - {x: 0, y: -1}
   attackPositions:
   - {x: 0, y: -1}
-  - {x: 0, y: -2}
   boostPositions: []
   hitsToDiePerTurn: 2
   boost: 0
-  cost: 3
+  cost: 4

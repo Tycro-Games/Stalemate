@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
-  m_Name: DiagonalShooterRed
+  m_Name: 2_Diagonals
   m_EditorClassIdentifier: 
   sprite: {fileID: 1256171581, guid: 091d23a1e154d3d4d91b56f6a5861ee4, type: 3}
   movePositions:
