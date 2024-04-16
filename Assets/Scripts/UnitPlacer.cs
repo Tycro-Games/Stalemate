@@ -9,7 +9,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(CellFinder))]
 public class UnitPlacer : MonoBehaviour
 {
-    [SerializeField] private ScriptableUnitSettings unitSettings;
+    [SerializeField] private UnitBoardInfo unitSettings;
     [SerializeField] private UnitSettingsEvent onUnitSettingsChanged;
 
 
@@ -43,7 +43,7 @@ public class UnitPlacer : MonoBehaviour
         cursorController.OnMovement -= Place;
     }
 
-    public void SetUnitSettings(ScriptableUnitSettings settings)
+    public void SetUnitSettings(UnitBoardInfo settings)
     {
         unitSettings = settings;
         onUnitSettingsChanged?.Invoke(settings);
@@ -51,12 +51,12 @@ public class UnitPlacer : MonoBehaviour
 
     private void Reset()
     {
-        SetUnitSettings(null);
+        SetUnitSettings(new UnitBoardInfo());
     }
 
     private void CheckRemainingPoints()
     {
-        if (RedBlueTurn.currentPoints < unitSettings.cost) Reset();
+        if (RedBlueTurn.currentPoints < unitSettings.unitSettings.cost) Reset();
     }
 
     public void ValidTurn()
@@ -84,7 +84,7 @@ public class UnitPlacer : MonoBehaviour
         }
 
 
-        //Debug.Log("hover over:" + place.name);
+        Debug.Log("hover over:" + place.name);
         //decide which row is okay to place on red/ blue
         var nameTurn = RedBlueTurn.IsRedFirst() ? "Red" : "Blue";
         var selectedRenderer = place.transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -104,12 +104,12 @@ public class UnitPlacer : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
-                var substraction = selectedPiece.GetUnitSettings().cost;
-                if (unitSettings == null)
+                var substraction = selectedPiece.GetUnitSettings().unitSettings.cost;
+                if (unitSettings.unitSettings == null)
                     SetUnitSettings(selectedPiece.GetUnitSettings());
                 RedBlueTurn.currentPoints += substraction;
                 placedSquares.Remove(selectedPiece);
-                selectedPiece.SetUnitSettings(null);
+                selectedPiece.SetUnitSettings(new UnitBoardInfo());
                 onPlace?.Invoke();
                 return;
             }
@@ -119,12 +119,12 @@ public class UnitPlacer : MonoBehaviour
 
 
         onHover?.Invoke(place.transform.position);
-        if (unitSettings == null) return;
+        if (unitSettings.unitSettings == null) return;
         if (Input.GetMouseButtonDown(0))
         {
             var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
             selectedPiece.SetUnitSettings(unitSettings);
-            RedBlueTurn.currentPoints -= unitSettings.cost;
+            RedBlueTurn.currentPoints -= unitSettings.unitSettings.cost;
             CheckRemainingPoints();
             onPlace?.Invoke();
             placedSquares.Add(selectedPiece);

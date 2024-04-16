@@ -8,17 +8,36 @@ using UnityEngine;
 public struct UnitData
 {
     public SpriteRenderer spriteRenderer;
-    public ScriptableUnitSettings unitSettings;
+    public UnitBoardInfo unitSettings;
     public float alpha;
 
     public int hp;
+}
+
+[Serializable]
+public struct UnitBoardInfo
+{
+    public UnitBoardInfo(ScriptableUnitSettings settings, bool isRed)
+    {
+        unitSettings = settings;
+        this.isRed = isRed;
+    }
+
+    public ScriptableUnitSettings unitSettings;
+    public bool isRed;
+
+    public void Reset()
+    {
+        isRed = true;
+        unitSettings = null;
+    }
 }
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class UnitRenderer : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private ScriptableUnitSettings unitSettings;
+    [SerializeField] private UnitBoardInfo unitSettings;
     [SerializeField] private float alpha = 1.0f;
 
     private int hp;
@@ -38,7 +57,7 @@ public class UnitRenderer : MonoBehaviour
     }
 
 
-    public ScriptableUnitSettings GetUnitSettings()
+    public UnitBoardInfo GetUnitSettings()
     {
         return unitSettings;
     }
@@ -51,7 +70,7 @@ public class UnitRenderer : MonoBehaviour
         return false;
     }
 
-    public void SetUnitSettings(ScriptableUnitSettings settings)
+    public void SetUnitSettings(UnitBoardInfo settings)
     {
         unitSettings = settings;
 
@@ -60,7 +79,7 @@ public class UnitRenderer : MonoBehaviour
 
     private void Reset()
     {
-        unitSettings = null;
+        unitSettings.Reset();
     }
 
     private void Awake()
@@ -70,17 +89,18 @@ public class UnitRenderer : MonoBehaviour
 
     public void Draw()
     {
-        if (unitSettings == null)
+        var settings = unitSettings.unitSettings;
+        if (settings == null)
         {
             spriteRenderer.sprite = null;
             return;
         }
 
-        hp = unitSettings.hp;
-        spriteRenderer.sprite = unitSettings.sprite;
-        var color = unitSettings.color;
-        spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
-        spriteRenderer.flipY = unitSettings.flipY;
+        hp = settings.hitsToDiePerTurn;
+        spriteRenderer.sprite = settings.sprite;
+        //var color = unitSettings.color;
+        //spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
+        //spriteRenderer.flipY = unitSettings.flipY;
     }
 
     public void SetUnitData(UnitData unitData)

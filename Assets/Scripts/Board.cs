@@ -215,9 +215,9 @@ public class Board : MonoBehaviour
     public UnitRenderer[] GetSquares(SquareType type)
     {
         if (type == SquareType.RED)
-            return pieces.TakeLast(sizeX).Where(x => x.GetUnitSettings() == null).ToArray();
+            return pieces.TakeLast(sizeX).Where(x => x.GetUnitSettings().unitSettings == null).ToArray();
         else if (type == SquareType.BLUE)
-            return pieces.Take(sizeX).Where(x => x.GetUnitSettings() == null).ToArray();
+            return pieces.Take(sizeX).Where(x => x.GetUnitSettings().unitSettings == null).ToArray();
         Debug.Assert(false, "Invalid square type");
         return null;
     }
@@ -225,9 +225,9 @@ public class Board : MonoBehaviour
     public static List<UnitRenderer> GetAllPieces(SquareType type, ref List<UnitRenderer> pieces)
     {
         if (type == SquareType.RED)
-            return pieces.FindAll(x => x.GetUnitSettings() != null && x.GetUnitSettings().isRed);
+            return pieces.FindAll(x => x.GetUnitSettings().unitSettings != null && x.GetUnitSettings().isRed);
         else if (type == SquareType.BLUE)
-            return pieces.FindAll(x => x.GetUnitSettings() != null && !x.GetUnitSettings().isRed);
+            return pieces.FindAll(x => x.GetUnitSettings().unitSettings != null && !x.GetUnitSettings().isRed);
 
         Debug.Assert(false, "Invalid square type");
         return null;

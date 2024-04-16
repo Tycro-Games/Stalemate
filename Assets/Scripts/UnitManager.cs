@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -121,7 +122,7 @@ public class UnitManager : MonoBehaviour
     private void CleanNullEnemies(ref List<UnitRenderer> units)
     {
         for (var i = units.Count - 1; i >= 0; i--)
-            if (units[i].GetUnitSettings() == null)
+            if (units[i].GetUnitSettings().unitSettings == null)
                 units.RemoveAt(i);
     }
 
@@ -135,18 +136,20 @@ public class UnitManager : MonoBehaviour
             var settings = units[i].GetUnitSettings();
             var sign = settings.isRed ? 1 : -1;
             //get settings
-            for (var j = 0; j < settings.movePositions.Length; j++)
+            for (var j = 0; j < settings.unitSettings.movePositions.Length; j++)
             {
-                var newSquare = Board.PieceInFrontWithPadding(units[i], settings.movePositions[j] * sign, board.pieces);
+                var newSquare = Board.PieceInFrontWithPadding(units[i], settings.unitSettings.movePositions[j] * sign,
+                    board.pieces);
                 if (newSquare == null)
                     continue;
                 Debug.Log("unit " + units[i].name + " moved to:" + newSquare.name);
 
 
-                if (newSquare.GetUnitSettings() != null)
+                if (newSquare.GetUnitSettings().unitSettings != null)
                     continue;
                 newSquare.SetUnitSettings(settings);
-                units[i].SetUnitSettings(null);
+
+                units[i].SetUnitSettings(new UnitBoardInfo());
                 units[i] = newSquare;
             }
         }
@@ -170,19 +173,20 @@ public class UnitManager : MonoBehaviour
         for (var i = 0; i < units.Count; i++)
         {
             var settings = units[i].GetUnitSettings();
-            if (!settings.boost)
+            if (!settings.unitSettings.boost)
                 continue;
             var sign = settings.isRed ? 1 : -1;
             //this should only be one
-            for (var j = 0; j < settings.boostPositions.Length; j++)
+            for (var j = 0; j < settings.unitSettings.boostPositions.Length; j++)
             {
-                var newSquare = Board.PieceInFront(units[i], settings.boostPositions[j] * sign, board.pieces);
+                var newSquare = Board.PieceInFront(units[i], settings.unitSettings.boostPositions[j] * sign,
+                    board.pieces);
                 if (newSquare == null)
                     continue;
 
                 var attackedSquareSettings = newSquare.GetUnitSettings();
                 //move itself
-                if (attackedSquareSettings == null || attackedSquareSettings.isRed != settings.isRed)
+                if (attackedSquareSettings.unitSettings == null || attackedSquareSettings.isRed != settings.isRed)
                 {
                     Debug.Log("unit " + units[i].name + "boosted itself");
 
@@ -224,20 +228,20 @@ public class UnitManager : MonoBehaviour
             var settings = units[i].GetUnitSettings();
             var sign = settings.isRed ? 1 : -1;
 
-            for (var j = 0; j < settings.attackPositions.Length; j++)
+            for (var j = 0; j < settings.unitSettings.attackPositions.Length; j++)
             {
-                var newSquare = Board.PieceInFront(units[i], settings.attackPositions[j] * sign, board.pieces);
+                var newSquare = Board.PieceInFront(units[i], settings.unitSettings.attackPositions[j] * sign,
+                    board.pieces);
                 if (newSquare == null) continue;
                 Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);
                 var attackedSquareSettings = newSquare.GetUnitSettings();
-                if (attackedSquareSettings == null || attackedSquareSettings.isRed == settings.isRed)
+                if (attackedSquareSettings.unitSettings == null || attackedSquareSettings.isRed == settings.isRed)
                     continue;
 
                 //check health of the unit
 
                 //if health is 0, remove the unit
-                if (newSquare.TryToKill())
-                    newSquare.SetUnitSettings(null);
+                if (newSquare.TryToKill()) newSquare.SetUnitSettings(new UnitBoardInfo());
             }
         }
     }

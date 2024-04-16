@@ -10,10 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
-  m_Name: BaseShooterRed
+  m_Name: DoubleMoveShootRed
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 003b1c77e9c8e5e47ac71cf4cf94a7fa, type: 3}
-  isRed: 1
-  sharedValues: {fileID: 11400000, guid: 1bb7fbba5740eff48a278378ddc11313, type: 2}
-  color: {r: 1, g: 0, b: 0.0033779144, a: 1}
-  flipY: 1
+  sprite: {fileID: 21300000, guid: 1e57a3d7380f7a744b3cdc7dfbd7d044, type: 3}
+  movePositions:
+  - {x: 0, y: -1}
+  attackPositions:
+  - {x: 0, y: -1}
+  boostPositions:
+  - {x: 0, y: -1}
+  hitsToDiePerTurn: 1
+  boost: 1
+  cost: 5
