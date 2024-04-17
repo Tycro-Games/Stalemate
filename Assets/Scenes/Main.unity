@@ -6788,7 +6788,7 @@ Transform:
   m_GameObject: {fileID: 1043797113}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9050196, y: 0.53025365, z: 337.6642}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8246,8 +8246,6 @@ GameObject:
   - component: {fileID: 1155901336}
   - component: {fileID: 1155901337}
   - component: {fileID: 1155901338}
-  - component: {fileID: 1155901339}
-  - component: {fileID: 1155901340}
   m_Layer: 6
   m_Name: Board
   m_TagString: Untagged
@@ -8438,76 +8436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842e482672cb2704583bdc9ca6beb161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1155901339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155901334}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e910a0e8bf21e4bbe9e2b79cb10d97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onTimerFinished:
-    m_PersistentCalls:
-      m_Calls: []
-  onTimerEnabled:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1155901338}
-        m_TargetAssemblyTypeName: Peak, Assembly-CSharp
-        m_MethodName: StepAhead
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onTimerDisabled:
-    m_PersistentCalls:
-      m_Calls: []
-  timeToWait: 0.001
-  loop: 0
---- !u!114 &1155901340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155901334}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e910a0e8bf21e4bbe9e2b79cb10d97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onTimerFinished:
-    m_PersistentCalls:
-      m_Calls: []
-  onTimerEnabled:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1155901338}
-        m_TargetAssemblyTypeName: Peak, Assembly-CSharp
-        m_MethodName: GoBack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onTimerDisabled:
-    m_PersistentCalls:
-      m_Calls: []
-  timeToWait: 0
-  loop: 0
 --- !u!1 &1177231450
 GameObject:
   m_ObjectHideFlags: 0

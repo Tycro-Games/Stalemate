@@ -17,8 +17,8 @@ MonoBehaviour:
   - {x: 0, y: -1}
   attackPositions:
   - {x: 0, y: -1}
-  boostPositions:
-  - {x: 0, y: -1}
   hitsToDiePerTurn: 1
   boost: 1
+  boostPositions:
+  - {x: 0, y: -1}
   cost: 5

@@ -1,4 +1,25 @@
+using UnityEditor;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+
+[CustomEditor(typeof(ScriptableUnitSettings))]
+public class ScriptableUnitSettingsEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        var settings = (ScriptableUnitSettings)target;
+
+        // Draw default properties
+        DrawDefaultInspector();
+
+        // Check if boost is true
+        if (settings.boost)
+        {
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("boostPositions"));
+            serializedObject.ApplyModifiedProperties();
+        }
+    }
+}
 
 [CreateAssetMenu(fileName = "UnitSpriteSettings", menuName = "ScriptableObjects/UnitSettings", order = 0)]
 public class ScriptableUnitSettings : ScriptableObject
@@ -10,8 +31,9 @@ public class ScriptableUnitSettings : ScriptableObject
 
     public Vector2Int[] attackPositions;
 
-    public Vector2Int[] boostPositions;
     public int hitsToDiePerTurn = 1;
     public bool boost = false;
+    [HideInInspector] public Vector2Int[] boostPositions;
+
     public int cost;
 }
