@@ -7,7 +7,9 @@ using UnityEngine;
 public class PhaseSystem : MonoBehaviour
 {
     [SerializeField] private List<Phase> phases = new();
-    private int index = 0;
+    [SerializeField] private List<Phase> unitsAct = new();
+    private int phaseIndex = 0;
+    private int actionIndex = 0;
 
     private void Start()
     {
@@ -16,17 +18,33 @@ public class PhaseSystem : MonoBehaviour
 
     public void StartNextPhase()
     {
-        Debug.Log("Starting phase " + phases[index].name);
+        Debug.Log("Starting phase " + phases[phaseIndex].name);
 
-        phases[index].OnStart?.Invoke();
+        phases[phaseIndex].OnStart?.Invoke();
     }
 
     public void EndPhase()
     {
-        Debug.Log("Ending phase " + phases[index].name);
-        var phase = phases[index];
+        Debug.Log("Ending phase " + phases[phaseIndex].name);
+        var phase = phases[phaseIndex];
 
-        index = (index + 1) % phases.Count;
+        phaseIndex = (phaseIndex + 1) % phases.Count;
         phase.OnEnd?.Invoke();
+    }
+
+    public void EndAction()
+    {
+        Debug.Log("Ending action " + unitsAct[actionIndex].name);
+        var action = unitsAct[actionIndex];
+
+        actionIndex = (actionIndex + 1) % unitsAct.Count;
+        action.OnEnd?.Invoke();
+    }
+
+    public void NextUnitAct()
+    {
+        Debug.Log("Starting unit act " + unitsAct[actionIndex].name);
+
+        unitsAct[actionIndex].OnStart?.Invoke();
     }
 }

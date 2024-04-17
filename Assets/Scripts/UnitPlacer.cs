@@ -84,7 +84,7 @@ public class UnitPlacer : MonoBehaviour
         }
 
 
-        Debug.Log("hover over:" + place.name);
+        //Debug.Log("hover over:" + place.name);
         //decide which row is okay to place on red/ blue
         var nameTurn = RedBlueTurn.IsRedFirst() ? "Red" : "Blue";
         var selectedRenderer = place.transform.GetChild(0).GetComponent<SpriteRenderer>();

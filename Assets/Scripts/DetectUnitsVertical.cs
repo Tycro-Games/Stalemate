@@ -11,8 +11,8 @@ public class DetectUnitsVertical : MonoBehaviour
     private int y;
 
     //[SerializeField] private int defaultYRed = -1;
-    private int RedUnitsOnY;
-    private int BlueUnitsOnY;
+    private static int RedUnitsOnY = 0;
+    private static int BlueUnitsOnY = 0;
     public static Action<int, int> onWinConditionChange;
 
     private void Start()
@@ -41,6 +41,7 @@ public class DetectUnitsVertical : MonoBehaviour
         foreach (var blueUnit in manager.GetBlueUnits())
             if ((int)blueUnit.transform.position.y >= y)
                 BlueUnitsOnY++;
+
         onWinConditionChange?.Invoke(RedUnitsOnY, BlueUnitsOnY);
     }
 

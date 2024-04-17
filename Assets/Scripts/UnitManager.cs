@@ -16,8 +16,13 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private UnityEvent onAttackEnd;
     [SerializeField] private UnityEvent onBoostEnd;
     private Board board;
-
+    private bool isPlayerTurn = true;
     public static Action onUnitManipulation;
+
+    public void SetCurrentSide(bool playerTurn)
+    {
+        isPlayerTurn = playerTurn;
+    }
 
     public List<UnitRenderer> GetRedUnits()
     {
@@ -43,33 +48,44 @@ public class UnitManager : MonoBehaviour
 
     public void MoveCurrentSide()
     {
-        StartCoroutine(Movement(RedBlueTurn.IsRedFirst()));
+        if (isPlayerTurn)
+            StartCoroutine(Movement(RedBlueTurn.IsRedFirst()));
+        else
+            MoveOtherSide();
     }
 
     public void AttackCurrentSide()
     {
-        StartCoroutine(Attack(RedBlueTurn.IsRedFirst()));
-    }
-
-    public void MoveOtherSide()
-    {
-        StartCoroutine(Movement(!RedBlueTurn.IsRedFirst()));
-    }
-
-    public void AttackOtherSide()
-    {
-        StartCoroutine(Attack(!RedBlueTurn.IsRedFirst()));
-    }
-
-    public void BoostOtherSide()
-    {
-        StartCoroutine(Boost(!RedBlueTurn.IsRedFirst()));
+        if (isPlayerTurn)
+            StartCoroutine(Attack(RedBlueTurn.IsRedFirst()));
+        else
+            AttackOtherSide();
     }
 
     public void BoostCurrentSide()
     {
-        StartCoroutine(Boost(RedBlueTurn.IsRedFirst()));
+        if (isPlayerTurn)
+            StartCoroutine(Boost(RedBlueTurn.IsRedFirst()));
+        else
+            BoostOtherSide();
     }
+
+
+    private void MoveOtherSide()
+    {
+        StartCoroutine(Movement(!RedBlueTurn.IsRedFirst()));
+    }
+
+    private void AttackOtherSide()
+    {
+        StartCoroutine(Attack(!RedBlueTurn.IsRedFirst()));
+    }
+
+    private void BoostOtherSide()
+    {
+        StartCoroutine(Boost(!RedBlueTurn.IsRedFirst()));
+    }
+
 
     private IEnumerator Movement(bool isRed)
     {
@@ -233,7 +249,7 @@ public class UnitManager : MonoBehaviour
                 var newSquare = Board.PieceInFront(units[i], settings.unitSettings.attackPositions[j] * sign,
                     board.pieces);
                 if (newSquare == null) continue;
-                Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);
+                //Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);
                 var attackedSquareSettings = newSquare.GetUnitSettings();
                 if (attackedSquareSettings.unitSettings == null || attackedSquareSettings.isRed == settings.isRed)
                     continue;
