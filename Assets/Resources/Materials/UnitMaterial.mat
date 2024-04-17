@@ -72,6 +72,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
@@ -87,6 +91,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Opacity: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -102,7 +107,7 @@ Material:
     - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
     - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
     - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
-    - _Blue_BodyDark: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
     - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
     - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
     - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
@@ -115,9 +120,9 @@ Material:
     - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
     - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
     - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
-    - _Red_GunDark: {r: 0.05882353, g: 0.03921569, b: 0.05882353, a: 1}
-    - _Red_GunLight: {r: 0.172549, g: 0.1176471, b: 0.1921569, a: 1}
-    - _Red_GunMid: {r: 0.1098039, g: 0.07450981, b: 0.1254902, a: 1}
+    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
+    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
+    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
     - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
     - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
