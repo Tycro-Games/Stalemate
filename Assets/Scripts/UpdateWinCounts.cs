@@ -34,8 +34,13 @@ public class UpdateWinCounts : MonoBehaviour
     public void CheckWinCondition()
     {
         if (winCounts.x >= RedBlueWinCounts.x || winCounts.y >= RedBlueWinCounts.y)
+        {
             onLose?.Invoke();
+            Debug.Log("You lose");
+        }
         else
+        {
             onNotLose?.Invoke();
+        }
     }
 }
