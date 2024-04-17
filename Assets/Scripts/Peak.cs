@@ -14,6 +14,7 @@ public class Peak : MonoBehaviour
 
     private Board board;
     private UnitManager unitManager;
+    private bool goBack = false;
 
     private void Start()
     {
@@ -46,5 +47,19 @@ public class Peak : MonoBehaviour
     {
         for (var i = 0; i < previosBoard.Count; i++) board.pieces[i].SetUnitData(previosBoard[i]);
         unitManager.ResetRedBlueUnitLists();
+    }
+
+    public void Peaking()
+    {
+        if (goBack)
+        {
+            GoBack();
+            goBack = false;
+        }
+        else
+        {
+            StepAhead();
+            goBack = true;
+        }
     }
 }
