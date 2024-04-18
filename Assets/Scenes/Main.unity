@@ -1400,119 +1400,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274851201}
   m_CullTransparentMesh: 1
---- !u!21 &304507046
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UnitMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _IsRed: 0
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Opacity: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
-    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
-    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
-    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
-    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
-    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
-    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
-    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
-    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
-    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
-    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
-    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
-    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
-    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
-    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
-    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
-    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
-    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
-    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
-    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
-    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &313195084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,119 +1769,6 @@ MonoBehaviour:
     unitSettings: {fileID: 0}
     isRed: 1
   alpha: 1
---- !u!21 &355397118
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UnitMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _IsRed: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Opacity: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
-    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
-    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
-    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
-    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
-    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
-    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
-    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
-    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
-    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
-    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
-    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
-    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
-    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
-    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
-    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
-    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
-    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
-    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
-    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
-    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &368753096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,6 +2147,119 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!21 &445375177
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UnitMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _IsRed: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
+    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
+    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
+    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
+    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
+    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
+    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
+    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
+    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
+    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
+    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
+    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
+    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
+    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
+    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
+    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
+    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &465393368
 GameObject:
   m_ObjectHideFlags: 0
@@ -2656,6 +2543,119 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20.624285, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!21 &493458559
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UnitMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _IsRed: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
+    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
+    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
+    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
+    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
+    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
+    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
+    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
+    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
+    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
+    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
+    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
+    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
+    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
+    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
+    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
+    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1001 &509737141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4102,119 +4102,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749728153}
   m_CullTransparentMesh: 1
---- !u!21 &760874858
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UnitMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _IsRed: 0
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Opacity: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
-    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
-    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
-    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
-    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
-    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
-    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
-    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
-    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
-    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
-    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
-    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
-    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
-    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
-    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
-    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
-    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
-    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
-    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
-    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
-    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &782520105
 GameObject:
   m_ObjectHideFlags: 0
@@ -4688,119 +4575,6 @@ Transform:
   - {fileID: 1956095216}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &827153858
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UnitMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _IsRed: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Opacity: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
-    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
-    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
-    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
-    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
-    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
-    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
-    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
-    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
-    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
-    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
-    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
-    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
-    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
-    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
-    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
-    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
-    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
-    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
-    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
-    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1001 &845758785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5046,6 +4820,119 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!21 &862587916
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UnitMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _IsRed: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
+    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
+    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
+    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
+    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
+    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
+    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
+    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
+    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
+    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
+    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
+    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
+    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
+    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
+    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
+    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
+    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!224 &869633810 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3220555903086523102, guid: 66a3b0fee2196fa41b796af97ed20bf3, type: 3}
@@ -6007,6 +5894,119 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925136750}
   m_CullTransparentMesh: 1
+--- !u!21 &932067861
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UnitMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _IsRed: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
+    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
+    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
+    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
+    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
+    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
+    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
+    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
+    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
+    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
+    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
+    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
+    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
+    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
+    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
+    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
+    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &939648446
 GameObject:
   m_ObjectHideFlags: 0
@@ -6295,6 +6295,119 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20.624285, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!21 &977495115
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UnitMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _IsRed: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
+    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
+    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
+    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
+    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
+    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
+    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
+    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
+    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
+    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
+    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
+    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
+    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
+    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
+    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
+    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
+    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &992745696
 GameObject:
   m_ObjectHideFlags: 0
@@ -6380,6 +6493,119 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3220555903086523102, guid: 66a3b0fee2196fa41b796af97ed20bf3, type: 3}
   m_PrefabInstance: {fileID: 898742428}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &994815215
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UnitMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _IsRed: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
+    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
+    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
+    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
+    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
+    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
+    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
+    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
+    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
+    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
+    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
+    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
+    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
+    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
+    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
+    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
+    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &1004510218
 GameObject:
   m_ObjectHideFlags: 0
@@ -7001,119 +7227,6 @@ MonoBehaviour:
       m_Calls: []
   timeToWait: 0.2
   loop: 1
---- !u!21 &1040931589
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UnitMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _IsRed: 0
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Opacity: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
-    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
-    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
-    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
-    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
-    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
-    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
-    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
-    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
-    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
-    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
-    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
-    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
-    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
-    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
-    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
-    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
-    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
-    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
-    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
-    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &1043313591
 GameObject:
   m_ObjectHideFlags: 0
@@ -7180,119 +7293,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &1049567878
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UnitMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _IsRed: 0
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Opacity: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
-    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
-    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
-    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
-    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
-    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
-    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
-    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
-    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
-    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
-    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
-    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
-    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
-    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
-    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
-    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
-    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
-    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
-    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
-    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
-    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &1050497354
 GameObject:
   m_ObjectHideFlags: 0
@@ -8364,232 +8364,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!21 &1288797654
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UnitMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _IsRed: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Opacity: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
-    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
-    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
-    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
-    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
-    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
-    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
-    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
-    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
-    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
-    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
-    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
-    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
-    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
-    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
-    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
-    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
-    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
-    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
-    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
-    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
---- !u!21 &1314259412
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UnitMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _IsRed: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Opacity: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
-    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
-    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
-    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
-    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
-    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
-    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
-    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
-    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
-    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
-    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
-    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
-    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
-    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
-    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
-    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
-    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
-    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
-    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
-    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
-    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1001 &1323248003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9364,6 +9138,119 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!21 &1424447209
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UnitMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _IsRed: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
+    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
+    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
+    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
+    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
+    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
+    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
+    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
+    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
+    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
+    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
+    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
+    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
+    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
+    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
+    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
+    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!224 &1432843009 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3220555903086523102, guid: 66a3b0fee2196fa41b796af97ed20bf3, type: 3}
@@ -10753,6 +10640,119 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646882738}
   m_CullTransparentMesh: 1
+--- !u!21 &1651619409
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UnitMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _IsRed: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
+    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
+    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
+    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
+    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
+    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
+    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
+    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
+    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
+    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
+    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
+    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
+    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
+    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
+    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
+    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
+    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &1659695946
 GameObject:
   m_ObjectHideFlags: 0
@@ -11293,6 +11293,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 1155901336}
   unitManager: {fileID: 1155901337}
+  onPresentTurn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 924948673}
+        m_TargetAssemblyTypeName: UnitPlacer, Assembly-CSharp
+        m_MethodName: ValidTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTimeChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 925136752}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1762727386
 GameObject:
   m_ObjectHideFlags: 0
@@ -11377,119 +11407,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!21 &1829982130
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UnitMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _IsRed: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Opacity: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
-    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
-    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
-    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
-    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
-    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
-    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
-    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
-    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
-    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
-    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
-    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
-    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
-    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
-    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
-    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
-    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
-    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
-    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
-    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
-    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &1832312570
 GameObject:
   m_ObjectHideFlags: 0
@@ -11610,6 +11527,119 @@ MonoBehaviour:
   m_Spacing: {x: 2.5, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!21 &1850269704
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UnitMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _IsRed: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
+    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
+    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
+    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
+    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
+    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
+    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
+    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
+    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
+    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
+    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
+    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
+    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
+    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
+    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
+    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
+    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &1918260645
 GameObject:
   m_ObjectHideFlags: 0
@@ -11919,6 +11949,119 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1926630279
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UnitMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _IsRed: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
+    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
+    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
+    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
+    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
+    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
+    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
+    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
+    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
+    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
+    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
+    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
+    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
+    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
+    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
+    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
+    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
+    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &1931520217
 GameObject:
   m_ObjectHideFlags: 0
@@ -12377,119 +12520,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!21 &1980881556
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UnitMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2c90fc1cd74fbd54a97f6811399a15ae, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2782d6150dff433daf78e21b03d22364_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: aee808350c584c849ac330e03df9a956, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _IsRed: 0
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Opacity: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Base_BodyDark: {r: 0.509804, g: 0.509804, b: 0.509804, a: 1}
-    - _Base_BodyLight: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
-    - _Base_BodyMid: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
-    - _Base_GunDark: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
-    - _Base_GunLight: {r: 0.3921569, g: 0.3921569, b: 0.3921569, a: 1}
-    - _Base_GunMid: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    - _Base_Highlight: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Outline: {r: 0, g: 0, b: 0, a: 1}
-    - _Blue_BodyDark: {r: 0.21960784, g: 0.34901962, b: 0.7019608, a: 0}
-    - _Blue_BodyLight: {r: 0.2980392, g: 0.6313726, b: 0.9019608, a: 0}
-    - _Blue_BodyMid: {r: 0.2, g: 0.5333334, b: 0.8705882, a: 0}
-    - _Blue_GunDark: {r: 0.2431373, g: 0.2313726, b: 0.3960784, a: 1}
-    - _Blue_GunLight: {r: 0.2862745, g: 0.3176471, b: 0.5333334, a: 0}
-    - _Blue_GunMid: {r: 0.2666667, g: 0.2745098, b: 0.4666667, a: 0}
-    - _Blue_Highlight: {r: 0.4039216, g: 0.8117647, b: 0.8941177, a: 0}
-    - _Blue_Outline: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Red_BodyDark: {r: 0.4196078, g: 0.1490196, b: 0.2627451, a: 1}
-    - _Red_BodyLight: {r: 0.7960784, g: 0.1568628, b: 0.2666667, a: 1}
-    - _Red_BodyMid: {r: 0.6745098, g: 0.1568628, b: 0.2784314, a: 1}
-    - _Red_GunDark: {r: 0.11764706, g: 0.08235294, b: 0.13725491, a: 1}
-    - _Red_GunLight: {r: 0.23921569, g: 0.14117648, b: 0.25882354, a: 1}
-    - _Red_GunMid: {r: 0.17254902, g: 0.11764706, b: 0.19215687, a: 1}
-    - _Red_Highlight: {r: 0.9254902, g: 0.1529412, b: 0.1921569, a: 1}
-    - _Red_Outline: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &1989509553
 GameObject:
   m_ObjectHideFlags: 0
