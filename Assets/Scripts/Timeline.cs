@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Timeline : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Timeline : MonoBehaviour
 
     [SerializeField] private Board board;
     [SerializeField] private UnitManager unitManager;
+    [SerializeField] private UnityEvent onPresentTurn;
+    [SerializeField] private UnityEvent onTimeChange;
 
     private int index = 0;
 
@@ -48,6 +51,8 @@ public class Timeline : MonoBehaviour
         var prevBoard = previosBoard[index];
         for (var i = 0; i < prevBoard.Count; i++) board.pieces[i].SetUnitData(prevBoard[i]);
         unitManager.ResetRedBlueUnitLists();
+        onTimeChange?.Invoke();
+        if (index == previosBoard.Count - 1) onPresentTurn.Invoke();
     }
 
     public void GoBack()
@@ -62,5 +67,6 @@ public class Timeline : MonoBehaviour
         var prevBoard = previosBoard[index];
         for (var i = 0; i < prevBoard.Count; i++) board.pieces[i].SetUnitData(prevBoard[i]);
         unitManager.ResetRedBlueUnitLists();
+        onTimeChange?.Invoke();
     }
 }

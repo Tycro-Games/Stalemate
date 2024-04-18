@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Board))]
 [RequireComponent(typeof(UnitManager))]
@@ -15,6 +16,8 @@ public class Peak : MonoBehaviour
     private Board board;
     private UnitManager unitManager;
     private bool goBack = false;
+    [SerializeField] private UnityEvent onPeak;
+    [SerializeField] private UnityEvent onUnPeak;
 
     private void Start()
     {
@@ -41,6 +44,7 @@ public class Peak : MonoBehaviour
         unitManager.BoostUnits(ref currentUnits);
         //just change 
         board.pieces = currentBoard;
+        unitManager.ResetRedBlueUnitLists();
     }
 
     public void GoBack()
@@ -55,11 +59,13 @@ public class Peak : MonoBehaviour
         {
             GoBack();
             goBack = false;
+            onUnPeak?.Invoke();
         }
         else
         {
             StepAhead();
             goBack = true;
+            onPeak?.Invoke();
         }
     }
 }
