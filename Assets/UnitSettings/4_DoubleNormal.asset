@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
-  m_Name: 2_Diagonals
+  m_Name: 4_DoubleNormal
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 8746aebd6956b9842af2b1a720eed31b, type: 3}
+  sprite: {fileID: 21300000, guid: d291e8f4e67646d4389e1b3f7db3fe0a, type: 3}
   movePositions:
   - {x: 0, y: -1}
   attackPositions:
-  - {x: 1, y: -1}
-  - {x: -1, y: -1}
-  hitsToDiePerTurn: 1
-  boost: 0
-  boostPositions: []
-  cost: 2
+  - {x: 0, y: -1}
+  hitsToDiePerTurn: 2
+  boost: 1
+  boostPositions:
+  - {x: 0, y: 0}
+  cost: 4
