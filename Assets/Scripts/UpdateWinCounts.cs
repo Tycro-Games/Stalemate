@@ -15,12 +15,12 @@ public class UpdateWinCounts : MonoBehaviour
 
     private void OnEnable()
     {
-        DetectUnitsVertical.onWinConditionChange += UpdateWinCount;
+        UnitManager.onWinConditionChange += UpdateWinCount;
     }
 
     private void OnDisable()
     {
-        DetectUnitsVertical.onWinConditionChange -= UpdateWinCount;
+        UnitManager.onWinConditionChange -= UpdateWinCount;
     }
 
     private void UpdateWinCount(int redCount, int blueCount)

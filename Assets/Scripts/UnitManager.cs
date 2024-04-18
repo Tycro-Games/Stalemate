@@ -16,12 +16,36 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private UnityEvent onAttackEnd;
     [SerializeField] private UnityEvent onBoostEnd;
     private Board board;
+
     private bool isPlayerTurn = true;
+
     public static Action onUnitManipulation;
+    public static Action<int, int> onWinConditionChange;
+
+    [HideInInspector] public List<Transform> positions;
+    private int redUnitsOnY = 0;
+    private int blueUnitsOnY = 0;
 
     public void SetCurrentSide(bool playerTurn)
     {
         isPlayerTurn = playerTurn;
+    }
+
+    public void UpdateWinningCounts()
+    {
+        redUnitsOnY = 0;
+        blueUnitsOnY = 0;
+        foreach (var middleLine in positions)
+        {
+            foreach (var redUnit in redUnits.FindAll(x => (int)x.transform.position.x == (int)middleLine.position.x))
+                if ((int)redUnit.transform.position.y <= middleLine.position.y)
+                    redUnitsOnY++;
+            foreach (var blueUnit in blueUnits.FindAll(x => (int)x.transform.position.x == (int)middleLine.position.x))
+                if ((int)blueUnit.transform.position.y >= middleLine.position.y)
+                    blueUnitsOnY++;
+        }
+
+        onWinConditionChange?.Invoke(redUnitsOnY, blueUnitsOnY);
     }
 
     public List<UnitRenderer> GetRedUnits()
@@ -44,6 +68,7 @@ public class UnitManager : MonoBehaviour
     {
         redUnits = Board.GetAllPieces(SquareType.RED, ref board.pieces);
         blueUnits = Board.GetAllPieces(SquareType.BLUE, ref board.pieces);
+        UpdateWinningCounts();
     }
 
     public void MoveCurrentSide()
@@ -99,6 +124,7 @@ public class UnitManager : MonoBehaviour
         yield return new WaitForSeconds(timeAfterMove);
         onMoveEnd?.Invoke();
         onUnitManipulation?.Invoke();
+        UpdateWinningCounts();
     }
 
     private IEnumerator Boost(bool isRed)
@@ -113,6 +139,7 @@ public class UnitManager : MonoBehaviour
         yield return new WaitForSeconds(timeAfterMove);
         onBoostEnd?.Invoke();
         onUnitManipulation?.Invoke();
+        UpdateWinningCounts();
     }
 
     private IEnumerator Attack(bool isRed)
@@ -133,6 +160,7 @@ public class UnitManager : MonoBehaviour
         yield return new WaitForSeconds(timeAfterMove);
         onAttackEnd?.Invoke();
         onUnitManipulation?.Invoke();
+        UpdateWinningCounts();
     }
 
     private void CleanNullEnemies(ref List<UnitRenderer> units)
@@ -226,12 +254,8 @@ public class UnitManager : MonoBehaviour
 
         MoveUnits(ref piecesToBoost);
         AttackUnits(ref piecesToBoost);
-        CleanNullEnemies(ref redUnits);
-        CleanNullEnemies(ref blueUnits);
-        if (isRed)
-            redUnits.AddRange(piecesToBoost);
-        else
-            blueUnits.AddRange(piecesToBoost);
+
+        ResetRedBlueUnitLists();
     }
 
     public void AttackUnits(ref List<UnitRenderer> units)
