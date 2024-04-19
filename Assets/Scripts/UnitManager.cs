@@ -255,6 +255,13 @@ public class UnitManager : MonoBehaviour
         MoveUnits(ref piecesToBoost);
         AttackUnits(ref piecesToBoost);
 
+        CleanNullEnemies(ref redUnits);
+        CleanNullEnemies(ref blueUnits);
+        if (isRed)
+            redUnits.AddRange(piecesToBoost);
+        else
+            blueUnits.AddRange(piecesToBoost);
+
         ResetRedBlueUnitLists();
     }
 
