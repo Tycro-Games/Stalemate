@@ -22,6 +22,18 @@ public class UnitUIRenderer : MonoBehaviour
         onUnitSettingsChanged?.Invoke(GetBoardInfo());
     }
 
+    public void SetUnitSettings(ScriptableUnitSettings _unitSettings)
+    {
+        unitSettings = _unitSettings;
+
+        spriteRenderer.sprite = unitSettings.sprite;
+    }
+
+    public ScriptableUnitSettings GetUnitSettings()
+    {
+        return unitSettings;
+    }
+
     public UnitBoardInfo GetBoardInfo()
     {
         return new UnitBoardInfo(unitSettings, isRed);

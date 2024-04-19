@@ -8,6 +8,8 @@ public class UpdateWinCounts : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI redUnitCount;
     [SerializeField] private TextMeshProUGUI blueUnitCount;
+    [SerializeField] private UnityEvent onWinRed;
+    [SerializeField] private UnityEvent onWinBlue;
     [SerializeField] private UnityEvent onLose;
     [SerializeField] private UnityEvent onNotLose;
     private Vector2Int RedBlueWinCounts = Vector2Int.one * 3;
@@ -33,6 +35,9 @@ public class UpdateWinCounts : MonoBehaviour
 
     public void CheckWinCondition()
     {
+        var redWin = winCounts.x >= RedBlueWinCounts.x;
+        var blueWin = winCounts.y >= RedBlueWinCounts.y;
+
         if (winCounts.x >= RedBlueWinCounts.x || winCounts.y >= RedBlueWinCounts.y)
         {
             onLose?.Invoke();
@@ -41,6 +46,18 @@ public class UpdateWinCounts : MonoBehaviour
         else
         {
             onNotLose?.Invoke();
+        }
+
+        if (redWin)
+        {
+            onWinRed?.Invoke();
+            Debug.Log("Red wins");
+        }
+
+        if (blueWin)
+        {
+            onWinBlue?.Invoke();
+            Debug.Log("Blue wins");
         }
     }
 }
