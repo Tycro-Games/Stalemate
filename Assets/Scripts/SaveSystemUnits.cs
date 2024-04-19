@@ -24,6 +24,7 @@ public class SaveSystemUnits : MonoBehaviour
     [SerializeField] private ScriptableUnitSettings fogOfWar;
     [SerializeField] private readonly string filePathRed = "Assets/SaveData/UnitsRed.json";
     [SerializeField] private readonly string filePathBlue = "Assets/SaveData/UnitsBlue.json";
+    [SerializeField] private readonly string filePathWon = "Assets/SaveData/DidRedWon.json";
 
     private void Start()
     {
@@ -87,5 +88,6 @@ public class SaveSystemUnits : MonoBehaviour
         // For example, if you want to save them to files:
         File.WriteAllText(filePathRed, redUnitsJson);
         File.WriteAllText(filePathBlue, blueUnitsJson);
+        File.WriteAllText(filePathWon, redWon ? "true" : "false");
     }
 }
