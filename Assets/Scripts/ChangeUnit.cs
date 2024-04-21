@@ -34,7 +34,10 @@ public class ChangeUnit : MonoBehaviour
 
     public void ChooseRandomCostUnit()
     {
-        index = Random.Range(0, unitUIRed.Length);
+        var randIndex = Random.Range(0, unitUIRed.Length);
+
+        while (randIndex == index) randIndex = Random.Range(0, unitUIRed.Length);
+        index = randIndex;
         //display the unit selected
         Debug.Log("index of selected:" + index);
         //var transforms = new List<RectTransform>();
