@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 [Serializable]
 public class SerializableList<T>
@@ -15,23 +16,87 @@ public class SerializableList<T>
 public class SaveSystemUnits : MonoBehaviour
 {
     [SerializeField] private Transform redParent;
+
     [SerializeField] private Transform blueParent;
+
+    //or the winner
     private UnitUIRenderer[] unitUIRed;
+
     private UnitUIRenderer[] unitUIBlue;
     private List<ScriptableUnitSettings> allUnits = new();
-    private SerializableList<int> redUnits = new();
+    private SerializableList<int> redWinUnits = new();
     private SerializableList<int> blueUnits = new();
     [SerializeField] private ScriptableUnitSettings fogOfWar;
     [SerializeField] private readonly string filePathRed = "Assets/SaveData/UnitsRed.json";
     [SerializeField] private readonly string filePathBlue = "Assets/SaveData/UnitsBlue.json";
     [SerializeField] private readonly string filePathWon = "Assets/SaveData/DidRedWon.json";
+    [SerializeField] private UnityEvent onStart;
 
     private void Start()
     {
-        allUnits = Resources.LoadAll<ScriptableUnitSettings>("UnitSettings").ToList();
+        allUnits = GetAllUnitSettings();
         allUnits.Remove(fogOfWar);
+        onStart?.Invoke();
         //load stuff
-        LoadData();
+        //load winner
+    }
+
+    public void SerializeWinner()
+    {
+        var didRedWin = bool.Parse(File.ReadAllText(filePathWon));
+
+        var serializeRed = new SerializableList<int>();
+        var serializeBlue = new SerializableList<int>();
+
+        if (didRedWin)
+        {
+            // Populate redUnits and blueUnits lists with ScriptableUnitSettings
+            foreach (var blue in unitUIBlue) serializeBlue.list.Add(GetID(blue.GetUnitSettings()));
+
+            foreach (var red in unitUIRed) serializeRed.list.Add(GetID(red.GetUnitSettings()));
+
+            // Now you can serialize redUnits and blueUnits using Unity's JSON utility
+            var redUnitsJson = JsonUtility.ToJson(serializeRed);
+            var blueUnitsJson = JsonUtility.ToJson(serializeBlue);
+
+            // Optionally, you can save the JSON strings to files or send them over the network, etc.
+            // For example, if you want to save them to files:
+            File.WriteAllText(filePathRed, redUnitsJson);
+            File.WriteAllText(filePathBlue, blueUnitsJson);
+        }
+        else
+        {
+            // Populate redUnits and blueUnits lists with ScriptableUnitSettings
+            foreach (var blue in unitUIBlue) serializeBlue.list.Add(GetID(blue.GetUnitSettings()));
+
+            foreach (var red in unitUIRed) serializeRed.list.Add(GetID(red.GetUnitSettings()));
+
+            // Now you can serialize redUnits and blueUnits using Unity's JSON utility
+            var redUnitsJson = JsonUtility.ToJson(serializeRed);
+            var blueUnitsJson = JsonUtility.ToJson(serializeBlue);
+
+            // Optionally, you can save the JSON strings to files or send them over the network, etc.
+            // For example, if you want to save them to files:
+            File.WriteAllText(filePathBlue, redUnitsJson);
+            File.WriteAllText(filePathRed, blueUnitsJson);
+        }
+    }
+
+    public static List<ScriptableUnitSettings> GetAllUnitSettings()
+    {
+        return Resources.LoadAll<ScriptableUnitSettings>("UnitSettings").ToList();
+    }
+
+    private bool LoadOneSide(string fileToRead, ref UnitUIRenderer[] unitUI, ref SerializableList<int> units)
+    {
+        var json = File.ReadAllText(fileToRead);
+
+        // Convert JSON to list of integers
+        units = JsonUtility.FromJson<SerializableList<int>>(json);
+        if (units.list.Count == 0) return false;
+        var i = 0;
+        foreach (var unit in unitUI) unit.SetUnitSettings(allUnits[units.list[i++]]);
+        return true;
     }
 
     public void LoadData()
@@ -42,21 +107,30 @@ public class SaveSystemUnits : MonoBehaviour
             return;
         }
 
-        var json = File.ReadAllText(filePathRed);
+        if (!LoadOneSide(filePathRed, ref unitUIRed, ref redWinUnits)) return;
 
-        // Convert JSON to list of integers
-        redUnits = JsonUtility.FromJson<SerializableList<int>>(json);
-        if (redUnits.list.Count == 0) return;
-        var i = 0;
-        foreach (var red in unitUIRed) red.SetUnitSettings(allUnits[redUnits.list[i++]]);
+        if (!LoadOneSide(filePathBlue, ref unitUIBlue, ref blueUnits)) return;
+    }
 
-        json = File.ReadAllText(filePathBlue);
+    public void LoadWinnerData()
+    {
+        if (!File.Exists(filePathBlue))
+        {
+            Debug.Log("No data to be loaded");
+            return;
+        }
 
-        // Convert JSON to list of integers
-        blueUnits = JsonUtility.FromJson<SerializableList<int>>(json);
-        if (blueUnits.list.Count == 0) return;
-        i = 0;
-        foreach (var blue in unitUIBlue) blue.SetUnitSettings(allUnits[blueUnits.list[i++]]);
+        var didRedWin = bool.Parse(File.ReadAllText(filePathWon));
+        if (didRedWin)
+        {
+            if (!LoadOneSide(filePathRed, ref unitUIRed, ref redWinUnits)) return;
+            if (!LoadOneSide(filePathBlue, ref unitUIBlue, ref blueUnits)) return;
+        }
+        else
+        {
+            if (!LoadOneSide(filePathBlue, ref unitUIRed, ref redWinUnits)) return;
+            if (!LoadOneSide(filePathRed, ref unitUIBlue, ref blueUnits)) return;
+        }
     }
 
     private void Awake()
