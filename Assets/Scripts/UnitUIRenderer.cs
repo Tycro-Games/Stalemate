@@ -29,6 +29,11 @@ public class UnitUIRenderer : MonoBehaviour
         spriteRenderer.sprite = unitSettings.sprite;
     }
 
+    public void SetIsRed(bool _isRed)
+    {
+        isRed = _isRed;
+    }
+
     public ScriptableUnitSettings GetUnitSettings()
     {
         return unitSettings;

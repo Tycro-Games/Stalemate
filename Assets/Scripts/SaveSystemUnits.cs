@@ -123,14 +123,24 @@ public class SaveSystemUnits : MonoBehaviour
         var didRedWin = bool.Parse(File.ReadAllText(filePathWon));
         if (didRedWin)
         {
+            //red is the losers by default
+            SetTheColors(false);
             if (!LoadOneSide(filePathRed, ref unitUIRed, ref redWinUnits)) return;
             if (!LoadOneSide(filePathBlue, ref unitUIBlue, ref blueUnits)) return;
         }
         else
         {
+            SetTheColors(true);
+
             if (!LoadOneSide(filePathBlue, ref unitUIRed, ref redWinUnits)) return;
             if (!LoadOneSide(filePathRed, ref unitUIBlue, ref blueUnits)) return;
         }
+    }
+
+    private void SetTheColors(bool redWon)
+    {
+        foreach (var red in unitUIRed) red.SetIsRed(redWon);
+        foreach (var blue in unitUIBlue) blue.SetIsRed(!redWon);
     }
 
     private void Awake()
