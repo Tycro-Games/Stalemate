@@ -61,8 +61,8 @@ public class SaveSystemUnits : MonoBehaviour
 
             // Optionally, you can save the JSON strings to files or send them over the network, etc.
             // For example, if you want to save them to files:
-            File.WriteAllText(filePathRed, redUnitsJson);
-            File.WriteAllText(filePathBlue, blueUnitsJson);
+            File.WriteAllText(filePathBlue, redUnitsJson);
+            File.WriteAllText(filePathRed, blueUnitsJson);
         }
         else
         {
@@ -77,8 +77,8 @@ public class SaveSystemUnits : MonoBehaviour
 
             // Optionally, you can save the JSON strings to files or send them over the network, etc.
             // For example, if you want to save them to files:
-            File.WriteAllText(filePathBlue, redUnitsJson);
-            File.WriteAllText(filePathRed, blueUnitsJson);
+            File.WriteAllText(filePathRed, redUnitsJson);
+            File.WriteAllText(filePathBlue, blueUnitsJson);
         }
     }
 
@@ -124,23 +124,31 @@ public class SaveSystemUnits : MonoBehaviour
         if (didRedWin)
         {
             //red is the losers by default
+            if (!LoadOneSide(filePathRed, ref unitUIBlue, ref blueUnits)) return;
+            if (!LoadOneSide(filePathBlue, ref unitUIRed, ref redWinUnits)) return;
             SetTheColors(false);
-            if (!LoadOneSide(filePathRed, ref unitUIRed, ref redWinUnits)) return;
-            if (!LoadOneSide(filePathBlue, ref unitUIBlue, ref blueUnits)) return;
         }
         else
         {
+            if (!LoadOneSide(filePathRed, ref unitUIRed, ref redWinUnits)) return;
+            if (!LoadOneSide(filePathBlue, ref unitUIBlue, ref blueUnits)) return;
             SetTheColors(true);
-
-            if (!LoadOneSide(filePathBlue, ref unitUIRed, ref redWinUnits)) return;
-            if (!LoadOneSide(filePathRed, ref unitUIBlue, ref blueUnits)) return;
         }
     }
 
     private void SetTheColors(bool redWon)
     {
-        foreach (var red in unitUIRed) red.SetIsRed(redWon);
-        foreach (var blue in unitUIBlue) blue.SetIsRed(!redWon);
+        foreach (var red in unitUIRed)
+        {
+            red.SetIsRed(redWon);
+            red.Draw();
+        }
+
+        foreach (var blue in unitUIBlue)
+        {
+            blue.SetIsRed(!redWon);
+            blue.Draw();
+        }
     }
 
     private void Awake()
