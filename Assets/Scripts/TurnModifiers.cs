@@ -14,7 +14,10 @@ public class TurnModifiers : MonoBehaviour
     //only happens when the turn is equal to 6
     public void StartOvertime()
     {
-        Debug.Log("Turn Modified");
-        if (RedBlueTurn.currentPoints >= startingOvertimePoints) onModification?.Invoke(numberOfUnitsToLose);
+        if (RedBlueTurn.currentPoints >= startingOvertimePoints)
+        {
+            onModification?.Invoke(numberOfUnitsToLose);
+            Debug.Log("Turn Modified");
+        }
     }
 }

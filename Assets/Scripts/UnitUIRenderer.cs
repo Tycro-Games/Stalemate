@@ -11,7 +11,7 @@ public class UnitUIRenderer : MonoBehaviour
 {
     [SerializeField] private Image spriteRenderer;
     [SerializeField] private ScriptableUnitSettings unitSettings;
-    [SerializeField] private UnitSettingsEvent onUnitSettingsChanged;
+    [SerializeField] private UnitInfoEvent onUnitInfoChanged;
     [SerializeField] private bool isRed;
 
     public void TriggerOnUnitSettings()
@@ -19,7 +19,7 @@ public class UnitUIRenderer : MonoBehaviour
         var cost = unitSettings.cost;
         var remainingPoints = RedBlueTurn.currentPoints;
         if (cost > remainingPoints) return;
-        onUnitSettingsChanged?.Invoke(GetBoardInfo());
+        onUnitInfoChanged?.Invoke(GetBoardInfo());
     }
 
     public void SetUnitSettings(ScriptableUnitSettings _unitSettings)

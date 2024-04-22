@@ -10,10 +10,11 @@ using UnityEngine.Events;
 public class UnitPlacer : MonoBehaviour
 {
     [SerializeField] private UnitBoardInfo unitSettings;
-    [SerializeField] private UnitSettingsEvent onUnitSettingsChanged;
+    [SerializeField] private UnitInfoEvent onUnitInfoChanged;
 
 
     [SerializeField] private Vector3Event onHover;
+    [SerializeField] private UnitInfoEvent onHoverUnitInfo;
 
     [Tooltip("Triggered where the unit was placed")] [SerializeField]
     private UnitRenderEvent onClick;
@@ -22,6 +23,7 @@ public class UnitPlacer : MonoBehaviour
     private UnityEvent onPlace;
 
     [SerializeField] private UnityEvent onNoHover;
+    [SerializeField] private UnityEvent onHoverNewTile;
     [SerializeField] private UnityEvent onValidTurn;
     [SerializeField] private UnityEvent onNotValidTurn;
 
@@ -46,7 +48,7 @@ public class UnitPlacer : MonoBehaviour
     public void SetUnitSettings(UnitBoardInfo settings)
     {
         unitSettings = settings;
-        onUnitSettingsChanged?.Invoke(settings);
+        onUnitInfoChanged?.Invoke(settings);
     }
 
     private void Reset()
@@ -80,6 +82,8 @@ public class UnitPlacer : MonoBehaviour
         if (place == null)
         {
             onNoHover?.Invoke();
+            onHoverNewTile?.Invoke();
+            ;
             return;
         }
 
@@ -88,7 +92,10 @@ public class UnitPlacer : MonoBehaviour
         //decide which row is okay to place on red/ blue
         var nameTurn = RedBlueTurn.IsRedFirst() ? "Red" : "Blue";
         var selectedRenderer = place.transform.GetChild(0).GetComponent<SpriteRenderer>();
-
+        if (selectedRenderer.sprite != null)
+            onHoverUnitInfo?.Invoke(place.transform.GetChild(0).GetComponent<UnitRenderer>().GetUnitSettings());
+        else
+            onHoverNewTile?.Invoke();
         //this is the color of square that is being hovered over
         var nameSelected = place.transform.GetChild(1).name;
         //the right color of the turn and free space
@@ -114,12 +121,14 @@ public class UnitPlacer : MonoBehaviour
                 return;
             }
 
+
             onNoHover?.Invoke();
         }
 
 
         onHover?.Invoke(place.transform.position);
         if (unitSettings.unitSettings == null) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
