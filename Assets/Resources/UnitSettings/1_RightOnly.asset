@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
   m_Name: 1_RightOnly
   m_EditorClassIdentifier: 
+  title: title
+  description: Only hits the tiles diagnally to it's right and adjacent to it's right
   sprite: {fileID: 21300000, guid: 8a1c592e380cdca4f9190d7f7e2d0545, type: 3}
   movePositions:
   - {x: 0, y: -1}
   attackPositions:
   - {x: 1, y: -1}
   - {x: 1, y: 0}
+  cost: 1
   hitsToDiePerTurn: 1
   boost: 0
   boostPositions: []
-  cost: 1
