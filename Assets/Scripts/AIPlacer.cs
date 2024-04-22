@@ -23,7 +23,7 @@ public class AIPlacer : MonoBehaviour
     private int weight;
     private List<UnitRenderer> positions;
 
-    private void Awake()
+    public void Init()
     {
         board = FindObjectOfType<Board>();
         var reds = redUnitsParent.GetComponentsInChildren<UnitUIRenderer>();
