@@ -25,6 +25,13 @@ public class UpdateWinCounts : MonoBehaviour
         UnitManager.onWinConditionChange -= UpdateWinCount;
     }
 
+    public void SetWinCounts(int newWinCount)
+    {
+        RedBlueWinCounts.x = newWinCount;
+        RedBlueWinCounts.y = newWinCount;
+        UpdateWinCount(winCounts.x, winCounts.y);
+    }
+
     private void UpdateWinCount(int redCount, int blueCount)
     {
         redUnitCount.text = redCount + "/" + RedBlueWinCounts.x;
