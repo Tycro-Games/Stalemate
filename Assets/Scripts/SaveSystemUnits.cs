@@ -27,13 +27,15 @@ public class SaveSystemUnits : MonoBehaviour
     private SerializableList<int> redWinUnits = new();
     private SerializableList<int> blueUnits = new();
     [SerializeField] private ScriptableUnitSettings fogOfWar;
-    [SerializeField] private readonly string filePathRed = "Assets/SaveData/UnitsRed.json";
-    [SerializeField] private readonly string filePathBlue = "Assets/SaveData/UnitsBlue.json";
-    [SerializeField] private readonly string filePathWon = "Assets/SaveData/DidRedWon.json";
+    [SerializeField] private readonly string filePathRed = "UnitsRed.json";
+    [SerializeField] private readonly string filePathBlue = "UnitsBlue.json";
+    [SerializeField] private readonly string filePathWon = "DidRedWon.json";
+    [SerializeField] private string persistentPath;
     [SerializeField] private UnityEvent onStart;
 
     private void Start()
     {
+        persistentPath = Application.persistentDataPath;
         allUnits = GetAllUnitSettings();
         allUnits.Remove(fogOfWar);
         onStart?.Invoke();
@@ -43,7 +45,7 @@ public class SaveSystemUnits : MonoBehaviour
 
     public void SerializeWinner()
     {
-        var didRedWin = bool.Parse(File.ReadAllText(filePathWon));
+        var didRedWin = bool.Parse(File.ReadAllText(persistentPath + filePathWon));
 
         var serializeRed = new SerializableList<int>();
         var serializeBlue = new SerializableList<int>();
@@ -61,8 +63,8 @@ public class SaveSystemUnits : MonoBehaviour
 
             // Optionally, you can save the JSON strings to files or send them over the network, etc.
             // For example, if you want to save them to files:
-            File.WriteAllText(filePathBlue, redUnitsJson);
-            File.WriteAllText(filePathRed, blueUnitsJson);
+            File.WriteAllText(persistentPath + filePathBlue, redUnitsJson);
+            File.WriteAllText(persistentPath + filePathRed, blueUnitsJson);
         }
         else
         {
@@ -77,8 +79,8 @@ public class SaveSystemUnits : MonoBehaviour
 
             // Optionally, you can save the JSON strings to files or send them over the network, etc.
             // For example, if you want to save them to files:
-            File.WriteAllText(filePathRed, redUnitsJson);
-            File.WriteAllText(filePathBlue, blueUnitsJson);
+            File.WriteAllText(persistentPath + filePathRed, redUnitsJson);
+            File.WriteAllText(persistentPath + filePathBlue, blueUnitsJson);
         }
     }
 
@@ -89,7 +91,7 @@ public class SaveSystemUnits : MonoBehaviour
 
     private bool LoadOneSide(string fileToRead, ref UnitUIRenderer[] unitUI, ref SerializableList<int> units)
     {
-        var json = File.ReadAllText(fileToRead);
+        var json = File.ReadAllText(persistentPath + fileToRead);
 
         // Convert JSON to list of integers
         units = JsonUtility.FromJson<SerializableList<int>>(json);
@@ -101,7 +103,7 @@ public class SaveSystemUnits : MonoBehaviour
 
     public void LoadData()
     {
-        if (!File.Exists(filePathBlue))
+        if (!File.Exists(persistentPath + filePathBlue))
         {
             Debug.Log("No data to be loaded");
             return;
@@ -114,13 +116,13 @@ public class SaveSystemUnits : MonoBehaviour
 
     public void LoadWinnerData()
     {
-        if (!File.Exists(filePathBlue))
+        if (!File.Exists(persistentPath + filePathBlue))
         {
             Debug.Log("No data to be loaded");
             return;
         }
 
-        var didRedWin = bool.Parse(File.ReadAllText(filePathWon));
+        var didRedWin = bool.Parse(File.ReadAllText(persistentPath + filePathWon));
         if (didRedWin)
         {
             //red is the losers by default
@@ -178,8 +180,8 @@ public class SaveSystemUnits : MonoBehaviour
 
         // Optionally, you can save the JSON strings to files or send them over the network, etc.
         // For example, if you want to save them to files:
-        File.WriteAllText(filePathRed, redUnitsJson);
-        File.WriteAllText(filePathBlue, blueUnitsJson);
-        File.WriteAllText(filePathWon, redWon ? "true" : "false");
+        File.WriteAllText(persistentPath + filePathRed, redUnitsJson);
+        File.WriteAllText(persistentPath + filePathBlue, blueUnitsJson);
+        File.WriteAllText(persistentPath + filePathWon, redWon ? "true" : "false");
     }
 }

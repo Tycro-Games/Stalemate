@@ -1,13 +1,8 @@
-using Bogadanul.Assets.Scripts.Utility;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Playables;
 
 [Serializable]
 internal struct DotLineCoordinates

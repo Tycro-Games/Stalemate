@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(ScriptableUnitSettings))]
 public class ScriptableUnitSettingsEditor : Editor
 {
@@ -20,7 +21,7 @@ public class ScriptableUnitSettingsEditor : Editor
         }
     }
 }
-
+#endif
 [CreateAssetMenu(fileName = "UnitSpriteSettings", menuName = "ScriptableObjects/UnitSettings", order = 0)]
 public class ScriptableUnitSettings : ScriptableObject
 {
