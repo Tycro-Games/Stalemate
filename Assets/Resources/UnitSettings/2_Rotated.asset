@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
-  m_Name: 2_Diagonals
+  m_Name: 2_Rotated
   m_EditorClassIdentifier: 
-  title: Diagnal Darryl
-  description: then hits tiles diagonally in front of it
-  sprite: {fileID: 21300000, guid: 8746aebd6956b9842af2b1a720eed31b, type: 3}
+  title: Rotated Idiot
+  description: Has a unique attack pattern
+  sprite: {fileID: 21300000, guid: 1478e19d5ad4b5547b6dcef97f46e8fc, type: 3}
   movePositions:
   - {x: 0, y: -1}
   attackPositions:
   - {x: 1, y: -1}
-  - {x: -1, y: -1}
+  - {x: -1, y: 0}
+  - {x: 1, y: -2}
   cost: 2
   hitsToDiePerTurn: 1
   boost: 0

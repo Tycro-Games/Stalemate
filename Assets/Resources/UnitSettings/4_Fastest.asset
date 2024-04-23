@@ -10,17 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
-  m_Name: 2_Diagonals
+  m_Name: 4_Fastest
   m_EditorClassIdentifier: 
-  title: Diagnal Darryl
-  description: then hits tiles diagonally in front of it
-  sprite: {fileID: 21300000, guid: 8746aebd6956b9842af2b1a720eed31b, type: 3}
+  title: FastestOfBoys
+  description: Moves as far forward as is possible
+  sprite: {fileID: 21300000, guid: 2c1728defd9540e43afd0182e9e14374, type: 3}
   movePositions:
   - {x: 0, y: -1}
+  - {x: 0, y: -1}
+  - {x: 0, y: -1}
+  - {x: 0, y: -1}
   attackPositions:
-  - {x: 1, y: -1}
-  - {x: -1, y: -1}
-  cost: 2
+  - {x: 0, y: -1}
+  cost: 4
   hitsToDiePerTurn: 1
   boost: 0
-  boostPositions: []
+  boostPositions:
+  - {x: 0, y: 0}
