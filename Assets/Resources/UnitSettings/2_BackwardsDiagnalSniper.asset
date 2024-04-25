@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
   m_Name: 2_BackwardsDiagnalSniper
   m_EditorClassIdentifier: 
-  title: Backwards Diagnal Sniper
-  description: Hits 2 tiles behind it diagnally (Ask playtest host for details if
-    unclear)
+  title: Backwards Diagonal Sniper
+  description: Moves twice, then Hits 2 tiles behind it diagnally (Ask playtest host
+    for details if unclear)
   sprite: {fileID: 21300000, guid: 1117445a2b3a7bb45be9c4c3f6e70a65, type: 3}
   movePositions:
+  - {x: 0, y: -1}
   - {x: 0, y: -1}
   attackPositions:
   - {x: 1, y: 1}
