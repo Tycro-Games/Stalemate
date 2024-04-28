@@ -130,7 +130,7 @@ public class Board : MonoBehaviour
             }
             else
             {
-                var spriteRenderer = new GameObject().AddComponent<SpriteRenderer>();
+                var spriteRenderer = new GameObject("Grid" + (x, y)).AddComponent<SpriteRenderer>();
                 spriteRenderer.transform.parent = squares[index].transform;
                 spriteRenderer.transform.localPosition = new Vector2(0.0f, 0.0f);
                 spriteRenderer.sprite = spritesOrder[y];
