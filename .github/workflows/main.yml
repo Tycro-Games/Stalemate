@@ -1,4 +1,4 @@
-name: GameCI Template 🎮
+name: Upload to itch.io
 
 on:
   push:
