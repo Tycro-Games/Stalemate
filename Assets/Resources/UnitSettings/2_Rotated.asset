@@ -24,4 +24,5 @@ MonoBehaviour:
   cost: 2
   hitsToDiePerTurn: 1
   boost: 0
+  flip: 1
   boostPositions: []

@@ -102,6 +102,8 @@ public class UnitRenderer : MonoBehaviour
         hp = settings.hitsToDiePerTurn;
         spriteRenderer.sprite = settings.sprite;
         spriteRenderer.material.SetFloat("_IsRed", unitSettings.isRed ? 1.0f : 0.0f);
+                spriteRenderer.material.SetFloat("_IsFlipped", unitSettings.unitSettings.flip ? 1.0f : 0.0f);
+
         //spriteRenderer.material.SetFloat("_Opacity", alpha);
         //var color = unitSettings.color;
         //spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);

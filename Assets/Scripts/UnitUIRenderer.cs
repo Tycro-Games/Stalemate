@@ -27,6 +27,7 @@ public class UnitUIRenderer : MonoBehaviour
         unitSettings = _unitSettings;
 
         spriteRenderer.sprite = unitSettings.sprite;
+        Draw();
     }
 
     public void SetIsRed(bool _isRed)
@@ -44,7 +45,7 @@ public class UnitUIRenderer : MonoBehaviour
         return new UnitBoardInfo(unitSettings, isRed);
     }
 
-    private void Awake()
+    private void Start()
     {
         spriteRenderer = GetComponent<Image>();
         Draw();
@@ -54,6 +55,7 @@ public class UnitUIRenderer : MonoBehaviour
     {
         spriteRenderer.material = new Material(Resources.Load<Material>("Materials/UnitMaterial"));
         spriteRenderer.material.SetFloat("_IsRed", isRed ? 1.0f : 0.0f);
+        spriteRenderer.material.SetFloat("_IsFlipped", unitSettings.flip ? 1.0f : 0.0f);
 
         spriteRenderer.sprite = unitSettings.sprite;
     }

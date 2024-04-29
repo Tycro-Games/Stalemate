@@ -39,5 +39,6 @@ public class ScriptableUnitSettings : ScriptableObject
 
     public int hitsToDiePerTurn = 1;
     public bool boost = false;
+    public bool flip = false;
     [HideInInspector] public Vector2Int[] boostPositions;
 }
