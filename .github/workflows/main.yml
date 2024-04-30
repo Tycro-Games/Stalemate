@@ -1,5 +1,4 @@
 name: Upload to itch.io
-#another test
 on:
   push:
     branches:
