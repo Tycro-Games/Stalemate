@@ -5,16 +5,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public class Spawnig
+public class Spawning
 {
     //0 to 3
     public List<int> placement;
 
-    public Spawnig()
+    public Spawning()
     {
         placement = new List<int> { 0, 0, 0, 0 };
     }
-    public Spawnig(int _first = 0, int _second = 0, int _third = 0, int _forth = 0)
+    public Spawning(int _first = 0, int _second = 0, int _third = 0, int _forth = 0)
     {
         placement = new List<int>(4);
 
@@ -50,7 +50,7 @@ public class AIPlacer : MonoBehaviour
     private List<UnitBoardInfo> enemyList;
     private List<int> enemyIndicies;
     //AI permutations
-    private List<Spawnig> validSpawns;
+    private List<Spawning> validSpawns;
 
     public void Init()
     {
@@ -100,7 +100,7 @@ public class AIPlacer : MonoBehaviour
             enemyList = enemyList.Where(x => x.unitSettings.cost <= weight).ToList();
             //call to recursive backtracking
             indexEnemy = new List<int>();
-
+            
             GenerateSpawnings();
             //Assign scores based on end conditions
             //Sort them based on scores
@@ -111,7 +111,7 @@ public class AIPlacer : MonoBehaviour
     }
     private void GenerateSpawnings()
     {
-        var spawning = new Spawnig();
+        var spawning = new Spawning();
 
         Backtracking(0, ref spawning);
     }
@@ -122,23 +122,28 @@ public class AIPlacer : MonoBehaviour
         foreach (var spawning in spawnings)
         {
             totalCost += spawning;
+            if (spawning > 5)
+                return false;
 
         }
+        //exactly the weight
         if (totalCost == weight)
             return true;
-        else
-        {
+        
+
+
+
             return false;
-        }
+        
     }
    
-    void DisplaySpawning(Spawnig toDisplay)
+    void DisplaySpawning(Spawning toDisplay)
     {
 
         Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " + toDisplay.placement[3]);
 
     }
-    private void Backtracking(int k, ref Spawnig spawning)
+    private void Backtracking(int k, ref Spawning spawning)
     {
 
         for (int i = 0; i <= weight; i++)
