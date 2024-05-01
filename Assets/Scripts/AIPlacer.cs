@@ -1,23 +1,20 @@
-using System;
-using System.Collections;
+using Assets.Scripts.Utility;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.Utility;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public struct Spawninig
+public class Spawnig
 {
     //0 to 3
     public List<int> placement;
 
-    public Spawninig()
+    public Spawnig()
     {
-        placement = new List<int>(4);
+        placement = new List<int> { 0, 0, 0, 0 };
     }
-    public Spawninig(int _first=0, int _second=0, int _third=0, int _forth=0)          
+    public Spawnig(int _first = 0, int _second = 0, int _third = 0, int _forth = 0)
     {
         placement = new List<int>(4);
 
@@ -27,7 +24,7 @@ public struct Spawninig
         placement[3] = _forth;
     }
 
-   
+
 }
 public class AIPlacer : MonoBehaviour
 {
@@ -53,7 +50,7 @@ public class AIPlacer : MonoBehaviour
     private List<UnitBoardInfo> enemyList;
     private List<int> enemyIndicies;
     //AI permutations
-    private List<Spawninig> validSpawns;
+    private List<Spawnig> validSpawns;
 
     public void Init()
     {
@@ -87,11 +84,11 @@ public class AIPlacer : MonoBehaviour
         else
         {
             //Get all possible positions
-            weight = RedBlueTurn.maxPoints;
+            weight = RedBlueTurn.currentPoints;
             //min 1
             var minEnemyCount = (1 + weight / 6);
             //max 4
-    
+
 
             positions = new List<UnitRenderer>(board.GetSquares(isRed ? SquareType.BLUE : SquareType.RED));
             minEnemyCount = Mathf.Min(minEnemyCount, positions.Count);
@@ -112,39 +109,58 @@ public class AIPlacer : MonoBehaviour
 
         onFogOfWar?.Invoke();
     }
+    private void GenerateSpawnings()
+    {
+        var spawning = new Spawnig();
 
+        Backtracking(0, ref spawning);
+    }
     bool IsValid(List<int> spawnings)
     {
+
         int totalCost = 0;
         foreach (var spawning in spawnings)
         {
             totalCost += spawning;
-            
+
         }
-        if(totalCost==weight)
-         return true;
+        if (totalCost == weight)
+            return true;
         else
         {
             return false;
         }
     }
-    private void GenerateSpawnings()
+   
+    void DisplaySpawning(Spawnig toDisplay)
     {
-            Backtracking(1);
-    }
 
-    private void Backtracking(int k)
+        Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " + toDisplay.placement[3]);
+
+    }
+    private void Backtracking(int k, ref Spawnig spawning)
     {
-        var spawning = new Spawninig();
-        for (int i = 1; i <= weight; i++)
+
+        for (int i = 0; i <= weight; i++)
         {
-            
+
             spawning.placement[k] = i;
-            if (IsValid(spawning.placement))
+            //no more space
+            if (k == 3)
             {
-                Debug.Log(spawning.placement);
-                Backtracking(k+1);
+                if (IsValid(spawning.placement))
+                {
+                    DisplaySpawning(spawning);
+                }
             }
+            else
+            {
+                Backtracking(k + 1, ref spawning);
+            }
+
+
+
+
         }
     }
 
