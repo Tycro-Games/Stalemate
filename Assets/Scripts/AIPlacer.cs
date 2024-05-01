@@ -8,6 +8,27 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
+public struct Spawninig
+{
+    //0 to 3
+    public List<int> placement;
+
+    public Spawninig()
+    {
+        placement = new List<int>(4);
+    }
+    public Spawninig(int _first=0, int _second=0, int _third=0, int _forth=0)          
+    {
+        placement = new List<int>(4);
+
+        placement[0] = _first;
+        placement[1] = _second;
+        placement[2] = _third;
+        placement[3] = _forth;
+    }
+
+   
+}
 public class AIPlacer : MonoBehaviour
 {
     [SerializeField] private UnityEvent onFogOfWar;
@@ -18,6 +39,11 @@ public class AIPlacer : MonoBehaviour
     [SerializeField] private UnitBoardInfo fogOfWarBlue;
     [SerializeField] private Transform redUnitsParent;
     [SerializeField] private Transform blueUnitsParent;
+    [SerializeField] private ScriptableAI redAI;
+    [SerializeField] private ScriptableAI blueAI;
+
+
+    //auxiliary variables
     private List<UnitBoardInfo> redUnits = new();
     private List<UnitBoardInfo> blueUnits = new();
     private int weight;
@@ -26,6 +52,8 @@ public class AIPlacer : MonoBehaviour
     private List<UnitRenderer> unitRenderers;
     private List<UnitBoardInfo> enemyList;
     private List<int> enemyIndicies;
+    //AI permutations
+    private List<Spawninig> validSpawns;
 
     public void Init()
     {
@@ -42,17 +70,95 @@ public class AIPlacer : MonoBehaviour
     public void AIFogOfWar()
     {
         //Debug.Log("AIPlacer.AIFogOfWar");
-        weight = RedBlueTurn.maxPoints;
-        // between 1 and 4
-        var countEnemies = Random.Range(1 + weight / 6, Mathf.Min(weight, 5));
+
 
 
         var isRed = RedBlueTurn.IsRedFirst();
-        var fogOfWar = isRed ? fogOfWarBlue : fogOfWarRed;
+        var AISettings = isRed ? blueAI : redAI;
+
+        enemyIndicies = new List<int>();
+
+        if (AISettings.random)
+        {
+            if (RandomSpawn(isRed))
+                return;
+        }
+        //this AI chooses stuff
+        else
+        {
+            //Get all possible positions
+            weight = RedBlueTurn.maxPoints;
+            //min 1
+            var minEnemyCount = (1 + weight / 6);
+            //max 4
+    
+
+            positions = new List<UnitRenderer>(board.GetSquares(isRed ? SquareType.BLUE : SquareType.RED));
+            minEnemyCount = Mathf.Min(minEnemyCount, positions.Count);
+            var maxEnemyCount = Mathf.Min(weight, 4);
+
+
+
+            enemyList = RedBlueTurn.IsRedFirst() ? blueUnits : redUnits;
+            enemyList = enemyList.Where(x => x.unitSettings.cost <= weight).ToList();
+            //call to recursive backtracking
+            indexEnemy = new List<int>();
+
+            GenerateSpawnings();
+            //Assign scores based on end conditions
+            //Sort them based on scores
+
+        }
+
+        onFogOfWar?.Invoke();
+    }
+
+    bool IsValid(List<int> spawnings)
+    {
+        int totalCost = 0;
+        foreach (var spawning in spawnings)
+        {
+            totalCost += spawning;
+            
+        }
+        if(totalCost==weight)
+         return true;
+        else
+        {
+            return false;
+        }
+    }
+    private void GenerateSpawnings()
+    {
+            Backtracking(1);
+    }
+
+    private void Backtracking(int k)
+    {
+        var spawning = new Spawninig();
+        for (int i = 1; i <= weight; i++)
+        {
+            
+            spawning.placement[k] = i;
+            if (IsValid(spawning.placement))
+            {
+                Debug.Log(spawning.placement);
+                Backtracking(k+1);
+            }
+        }
+    }
+
+    private bool RandomSpawn(bool isRed)
+    {
+        weight = RedBlueTurn.maxPoints;
+        // between 1 and 4
+        var countEnemies = Random.Range(1 + weight / 6, Mathf.Min(weight, 5));
         positions = new List<UnitRenderer>(board.GetSquares(isRed ? SquareType.BLUE : SquareType.RED));
         countEnemies = Mathf.Min(countEnemies, positions.Count);
         GetListOfPositions(ref positions, countEnemies);
         //Debug.Log(positions);
+
+        var fogOfWar = isRed ? fogOfWarBlue : fogOfWarRed;
         foreach (var unitRenderer in positions) unitRenderer.SetUnitSettings(fogOfWar);
 
 
@@ -61,13 +167,12 @@ public class AIPlacer : MonoBehaviour
         if (positions.Count == 0)
         {
             onEnemyEndTurn?.Invoke();
-            return;
+            return true;
         }
 
         enemyList = RedBlueTurn.IsRedFirst() ? blueUnits : redUnits;
         indexEnemy = new List<int>();
         unitRenderers = new List<UnitRenderer>();
-        enemyIndicies = new List<int>();
         //choose some random enemies
         while (positions.Count > 0 && weight > 0)
         {
@@ -102,11 +207,8 @@ public class AIPlacer : MonoBehaviour
 
         }
 
-
-
-        onFogOfWar?.Invoke();
+        return false;
     }
-
 
 
     public void PlaceEnemies()

@@ -4706,6 +4706,8 @@ MonoBehaviour:
     isRed: 0
   redUnitsParent: {fileID: 1469964649}
   blueUnitsParent: {fileID: 1846272532}
+  redAI: {fileID: 11400000, guid: add619a4ad7e3f24d99e58776145be2f, type: 2}
+  blueAI: {fileID: 11400000, guid: b8e31506977eb034cb059c32fed15ff7, type: 2}
 --- !u!114 &924948676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5274,7 +5276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 28, y: -156}
+  m_AnchoredPosition: {x: 28, y: -156.00002}
   m_SizeDelta: {x: -445.3954, y: -325.0555}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &992745698
