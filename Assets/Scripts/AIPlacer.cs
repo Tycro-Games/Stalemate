@@ -1,5 +1,7 @@
 using Assets.Scripts.Utility;
+using OpenCover.Framework.Model;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -50,7 +52,8 @@ public class AIPlacer : MonoBehaviour
     private List<UnitBoardInfo> enemyList;
     private List<int> enemyIndicies;
     //AI permutations
-    private List<Spawning> validSpawns;
+    private List<Spawning> validSpawns=new List<Spawning>();
+    private int total;
 
     public void Init()
     {
@@ -100,7 +103,7 @@ public class AIPlacer : MonoBehaviour
             enemyList = enemyList.Where(x => x.unitSettings.cost <= weight).ToList();
             //call to recursive backtracking
             indexEnemy = new List<int>();
-            
+
             GenerateSpawnings();
             //Assign scores based on end conditions
             //Sort them based on scores
@@ -112,12 +115,13 @@ public class AIPlacer : MonoBehaviour
     private void GenerateSpawnings()
     {
         var spawning = new Spawning();
-
+        total = 0;
         Backtracking(0, ref spawning);
+        Debug.Log(total);
     }
     bool IsValid(List<int> spawnings)
     {
-
+        //return true;
         int totalCost = 0;
         foreach (var spawning in spawnings)
         {
@@ -129,24 +133,30 @@ public class AIPlacer : MonoBehaviour
         //exactly the weight
         if (totalCost == weight)
             return true;
-        
 
 
 
-            return false;
-        
+
+        return false;
+
     }
-   
+
     void DisplaySpawning(Spawning toDisplay)
     {
-
+        total++;
         Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " + toDisplay.placement[3]);
+
+    }
+    string MakeString(Spawning toDisplay)
+    {
+      
+        return ("["+toDisplay.placement[0] + ", " + toDisplay.placement[1] + ", " + toDisplay.placement[2] + ", " + toDisplay.placement[3]+"]");
 
     }
     private void Backtracking(int k, ref Spawning spawning)
     {
 
-        for (int i = 0; i <= weight; i++)
+        for (int i = 0; i <= 5; i++)
         {
 
             spawning.placement[k] = i;
@@ -155,6 +165,8 @@ public class AIPlacer : MonoBehaviour
             {
                 if (IsValid(spawning.placement))
                 {
+                    validSpawns.Add(spawning);
+                    System.IO.File.AppendAllText("Assets/text.txt", MakeString(spawning)+'\n');
                     DisplaySpawning(spawning);
                 }
             }
@@ -162,6 +174,7 @@ public class AIPlacer : MonoBehaviour
             {
                 Backtracking(k + 1, ref spawning);
             }
+     
 
 
 
