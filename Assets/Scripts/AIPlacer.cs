@@ -166,7 +166,6 @@ public class AIPlacer : MonoBehaviour
                 if (IsValid(spawning.placement))
                 {
                     validSpawns.Add(spawning);
-                    System.IO.File.AppendAllText("Assets/text.txt", MakeString(spawning)+'\n');
                     DisplaySpawning(spawning);
                 }
             }
