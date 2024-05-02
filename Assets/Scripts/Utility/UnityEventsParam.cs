@@ -24,7 +24,10 @@ namespace Assets.Scripts.Utility
     public class IntEvent : UnityEvent<int>
     {
     }
-
+    [Serializable]
+    public class FloatEvent : UnityEvent<float>
+    {
+    }
     [Serializable]
     public class UnitInfoEvent : UnityEvent<UnitBoardInfo>
     {

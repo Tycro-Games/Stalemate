@@ -9,6 +9,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(CellFinder))]
 public class UnitPlacer : MonoBehaviour
 {
+    [SerializeField] private bool placeOnOppositeSide = false;
     [SerializeField] private UnitBoardInfo unitSettings;
     [SerializeField] private UnitInfoEvent onUnitInfoChanged;
 
@@ -16,10 +17,12 @@ public class UnitPlacer : MonoBehaviour
     [SerializeField] private Vector3Event onHover;
     [SerializeField] private UnitInfoEvent onHoverUnitInfo;
 
-    [Tooltip("Triggered where the unit was placed")] [SerializeField]
+    [Tooltip("Triggered where the unit was placed")]
+    [SerializeField]
     private UnitRenderEvent onClick;
 
-    [Tooltip("Triggered after the unit placement")] [SerializeField]
+    [Tooltip("Triggered after the unit placement")]
+    [SerializeField]
     private UnityEvent onPlace;
 
     [SerializeField] private UnityEvent onNoHover;
@@ -83,14 +86,24 @@ public class UnitPlacer : MonoBehaviour
         {
             onNoHover?.Invoke();
             onHoverNewTile?.Invoke();
-            ;
             return;
         }
 
 
         //Debug.Log("hover over:" + place.name);
         //decide which row is okay to place on red/ blue
-        var nameTurn = RedBlueTurn.IsRedFirst() ? "Red" : "Blue";
+
+        string nameTurn;
+        if (placeOnOppositeSide)
+        {
+            nameTurn = !RedBlueTurn.IsRedFirst() ? "Red" : "Blue";
+        }
+        else
+        {
+            nameTurn = !RedBlueTurn.IsRedFirst() ? "Blue" : "Red";
+
+        }
+
         var selectedRenderer = place.transform.GetChild(0).GetComponent<SpriteRenderer>();
         if (selectedRenderer.sprite != null)
             onHoverUnitInfo?.Invoke(place.transform.GetChild(0).GetComponent<UnitRenderer>().GetUnitSettings());

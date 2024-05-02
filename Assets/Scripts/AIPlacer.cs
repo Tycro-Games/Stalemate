@@ -53,7 +53,7 @@ public class AIPlacer : MonoBehaviour
     private List<int> enemyIndicies;
     //AI permutations
     private List<Spawning> validSpawns=new List<Spawning>();
-    private int total;
+    private int spawningsCount;
 
     public void Init()
     {
@@ -69,10 +69,26 @@ public class AIPlacer : MonoBehaviour
 
     public void AIFogOfWar()
     {
-        //Debug.Log("AIPlacer.AIFogOfWar");
+
+        ChooseEnemies();
+
+        onFogOfWar?.Invoke();
+    }
+    [SerializeField]
+    private FloatEvent onTotalSpawnings; 
+    //the same as AIFogOfWar but with no event trigger
+    public void AISpawnings()
+    {
 
 
 
+        ChooseEnemies();
+        onTotalSpawnings?.Invoke(spawningsCount);
+
+    }
+
+    private void ChooseEnemies()
+    {
         var isRed = RedBlueTurn.IsRedFirst();
         var AISettings = isRed ? blueAI : redAI;
 
@@ -109,15 +125,14 @@ public class AIPlacer : MonoBehaviour
             //Sort them based on scores
 
         }
-
-        onFogOfWar?.Invoke();
     }
+
     private void GenerateSpawnings()
     {
         var spawning = new Spawning();
-        total = 0;
+        spawningsCount = 0;
         Backtracking(0, ref spawning);
-        Debug.Log(total);
+        Debug.Log(spawningsCount);
     }
     bool IsValid(List<int> spawnings)
     {
@@ -143,7 +158,7 @@ public class AIPlacer : MonoBehaviour
 
     void DisplaySpawning(Spawning toDisplay)
     {
-        total++;
+        spawningsCount++;
         Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " + toDisplay.placement[3]);
 
     }
@@ -155,7 +170,7 @@ public class AIPlacer : MonoBehaviour
     }
     private void Backtracking(int k, ref Spawning spawning)
     {
-
+        //max unit is 5
         for (int i = 0; i <= 5; i++)
         {
 
@@ -243,7 +258,10 @@ public class AIPlacer : MonoBehaviour
         return false;
     }
 
-
+    public void ChooseSpawning(int index)
+    {
+        unitRenderers = new List<UnitRenderer>();
+    }
     public void PlaceEnemies()
     {
 

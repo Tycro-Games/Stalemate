@@ -25,10 +25,7 @@ public class RedBlueTurn : MonoBehaviour
     [SerializeField] private UnityEvent onRedTurn;
     [SerializeField] private UnityEvent onBlueTurn;
 
-    private bool GetRedIsFirst()
-    {
-        return isRedFirst;
-    }
+   
 
     private void OnEnable()
     {
@@ -36,7 +33,12 @@ public class RedBlueTurn : MonoBehaviour
         maxPoints = startingPoints;
         SetValues();
     }
-
+    public void SetPoints(string  points)
+    {
+        maxPoints = int.Parse(points);
+        currentPoints = maxPoints;
+        UpdateText();
+    }
     public void SetValues()
     {
         isRedFirst = !isRedFirst;
