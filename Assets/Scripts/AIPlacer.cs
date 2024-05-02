@@ -261,6 +261,8 @@ public class AIPlacer : MonoBehaviour
     public void ChooseSpawning(int index)
     {
         unitRenderers = new List<UnitRenderer>();
+        validSpawns[index].placement
+
     }
     public void PlaceEnemies()
     {
