@@ -87,6 +87,8 @@ public class AIPlacer : MonoBehaviour
     }
     [SerializeField]
     private FloatEvent onTotalSpawnings;
+    private bool isRed;
+
     //the same as AIFogOfWar but with no event trigger
     public void AISpawnings()
     {
@@ -100,7 +102,7 @@ public class AIPlacer : MonoBehaviour
 
     private void ChooseEnemies()
     {
-        var isRed = RedBlueTurn.IsRedFirst();
+        isRed = RedBlueTurn.IsRedFirst();
         var AISettings = isRed ? blueAI : redAI;
 
         enemyIndicies = new List<int>();
@@ -120,7 +122,7 @@ public class AIPlacer : MonoBehaviour
             //max 4
 
 
-            positions = new List<UnitRenderer>(board.GetSquares(isRed ? SquareType.BLUE : SquareType.RED));
+            positions = new List<UnitRenderer>(board.GetEmptySquares(isRed ? SquareType.BLUE : SquareType.RED));
             minEnemyCount = Mathf.Min(minEnemyCount, positions.Count);
             var maxEnemyCount = Mathf.Min(weight, 4);
 
@@ -138,6 +140,8 @@ public class AIPlacer : MonoBehaviour
     }
     public void ClearPositions()
     {
+        positions = new List<UnitRenderer>(board.GetSquares(isRed ? SquareType.BLUE : SquareType.RED));
+
         for (int i = 0; i < positions.Count; i++)
         {
             positions[i].SetUnitSettings(new UnitBoardInfo());
@@ -193,11 +197,12 @@ public class AIPlacer : MonoBehaviour
 
             spawning.placement[k] = i;
             //no more space
-            if (k == emptySlots - 1)
+            if (k == emptySlots)
             {
                 if (IsValid(spawning.placement))
                 {
                     var newSpawning = spawning.placement;
+
                     validSpawns.Add(new Spawning(newSpawning[0], newSpawning[1], newSpawning[2], newSpawning[3]));
                     spawningsCount++;
 
@@ -221,7 +226,7 @@ public class AIPlacer : MonoBehaviour
         weight = RedBlueTurn.maxPoints;
         // between 1 and 4
         var countEnemies = Random.Range(1 + weight / 6, Mathf.Min(weight, 5));
-        positions = new List<UnitRenderer>(board.GetSquares(isRed ? SquareType.BLUE : SquareType.RED));
+        positions = new List<UnitRenderer>(board.GetEmptySquares(isRed ? SquareType.BLUE : SquareType.RED));
         countEnemies = Mathf.Min(countEnemies, positions.Count);
         GetListOfPositions(ref positions, countEnemies);
         //Debug.Log(positions);
@@ -280,7 +285,7 @@ public class AIPlacer : MonoBehaviour
 
     public void ChooseSpawning(float index)
     {
-
+        //clear previous placement
         for (int i = 0; i < positions.Count; i++)
         {
             positions[i].SetUnitSettings(new UnitBoardInfo());
@@ -289,12 +294,14 @@ public class AIPlacer : MonoBehaviour
         var placement = validSpawns[int.Parse(index.ToString())];
         DisplaySpawning(placement);
 
-
-        foreach(UnitRenderer unitSlot in positions)
+        int indexEnemy = 0;
+        foreach (UnitRenderer unitSlot in positions)
         {
-            if (unitSlot.GetUnitSettings().unitSettings == null && placement.placement[i] != 0)
-                SetUnitRenderer(unitSlot, enemyList[placement.placement[i] - 1]);
-            
+            if (placement.placement[indexEnemy] > 0)
+                SetUnitRenderer(unitSlot, enemyList[placement.placement[indexEnemy] - 1]);
+
+            indexEnemy++;
+
         }
 
     }

@@ -207,7 +207,7 @@ public class Board : MonoBehaviour
         return null;
     }
 
-    public UnitRenderer[] GetSquares(SquareType type)
+    public UnitRenderer[] GetEmptySquares(SquareType type)
     {
         if (type == SquareType.RED)
             return pieces.TakeLast(sizeX).Where(x => x.GetUnitSettings().unitSettings == null).ToArray();
@@ -216,7 +216,15 @@ public class Board : MonoBehaviour
         Debug.Assert(false, "Invalid square type");
         return null;
     }
-
+    public UnitRenderer[] GetSquares(SquareType type)
+    {
+        if (type == SquareType.RED)
+            return pieces.TakeLast(sizeX).ToArray();
+        else if (type == SquareType.BLUE)
+            return pieces.Take(sizeX).ToArray();
+        Debug.Assert(false, "Invalid square type");
+        return null;
+    }
     public static List<UnitRenderer> GetAllPieces(SquareType type, ref List<UnitRenderer> pieces)
     {
         if (type == SquareType.RED)
