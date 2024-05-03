@@ -118,16 +118,14 @@ public class AIPlacer : MonoBehaviour
             //Get all possible positions
             weight = RedBlueTurn.currentPoints;
             //min 1
-            var minEnemyCount = (1 + weight / 6);
-            //max 4
+
 
 
             positions = new List<UnitRenderer>(board.GetEmptySquares(isRed ? SquareType.BLUE : SquareType.RED));
-            minEnemyCount = Mathf.Min(minEnemyCount, positions.Count);
-            var maxEnemyCount = Mathf.Min(weight, 4);
+            if (positions.Count == 0)
+                return;
 
-
-
+            weight = Mathf.Min(weight, positions.Count * 5);
             enemyList = RedBlueTurn.IsRedFirst() ? blueUnits : redUnits;
             //call to recursive backtracking
             indexEnemy = new List<int>();
