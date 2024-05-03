@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class Spawning
@@ -63,6 +64,7 @@ public class AIPlacer : MonoBehaviour
     //AI permutations
     private List<Spawning> validSpawns = new List<Spawning>();
     private int spawningsCount;
+    private int emptySlots = 4;
 
     public void Init()
     {
@@ -134,9 +136,16 @@ public class AIPlacer : MonoBehaviour
 
         }
     }
-
+    public void ClearPositions()
+    {
+        for (int i = 0; i < positions.Count; i++)
+        {
+            positions[i].SetUnitSettings(new UnitBoardInfo());
+        }
+    }
     private void GenerateSpawnings()
     {
+        emptySlots = positions.Count - 1;
         validSpawns = new List<Spawning>();
         var spawning = new Spawning();
         spawningsCount = 0;
@@ -184,7 +193,7 @@ public class AIPlacer : MonoBehaviour
 
             spawning.placement[k] = i;
             //no more space
-            if (k == 3)
+            if (k == emptySlots - 1)
             {
                 if (IsValid(spawning.placement))
                 {
@@ -271,7 +280,7 @@ public class AIPlacer : MonoBehaviour
 
     public void ChooseSpawning(float index)
     {
-      
+
         for (int i = 0; i < positions.Count; i++)
         {
             positions[i].SetUnitSettings(new UnitBoardInfo());
@@ -281,10 +290,11 @@ public class AIPlacer : MonoBehaviour
         DisplaySpawning(placement);
 
 
-        for (int i = 0; i < positions.Count; i++)
+        foreach(UnitRenderer unitSlot in positions)
         {
-            if (placement.placement[i] != 0)
-                SetUnitRenderer(positions[i], enemyList[placement.placement[i] - 1]);
+            if (unitSlot.GetUnitSettings().unitSettings == null && placement.placement[i] != 0)
+                SetUnitRenderer(unitSlot, enemyList[placement.placement[i] - 1]);
+            
         }
 
     }
