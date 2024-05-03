@@ -5372,8 +5372,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 924948675}
         m_TargetAssemblyTypeName: AIPlacer, Assembly-CSharp
-        m_MethodName: PlaceEnemies
-        m_Mode: 1
+        m_MethodName: ChooseSpawning
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

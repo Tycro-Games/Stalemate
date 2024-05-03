@@ -16,14 +16,23 @@ public class Spawning
     {
         placement = new List<int> { 0, 0, 0, 0 };
     }
-    public Spawning(int _first = 0, int _second = 0, int _third = 0, int _forth = 0)
+    public Spawning(int _first, int _second, int _third, int _forth)
     {
-        placement = new List<int>(4);
+        placement = new List<int> { 0, 0, 0, 0 };
 
         placement[0] = _first;
         placement[1] = _second;
         placement[2] = _third;
         placement[3] = _forth;
+    }
+    public Spawning(ref Spawning spawning)
+    {
+        placement = new List<int>(4);
+
+        placement[0] = spawning.placement[0];
+        placement[1] = spawning.placement[1];
+        placement[2] = spawning.placement[2];
+        placement[3] = spawning.placement[3];
     }
 
 
@@ -52,7 +61,7 @@ public class AIPlacer : MonoBehaviour
     private List<UnitBoardInfo> enemyList;
     private List<int> enemyIndicies;
     //AI permutations
-    private List<Spawning> validSpawns=new List<Spawning>();
+    private List<Spawning> validSpawns = new List<Spawning>();
     private int spawningsCount;
 
     public void Init()
@@ -75,7 +84,7 @@ public class AIPlacer : MonoBehaviour
         onFogOfWar?.Invoke();
     }
     [SerializeField]
-    private FloatEvent onTotalSpawnings; 
+    private FloatEvent onTotalSpawnings;
     //the same as AIFogOfWar but with no event trigger
     public void AISpawnings()
     {
@@ -83,7 +92,7 @@ public class AIPlacer : MonoBehaviour
 
 
         ChooseEnemies();
-        onTotalSpawnings?.Invoke(spawningsCount);
+        onTotalSpawnings?.Invoke(spawningsCount - 1);
 
     }
 
@@ -116,7 +125,6 @@ public class AIPlacer : MonoBehaviour
 
 
             enemyList = RedBlueTurn.IsRedFirst() ? blueUnits : redUnits;
-            enemyList = enemyList.Where(x => x.unitSettings.cost <= weight).ToList();
             //call to recursive backtracking
             indexEnemy = new List<int>();
 
@@ -129,6 +137,7 @@ public class AIPlacer : MonoBehaviour
 
     private void GenerateSpawnings()
     {
+        validSpawns = new List<Spawning>();
         var spawning = new Spawning();
         spawningsCount = 0;
         Backtracking(0, ref spawning);
@@ -158,14 +167,13 @@ public class AIPlacer : MonoBehaviour
 
     void DisplaySpawning(Spawning toDisplay)
     {
-        spawningsCount++;
         Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " + toDisplay.placement[3]);
 
     }
     string MakeString(Spawning toDisplay)
     {
-      
-        return ("["+toDisplay.placement[0] + ", " + toDisplay.placement[1] + ", " + toDisplay.placement[2] + ", " + toDisplay.placement[3]+"]");
+
+        return ("[" + toDisplay.placement[0] + ", " + toDisplay.placement[1] + ", " + toDisplay.placement[2] + ", " + toDisplay.placement[3] + "]");
 
     }
     private void Backtracking(int k, ref Spawning spawning)
@@ -180,7 +188,10 @@ public class AIPlacer : MonoBehaviour
             {
                 if (IsValid(spawning.placement))
                 {
-                    validSpawns.Add(spawning);
+                    var newSpawning = spawning.placement;
+                    validSpawns.Add(new Spawning(newSpawning[0], newSpawning[1], newSpawning[2], newSpawning[3]));
+                    spawningsCount++;
+
                     DisplaySpawning(spawning);
                 }
             }
@@ -188,7 +199,7 @@ public class AIPlacer : MonoBehaviour
             {
                 Backtracking(k + 1, ref spawning);
             }
-     
+
 
 
 
@@ -258,10 +269,23 @@ public class AIPlacer : MonoBehaviour
         return false;
     }
 
-    public void ChooseSpawning(int index)
+    public void ChooseSpawning(float index)
     {
-        unitRenderers = new List<UnitRenderer>();
-        validSpawns[index].placement
+      
+        for (int i = 0; i < positions.Count; i++)
+        {
+            positions[i].SetUnitSettings(new UnitBoardInfo());
+        }
+
+        var placement = validSpawns[int.Parse(index.ToString())];
+        DisplaySpawning(placement);
+
+
+        for (int i = 0; i < positions.Count; i++)
+        {
+            if (placement.placement[i] != 0)
+                SetUnitRenderer(positions[i], enemyList[placement.placement[i] - 1]);
+        }
 
     }
     public void PlaceEnemies()
