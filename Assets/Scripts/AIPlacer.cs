@@ -90,9 +90,8 @@ public class AIPlacer : MonoBehaviour
     private bool isRed;
 
     //the same as AIFogOfWar but with no event trigger
-    public void AISpawnings()
+    public void AiSpawnings()
     {
-
 
 
         ChooseEnemies();
@@ -103,11 +102,11 @@ public class AIPlacer : MonoBehaviour
     private void ChooseEnemies()
     {
         isRed = RedBlueTurn.IsRedFirst();
-        var AISettings = isRed ? blueAI : redAI;
+        var aiSettings = isRed ? blueAI : redAI;
 
         enemyIndicies = new List<int>();
 
-        if (AISettings.random)
+        if (aiSettings.random)
         {
             if (RandomSpawn(isRed))
                 return;

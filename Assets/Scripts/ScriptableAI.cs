@@ -27,5 +27,5 @@ public class ScriptableAIEditor : Editor
 public class ScriptableAI : ScriptableObject
 {
     public bool random = true;
-    public int val;
+    //public int val;
 }
