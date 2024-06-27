@@ -68,4 +68,40 @@ public class Peak : MonoBehaviour
             onPeak?.Invoke();
         }
     }
+    public void EndTurnBoard()
+    {
+
+        if (goBack)
+        {
+            GoBack();
+            goBack = false;
+            onUnPeak?.Invoke();
+        }
+        else
+        {
+            GetCurrentPieces();
+
+            var currentUnits = RedBlueTurn.IsRedFirst() ? red : blue;
+            var otherUnits = !RedBlueTurn.IsRedFirst() ? red : blue;
+            MoveAttackBoostUnits(currentUnits);
+            MoveAttackBoostUnits(otherUnits);
+
+            board.pieces = currentBoard;
+            unitManager.ResetRedBlueUnitLists();
+            goBack = true;
+            onPeak?.Invoke();
+        }
+       
+  
+        //attack boost
+
+
+    }
+
+    private void MoveAttackBoostUnits(List<UnitRenderer> currentUnits)
+    {
+        unitManager.MoveUnits(ref currentUnits);
+        unitManager.AttackUnits(ref currentUnits);
+        unitManager.BoostUnits(ref currentUnits);
+    }
 }

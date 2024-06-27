@@ -90,7 +90,7 @@ public class AIPlacer : MonoBehaviour
     private bool isRed;
 
     //the same as AIFogOfWar but with no event trigger
-    public void AiSpawnings()
+    public void AiSpawning()
     {
 
 
@@ -210,14 +210,14 @@ public class AIPlacer : MonoBehaviour
             {
                 Backtracking(k + 1, ref spawning);
             }
-
-
-
-
-
+            
         }
     }
 
+    public void SpawnCurrentSpawn()
+    {
+
+    }
     private bool RandomSpawn(bool isRed)
     {
         weight = RedBlueTurn.maxPoints;
@@ -282,6 +282,7 @@ public class AIPlacer : MonoBehaviour
 
     public void ChooseSpawning(float index)
     {
+
         //clear previous placement
         for (int i = 0; i < positions.Count; i++)
         {
@@ -295,7 +296,10 @@ public class AIPlacer : MonoBehaviour
         foreach (UnitRenderer unitSlot in positions)
         {
             if (placement.placement[indexEnemy] > 0)
+            {
                 SetUnitRenderer(unitSlot, enemyList[placement.placement[indexEnemy] - 1]);
+              
+            }
 
             indexEnemy++;
 
@@ -357,5 +361,17 @@ public class AIPlacer : MonoBehaviour
         }
 
         positions = choosenPositions;
+    }
+
+    public void RateBoard()
+    {
+        
+            List<UnitRenderer> currentBoard = board.pieces;
+
+            List<UnitRenderer> red = Board.GetAllPieces(SquareType.RED, ref currentBoard);
+            List<UnitRenderer> blue = Board.GetAllPieces(SquareType.BLUE, ref currentBoard);
+
+        Debug.Log($"There are {red.Count} red units");
+        Debug.Log($"There are {blue.Count} blue units");
     }
 }
