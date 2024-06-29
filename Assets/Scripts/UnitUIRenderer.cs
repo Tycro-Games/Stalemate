@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using Assets.Scripts.Utility;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(Image))]

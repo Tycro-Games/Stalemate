@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Utility;
 using Bogadanul.Assets.Scripts.Utility;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CellFinder))]
 public class UnitPlacer : MonoBehaviour
@@ -17,12 +16,10 @@ public class UnitPlacer : MonoBehaviour
     [SerializeField] private Vector3Event onHover;
     [SerializeField] private UnitInfoEvent onHoverUnitInfo;
 
-    [Tooltip("Triggered where the unit was placed")]
-    [SerializeField]
+    [Tooltip("Triggered where the unit was placed")] [SerializeField]
     private UnitRenderEvent onClick;
 
-    [Tooltip("Triggered after the unit placement")]
-    [SerializeField]
+    [Tooltip("Triggered after the unit placement")] [SerializeField]
     private UnityEvent onPlace;
 
     [SerializeField] private UnityEvent onNoHover;
@@ -79,49 +76,14 @@ public class UnitPlacer : MonoBehaviour
         placedSquares.Clear();
     }
 
-    public void Place(Vector3 input)
+    public void PickUpUnit(InputAction.CallbackContext context)
     {
-        var place = cellFinder.NodeFromInput(input);
-        if (place == null)
-        {
-            onNoHover?.Invoke();
-            onHoverNewTile?.Invoke();
-            return;
-        }
-
-
-        //Debug.Log("hover over:" + place.name);
-        //decide which row is okay to place on red/ blue
-
-        string nameTurn;
-        if (placeOnOppositeSide)
-        {
-            nameTurn = !RedBlueTurn.IsRedFirst() ? "Red" : "Blue";
-        }
-        else
-        {
-            nameTurn = !RedBlueTurn.IsRedFirst() ? "Blue" : "Red";
-
-        }
-
-        var selectedRenderer = place.transform.GetChild(0).GetComponent<SpriteRenderer>();
-        if (selectedRenderer.sprite != null)
-            onHoverUnitInfo?.Invoke(place.transform.GetChild(0).GetComponent<UnitRenderer>().GetUnitSettings());
-        else
-            onHoverNewTile?.Invoke();
-        //this is the color of square that is being hovered over
-        var nameSelected = place.transform.GetChild(1).name;
-        //the right color of the turn and free space
-        if (nameTurn != nameSelected)
-        {
-            onNoHover?.Invoke();
-            return;
-        }
-
         //there is something selected
+        if (IsEditable == false)
+            return;
         if (selectedRenderer.sprite != null)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (context.control.IsPressed())
             {
                 var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
                 var substraction = selectedPiece.GetUnitSettings().unitSettings.cost;
@@ -134,15 +96,17 @@ public class UnitPlacer : MonoBehaviour
                 return;
             }
 
-
             onNoHover?.Invoke();
         }
 
+        PlaceUnit(context);
+    }
 
-        onHover?.Invoke(place.transform.position);
+    public void PlaceUnit(InputAction.CallbackContext context)
+    {
         if (unitSettings.unitSettings == null) return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (context.control.IsPressed())
         {
             var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
             selectedPiece.SetUnitSettings(unitSettings);
@@ -151,39 +115,81 @@ public class UnitPlacer : MonoBehaviour
             onPlace?.Invoke();
             placedSquares.Add(selectedPiece);
         }
-        //check if the place is full or not
-        //        if (currentTree != null)
-        //        {
+    }
 
-        //            hasPlaced = false;
-        //#if UNITY_ANDROID
-        //                if (first)
-        //                {
-        //                    first = false;
-        //                }
-        //#endif
-        //            if (placeable)
-        //            {
-        //                Node n = raycaster.NodeFromInput(input);
-        //                if (n == null)
-        //                {
-        //#if UNITY_ANDROID
-        //                        //CancelPlacing();
-        //#endif
-        //                    return;
-        //                }
-        //                if (!Fruit)
-        //                    CheckNode(n);
-        //                else if (n.FruitPlaceable())
-        //                {
-        //                    CheckPlacerPath.ToSpawn(n, currentTree);
-        //                    Instantiate(EffectOnPlace, n.worldPosition, Quaternion.identity);
+    private SpriteRenderer selectedRenderer;
+    private GameObject place;
+    private bool IsEditable = true;
+
+    public void Place(Vector3 input)
+    {
+        selectedRenderer = null;
+        IsEditable = true;
+        place = cellFinder.NodeFromInput(input);
+        if (place == null)
+        {
+            onNoHover?.Invoke();
+            onHoverNewTile?.Invoke();
+            IsEditable = false;
+            return;
+        }
 
 
-        //                    hasPlaced = true;
+        //Debug.Log("hover over:" + place.name);
+        //decide which row is okay to place on red/ blue
 
-        //                    Placing(n);
-        //                }
-        //            }
+        string nameTurn;
+        if (placeOnOppositeSide)
+            nameTurn = !RedBlueTurn.IsRedFirst() ? "Red" : "Blue";
+        else
+            nameTurn = !RedBlueTurn.IsRedFirst() ? "Blue" : "Red";
+
+        selectedRenderer = place.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        if (selectedRenderer.sprite != null)
+            onHoverUnitInfo?.Invoke(place.transform.GetChild(0).GetComponent<UnitRenderer>().GetUnitSettings());
+        else
+            onHoverNewTile?.Invoke();
+        //this is the color of square that is being hovered over
+        var nameSelected = place.transform.GetChild(1).name;
+        //the right color of the turn and free space
+        if (nameTurn != nameSelected)
+        {
+            IsEditable = false;
+            onNoHover?.Invoke();
+            return;
+        }
+
+        ////there is something selected
+        //if (selectedRenderer.sprite != null)
+        //{
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
+        //        var substraction = selectedPiece.GetUnitSettings().unitSettings.cost;
+        //        if (unitSettings.unitSettings == null)
+        //            SetUnitSettings(selectedPiece.GetUnitSettings());
+        //        RedBlueTurn.currentPoints += substraction;
+        //        placedSquares.Remove(selectedPiece);
+        //        selectedPiece.SetUnitSettings(new UnitBoardInfo());
+        //        onPlace?.Invoke();
+        //        return;
+        //    }
+
+
+        //    onNoHover?.Invoke();
+        //}
+
+
+        onHover?.Invoke(place.transform.position);
+
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
+        //    selectedPiece.SetUnitSettings(unitSettings);
+        //    RedBlueTurn.currentPoints -= unitSettings.unitSettings.cost;
+        //    CheckRemainingPoints();
+        //    onPlace?.Invoke();
+        //    placedSquares.Add(selectedPiece);
+        //}
     }
 }
