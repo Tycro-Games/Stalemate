@@ -2837,7 +2837,19 @@ MonoBehaviour:
     m_ActionId: 8c871970-7386-4de5-b098-cd9887ae9486
     m_ActionName: UI/Point[/Mouse/position]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 924948673}
+        m_TargetAssemblyTypeName: UnitPlacer, Assembly-CSharp
+        m_MethodName: PickUpUnit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e2b3a92d-06ae-4daf-b1c6-28f019204f61
     m_ActionName: UI/Click[/Mouse/leftButton]
   - m_PersistentCalls:
@@ -2862,7 +2874,7 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 2079113772}
 --- !u!1 &596596895
