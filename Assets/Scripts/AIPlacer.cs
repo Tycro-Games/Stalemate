@@ -14,6 +14,7 @@ public class Spawning
     {
         placement = new List<int> { 0, 0, 0, 0 };
     }
+
     public Spawning(int _first, int _second, int _third, int _forth)
     {
         placement = new List<int> { 0, 0, 0, 0 };
@@ -23,6 +24,7 @@ public class Spawning
         placement[2] = _third;
         placement[3] = _forth;
     }
+
     public Spawning(ref Spawning spawning)
     {
         placement = new List<int>(4);
@@ -32,9 +34,8 @@ public class Spawning
         placement[2] = spawning.placement[2];
         placement[3] = spawning.placement[3];
     }
-
-
 }
+
 public class AIPlacer : MonoBehaviour
 {
     [SerializeField] private UnityEvent onFogOfWar;
@@ -57,9 +58,11 @@ public class AIPlacer : MonoBehaviour
     private List<int> indexEnemy;
     private List<UnitRenderer> unitRenderers;
     private List<UnitBoardInfo> enemyList;
+
     private List<int> enemyIndicies;
+
     //AI permutations
-    private List<Spawning> validSpawns = new List<Spawning>();
+    private List<Spawning> validSpawns = new();
     private int spawningsCount;
     private int emptySlots = 4;
 
@@ -77,23 +80,19 @@ public class AIPlacer : MonoBehaviour
 
     public void AIFogOfWar()
     {
-
         ChooseEnemies();
 
         onFogOfWar?.Invoke();
     }
-    [SerializeField]
-    private FloatEvent onTotalSpawnings;
+
+    [SerializeField] private FloatEvent onTotalSpawnings;
     private bool isRed;
 
     //the same as AIFogOfWar but with no event trigger
     public void AiSpawning()
     {
-
-
         ChooseEnemies();
         onTotalSpawnings?.Invoke(spawningsCount - 1);
-
     }
 
     private void ChooseEnemies()
@@ -116,7 +115,6 @@ public class AIPlacer : MonoBehaviour
             //min 1
 
 
-
             positions = new List<UnitRenderer>(board.GetEmptySquares(isRed ? SquareType.BLUE : SquareType.RED));
             if (positions.Count == 0)
                 return;
@@ -129,18 +127,16 @@ public class AIPlacer : MonoBehaviour
             GenerateSpawnings();
             //Assign scores based on end conditions
             //Sort them based on scores
-
         }
     }
+
     public void ClearPositions()
     {
         positions = new List<UnitRenderer>(board.GetSquares(isRed ? SquareType.BLUE : SquareType.RED));
 
-        for (int i = 0; i < positions.Count; i++)
-        {
-            positions[i].SetUnitSettings(new UnitBoardInfo());
-        }
+        for (var i = 0; i < positions.Count; i++) positions[i].SetUnitSettings(new UnitBoardInfo());
     }
+
     private void GenerateSpawnings()
     {
         emptySlots = positions.Count - 1;
@@ -150,45 +146,43 @@ public class AIPlacer : MonoBehaviour
         Backtracking(0, ref spawning);
         Debug.Log(spawningsCount);
     }
-    bool IsValid(List<int> spawnings)
+
+    private bool IsValid(List<int> spawnings)
     {
         //return true;
-        int totalCost = 0;
+        var totalCost = 0;
         foreach (var spawning in spawnings)
         {
             totalCost += spawning;
             if (spawning > 5)
                 return false;
-
         }
+
         //exactly the weight
         if (totalCost == weight)
             return true;
 
 
-
-
         return false;
-
     }
 
-    void DisplaySpawning(Spawning toDisplay)
+    private void DisplaySpawning(Spawning toDisplay)
     {
-        Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " + toDisplay.placement[3]);
-
+        Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " +
+                  toDisplay.placement[3]);
     }
-    string MakeString(Spawning toDisplay)
+
+    private string MakeString(Spawning toDisplay)
     {
-
-        return ("[" + toDisplay.placement[0] + ", " + toDisplay.placement[1] + ", " + toDisplay.placement[2] + ", " + toDisplay.placement[3] + "]");
-
+        return "[" + toDisplay.placement[0] + ", " + toDisplay.placement[1] + ", " + toDisplay.placement[2] + ", " +
+               toDisplay.placement[3] + "]";
     }
+
     private void Backtracking(int k, ref Spawning spawning)
     {
         //max unit is 5
-        for (int i = 0; i <= 5; i++)
+        for (var i = 0; i <= 5; i++)
         {
-
             spawning.placement[k] = i;
             //no more space
             if (k == emptySlots)
@@ -207,14 +201,13 @@ public class AIPlacer : MonoBehaviour
             {
                 Backtracking(k + 1, ref spawning);
             }
-            
         }
     }
 
     public void SpawnCurrentSpawn()
     {
-
     }
+
     private bool RandomSpawn(bool isRed)
     {
         weight = RedBlueTurn.maxPoints;
@@ -255,6 +248,7 @@ public class AIPlacer : MonoBehaviour
             unitRenderers.Add(unitRenderer);
             positions.Remove(unitRenderer);
         }
+
         //we still have some weight with a full board
         if (weight > 0)
         {
@@ -263,7 +257,7 @@ public class AIPlacer : MonoBehaviour
             //increase cost of the units until no more weight
             while (weight > 0)
             {
-                int randomIndex = Random.Range(0, enemyIndicies.Count);
+                var randomIndex = Random.Range(0, enemyIndicies.Count);
                 if (enemyIndicies[randomIndex] + 1 > 5)
                     continue;
                 enemyIndicies[randomIndex]++;
@@ -271,7 +265,6 @@ public class AIPlacer : MonoBehaviour
                 weight--;
                 Debug.Log("Remaining weight:" + weight);
             }
-
         }
 
         return false;
@@ -279,52 +272,37 @@ public class AIPlacer : MonoBehaviour
 
     public void ChooseSpawning(float index)
     {
-
         //clear previous placement
-        for (int i = 0; i < positions.Count; i++)
-        {
-            positions[i].SetUnitSettings(new UnitBoardInfo());
-        }
+        for (var i = 0; i < positions.Count; i++) positions[i].SetUnitSettings(new UnitBoardInfo());
 
         var placement = validSpawns[int.Parse(index.ToString())];
         DisplaySpawning(placement);
 
-        int indexEnemy = 0;
-        foreach (UnitRenderer unitSlot in positions)
+        var indexEnemy = 0;
+        foreach (var unitSlot in positions)
         {
             if (placement.placement[indexEnemy] > 0)
-            {
                 SetUnitRenderer(unitSlot, enemyList[placement.placement[indexEnemy] - 1]);
-              
-            }
 
             indexEnemy++;
-
         }
-
     }
+
     public void PlaceEnemies()
     {
-
         if (enemyIndicies.Count > 0)
-        {
             for (var i = 0; i < indexEnemy.Count; i++)
                 if (unitRenderers[i].GetUnitSettings().unitSettings.cost < 5)
                     SetUnitRenderer(unitRenderers[i], enemyList[enemyIndicies[i]]);
                 else
                     //just spawn the high cost one
                     SetUnitRenderer(unitRenderers[i], enemyList[enemyList.Count - 1]);
-
-        }
         else
-        {
             for (var i = 0; i < unitRenderers.Count; i++)
                 SetUnitRenderer(unitRenderers[i], enemyList[indexEnemy[i]]);
-        }
 
         onEnemyEndTurn?.Invoke();
     }
-
 
 
     private void SetUnitRenderer(UnitRenderer unitRenderer, UnitBoardInfo settings)
@@ -362,13 +340,95 @@ public class AIPlacer : MonoBehaviour
 
     public void RateBoard()
     {
-        
-            List<UnitRenderer> currentBoard = board.pieces;
+        //gets the bot point of view
+        isRed = RedBlueTurn.IsRedFirst();
+        var aiSettings = isRed ? blueAI : redAI;
+        var pointSystem = aiSettings.pointSystem;
+        var currentBoard = board.pieces;
 
-            List<UnitRenderer> red = Board.GetAllPieces(SquareType.RED, ref currentBoard);
-            List<UnitRenderer> blue = Board.GetAllPieces(SquareType.BLUE, ref currentBoard);
+        var red = Board.GetAllPieces(SquareType.RED, ref currentBoard);
+        var blue = Board.GetAllPieces(SquareType.BLUE, ref currentBoard);
+        var redOverLine = UpdateWinCounts.winCounts.x;
+        var blueOverLine = UpdateWinCounts.winCounts.y;
 
-        Debug.Log($"There are {red.Count} red units");
-        Debug.Log($"There are {blue.Count} blue units");
+        Debug.Log($"Red units: {red.Count}, Blue units: {blue.Count}");
+        Debug.Log($"Red units over line: {redOverLine}, Blue units over line: {blueOverLine}");
+
+        var score = 0;
+        Debug.Log($"AI is Red: {!isRed} ");
+
+        if (!isRed)
+        {
+            var redScore = red.Count * pointSystem.alliedUnits;
+            var blueScore = blue.Count * pointSystem.enemyUnits;
+
+            var redOverLineScore = redOverLine * pointSystem.alliedUnitsOverLine;
+            var blueOverLineScore = blueOverLine * pointSystem.enemyUnitsOverLine;
+
+            score += redScore;
+            score += blueScore;
+            score += redOverLineScore;
+            score += blueOverLineScore;
+
+            Debug.Log($"Score from red units: {redScore}");
+            Debug.Log($"Score from blue units: {blueScore}");
+            Debug.Log($"Score from red units over line: {redOverLineScore}");
+            Debug.Log($"Score from blue units over line: {blueOverLineScore}");
+
+            // Assuming there's a win condition check that can be represented by a boolean
+            var redWins = UpdateWinCounts.redBlueWinMaxCounts.x <= redOverLine;
+            var blueWins = UpdateWinCounts.redBlueWinMaxCounts.y <= blueOverLine;
+
+
+            if (redWins)
+            {
+                score += pointSystem.alliedWin;
+                Debug.Log($"Red wins! Adding {pointSystem.alliedWin} to score.");
+            }
+
+            if (blueWins)
+            {
+                score -= pointSystem.enemyWin;
+                Debug.Log($"Blue wins! Subtracting {pointSystem.enemyWin} from score.");
+            }
+
+            Debug.Log($"Final Board Score: {score}");
+        }
+        else
+        {
+            var blueScore = blue.Count * pointSystem.alliedUnits; // Now blue units are allied
+            var redScore = red.Count * pointSystem.enemyUnits; // Red units are enemies
+
+            var blueOverLineScore = blueOverLine * pointSystem.alliedUnitsOverLine; // Blue units over line
+            var redOverLineScore = redOverLine * pointSystem.enemyUnitsOverLine; // Red units over line
+
+            score += blueScore;
+            score += redScore;
+            score += blueOverLineScore;
+            score += redOverLineScore;
+
+            Debug.Log($"Score from blue units: {blueScore}");
+            Debug.Log($"Score from red units: {redScore}");
+            Debug.Log($"Score from blue units over line: {blueOverLineScore}");
+            Debug.Log($"Score from red units over line: {redOverLineScore}");
+
+            // Assuming there's a win condition check that can be represented by a boolean
+            var blueWins = UpdateWinCounts.redBlueWinMaxCounts.y <= blueOverLine; // Blue win condition
+            var redWins = UpdateWinCounts.redBlueWinMaxCounts.x <= redOverLine; // Red win condition
+
+            if (blueWins)
+            {
+                score += pointSystem.alliedWin; // Blue wins
+                Debug.Log($"Blue wins! Adding {pointSystem.alliedWin} to score.");
+            }
+
+            if (redWins)
+            {
+                score -= pointSystem.enemyWin; // Red wins
+                Debug.Log($"Red wins! Subtracting {pointSystem.enemyWin} from score.");
+            }
+
+            Debug.Log($"Final Board Score: {score}");
+        }
     }
 }

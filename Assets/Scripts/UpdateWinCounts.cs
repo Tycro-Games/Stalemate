@@ -10,8 +10,8 @@ public class UpdateWinCounts : MonoBehaviour
     [SerializeField] private UnityEvent onWinBlue;
     [SerializeField] private UnityEvent onLose;
     [SerializeField] private UnityEvent onNotLose;
-    private Vector2Int RedBlueWinCounts = Vector2Int.one * 3;
-    private Vector2Int winCounts;
+    public static Vector2Int redBlueWinMaxCounts = Vector2Int.one * 3;
+    public static Vector2Int winCounts;
 
     private void OnEnable()
     {
@@ -25,25 +25,25 @@ public class UpdateWinCounts : MonoBehaviour
 
     public void SetWinCounts(int newWinCount)
     {
-        RedBlueWinCounts.x = newWinCount;
-        RedBlueWinCounts.y = newWinCount;
+        redBlueWinMaxCounts.x = newWinCount;
+        redBlueWinMaxCounts.y = newWinCount;
         UpdateWinCount(winCounts.x, winCounts.y);
     }
 
     private void UpdateWinCount(int redCount, int blueCount)
     {
-        redUnitCount.text = redCount + "/" + RedBlueWinCounts.x;
-        blueUnitCount.text = blueCount + "/" + RedBlueWinCounts.y;
+        redUnitCount.text = redCount + "/" + redBlueWinMaxCounts.x;
+        blueUnitCount.text = blueCount + "/" + redBlueWinMaxCounts.y;
         winCounts.x = redCount;
         winCounts.y = blueCount;
     }
 
     public void CheckWinCondition()
     {
-        var redWin = winCounts.x >= RedBlueWinCounts.x;
-        var blueWin = winCounts.y >= RedBlueWinCounts.y;
+        var redWin = winCounts.x >= redBlueWinMaxCounts.x;
+        var blueWin = winCounts.y >= redBlueWinMaxCounts.y;
 
-        if (winCounts.x >= RedBlueWinCounts.x || winCounts.y >= RedBlueWinCounts.y)
+        if (winCounts.x >= redBlueWinMaxCounts.x || winCounts.y >= redBlueWinMaxCounts.y)
         {
             onLose?.Invoke();
             Debug.Log("You lose");

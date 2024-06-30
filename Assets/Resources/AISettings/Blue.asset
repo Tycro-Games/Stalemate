@@ -13,4 +13,10 @@ MonoBehaviour:
   m_Name: Blue
   m_EditorClassIdentifier: 
   random: 0
-  val: 0
+  pointSystem:
+    alliedUnits: 1
+    enemyUnits: -1
+    alliedUnitsOverLine: 5
+    enemyUnitsOverLine: -5
+    alliedWin: 100
+    enemyWin: -100

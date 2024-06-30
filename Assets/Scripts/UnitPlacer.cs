@@ -102,7 +102,7 @@ public class UnitPlacer : MonoBehaviour
         PlaceUnit(context);
     }
 
-    public void PlaceUnit(InputAction.CallbackContext context)
+    private void PlaceUnit(InputAction.CallbackContext context)
     {
         if (unitSettings.unitSettings == null) return;
 

@@ -162,7 +162,7 @@ public class UnitManager : MonoBehaviour
         UpdateWinningCounts();
     }
 
-    private void CleanNullEnemies(ref List<UnitRenderer> units)
+    public void CleanNullEnemies(ref List<UnitRenderer> units)
     {
         for (var i = units.Count - 1; i >= 0; i--)
             if (units[i].GetUnitSettings().unitSettings == null)
