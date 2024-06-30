@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcdb0a5156abcfa4b800914588fb5a01, type: 3}
   m_Name: Red
   m_EditorClassIdentifier: 
-  random: 1
-  val: 0
+  random: 0
+  pointSystem:
+    alliedUnits: 1
+    enemyUnits: -1
+    alliedUnitsOverLine: 5
+    enemyUnitsOverLine: -5
+    alliedWin: 100
+    enemyWin: -100

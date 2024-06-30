@@ -388,7 +388,7 @@ public class AIPlacer : MonoBehaviour
 
             if (blueWins)
             {
-                score -= pointSystem.enemyWin;
+                score += pointSystem.enemyWin;
                 Debug.Log($"Blue wins! Subtracting {pointSystem.enemyWin} from score.");
             }
 
@@ -424,7 +424,7 @@ public class AIPlacer : MonoBehaviour
 
             if (redWins)
             {
-                score -= pointSystem.enemyWin; // Red wins
+                score += pointSystem.enemyWin; // Red wins
                 Debug.Log($"Red wins! Subtracting {pointSystem.enemyWin} from score.");
             }
 
