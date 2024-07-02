@@ -10,11 +10,12 @@ public class UpdateWinCounts : MonoBehaviour
     [SerializeField] private UnityEvent onWinBlue;
     [SerializeField] private UnityEvent onLose;
     [SerializeField] private UnityEvent onNotLose;
-    public static Vector2Int redBlueWinMaxCounts = Vector2Int.one * 3;
+    public static Vector2Int redBlueWinMaxCounts;
     public static Vector2Int winCounts;
 
     private void OnEnable()
     {
+        redBlueWinMaxCounts = Vector2Int.one * 3;
         UnitManager.onWinConditionChange += UpdateWinCount;
     }
 
