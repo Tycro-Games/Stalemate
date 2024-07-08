@@ -45,6 +45,7 @@ public class Peak : MonoBehaviour
         unitManager.ResetRedBlueUnitLists();
     }
 
+
     public void GoBack()
     {
         for (var i = 0; i < previosBoard.Count; i++) board.pieces[i].SetUnitData(previosBoard[i]);
@@ -67,7 +68,8 @@ public class Peak : MonoBehaviour
         }
     }
 
-    public void EndTurnBoard()
+    //true means the non_AI side is moving
+    public void EndTurnBoard(bool moveCurrentUnits)
     {
         if (goBack)
         {
@@ -77,24 +79,31 @@ public class Peak : MonoBehaviour
         }
         else
         {
-            GetCurrentPieces();
+            if (moveCurrentUnits)
+            {
+                GetCurrentPieces();
 
-            var currentUnits = RedBlueTurn.IsRedFirst() ? red : blue;
-            var otherUnits = !RedBlueTurn.IsRedFirst() ? red : blue;
-            MoveAttackBoostUnits(currentUnits);
-            unitManager.CleanNullEnemies(ref otherUnits);
+                var currentUnits = RedBlueTurn.IsRedFirst() ? red : blue;
+                var otherUnits = !RedBlueTurn.IsRedFirst() ? red : blue;
+                MoveAttackBoostUnits(currentUnits);
+                unitManager.CleanNullEnemies(ref otherUnits);
+            }
+            else
+            {
+                red = Board.GetAllPieces(SquareType.RED, ref currentBoard);
+                blue = Board.GetAllPieces(SquareType.BLUE, ref currentBoard);
+                var currentUnits = RedBlueTurn.IsRedFirst() ? red : blue;
+                var otherUnits = !RedBlueTurn.IsRedFirst() ? red : blue;
+                MoveAttackBoostUnits(otherUnits);
 
-            MoveAttackBoostUnits(otherUnits);
-            unitManager.CleanNullEnemies(ref currentUnits);
+                unitManager.CleanNullEnemies(ref currentUnits);
 
-            board.pieces = currentBoard;
-            unitManager.ResetRedBlueUnitLists();
-            goBack = true;
-            onPeak?.Invoke();
+                goBack = true;
+                onPeak?.Invoke();
+                board.pieces = currentBoard;
+                unitManager.ResetRedBlueUnitLists();
+            }
         }
-
-
-        //attack boost
     }
 
     private void MoveAttackBoostUnits(List<UnitRenderer> currentUnits)

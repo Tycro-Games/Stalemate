@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts.Utility;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,7 @@ public class AIPlacer : MonoBehaviour
     [SerializeField] private UnityEvent onEnemyEndTurn;
     [SerializeField] private UnitRenderEvent onEnemyPlace;
     private Board board;
+    private Peak peak;
     [SerializeField] private UnitBoardInfo fogOfWarRed;
     [SerializeField] private UnitBoardInfo fogOfWarBlue;
     [SerializeField] private Transform redUnitsParent;
@@ -69,6 +71,7 @@ public class AIPlacer : MonoBehaviour
     public void Init()
     {
         board = FindObjectOfType<Board>();
+        peak = FindObjectOfType<Peak>();
         var reds = redUnitsParent.GetComponentsInChildren<UnitUIRenderer>();
         var blues = blueUnitsParent.GetComponentsInChildren<UnitUIRenderer>();
         foreach (var red in reds)
@@ -95,12 +98,16 @@ public class AIPlacer : MonoBehaviour
         onTotalSpawnings?.Invoke(spawningsCount - 1);
     }
 
+    private List<Tuple<Spawning, int>> spawnsScore;
+
     private void ChooseEnemies()
     {
         isRed = RedBlueTurn.IsRedFirst();
         var aiSettings = isRed ? blueAI : redAI;
 
         enemyIndicies = new List<int>();
+        unitRenderers = new List<UnitRenderer>();
+        indexEnemy = new List<int>();
 
         if (aiSettings.random)
         {
@@ -126,8 +133,83 @@ public class AIPlacer : MonoBehaviour
 
             GenerateSpawnings();
             //Assign scores based on end conditions
+            spawnsScore = new List<Tuple<Spawning, int>>();
+
+            for (var i = 0; i < validSpawns.Count; i++)
+            {
+                peak.EndTurnBoard(true);
+                ChooseSpawning(i);
+                peak.EndTurnBoard(false);
+                RateBoard();
+                //go back to the original state
+                peak.EndTurnBoard(false);
+
+
+                spawnsScore.Add(new Tuple<Spawning, int>(validSpawns[i], score));
+            }
+
             //Sort them based on scores
+            spawnsScore = spawnsScore.OrderByDescending(spawn => spawn.Item2).ToList();
+            validSpawns = spawnsScore.Select(spawnScore => spawnScore.Item1).ToList();
+            var fogOfWar = isRed ? fogOfWarBlue : fogOfWarRed;
+
+            var choiceIndex = 0;
+            ChooseMaximalSpawning(ref choiceIndex);
+            if (choiceIndex == -1) Debug.Log("Choice index for option is invalid");
+
+            var placement = validSpawns[int.Parse(choiceIndex.ToString())];
+
+            var indexUnit = 0;
+            foreach (var unitSlot in positions)
+            {
+                if (placement.placement[indexUnit] > 0)
+                {
+                    SetUnitRenderer(unitSlot, fogOfWar);
+                    unitRenderers.Add(unitSlot);
+                    indexEnemy.Add(placement.placement[indexUnit] - 1);
+                }
+
+                indexUnit++;
+            }
+
+            //foreach (var unitRenderer in placement.placement) unitRenderer.SetUnitSettings(fogOfWar);
+            //ClearPositions();
         }
+    }
+
+    public void ChooseMaximalSpawning(ref int index)
+    {
+        index = -1;
+        // Assuming spawnsScore is sorted and validSpawns is aligned with it
+        var highestScore = spawnsScore.First().Item2; // Get the highest score
+
+        var highestScoreIndices = new List<int>();
+
+        for (var i = 0; i < spawnsScore.Count; i++)
+            if (spawnsScore[i].Item2 == highestScore)
+                highestScoreIndices.Add(i); // Add index to list
+            else
+                break; // Since spawnsScore is sorted, no need to check further once a lower score is found
+
+        index = Random.Range(0, highestScoreIndices.Count);
+        //ChooseSpawningRate(index);
+    }
+
+    public void DebugChooseMaximalSpawning()
+    {
+        // Assuming spawnsScore is sorted and validSpawns is aligned with it
+        var highestScore = spawnsScore.First().Item2; // Get the highest score
+
+        var highestScoreIndices = new List<int>();
+
+        for (var i = 0; i < spawnsScore.Count; i++)
+            if (spawnsScore[i].Item2 == highestScore)
+                highestScoreIndices.Add(i); // Add index to list
+            else
+                break; // Since spawnsScore is sorted, no need to check further once a lower score is found
+
+        var index = Random.Range(0, highestScoreIndices.Count);
+        ChooseSpawningRate(index);
     }
 
     public void ClearPositions()
@@ -231,8 +313,6 @@ public class AIPlacer : MonoBehaviour
         }
 
         enemyList = RedBlueTurn.IsRedFirst() ? blueUnits : redUnits;
-        indexEnemy = new List<int>();
-        unitRenderers = new List<UnitRenderer>();
         //choose some random enemies
         while (positions.Count > 0 && weight > 0)
         {
@@ -270,7 +350,7 @@ public class AIPlacer : MonoBehaviour
         return false;
     }
 
-    public void ChooseSpawning(float index)
+    private void ChooseSpawning(float index)
     {
         //clear previous placement
         for (var i = 0; i < positions.Count; i++) positions[i].SetUnitSettings(new UnitBoardInfo());
@@ -286,6 +366,26 @@ public class AIPlacer : MonoBehaviour
 
             indexEnemy++;
         }
+    }
+
+    public void ChooseSpawningRate(float index)
+    {
+        //clear previous placement
+        for (var i = 0; i < positions.Count; i++) positions[i].SetUnitSettings(new UnitBoardInfo());
+
+        var placement = validSpawns[int.Parse(index.ToString())];
+        DisplaySpawning(placement);
+
+        var indexEnemy = 0;
+        foreach (var unitSlot in positions)
+        {
+            if (placement.placement[indexEnemy] > 0)
+                SetUnitRenderer(unitSlot, enemyList[placement.placement[indexEnemy] - 1]);
+
+            indexEnemy++;
+        }
+
+        onRate?.Invoke(spawnsScore[int.Parse(index.ToString())].Item2.ToString());
     }
 
     public void PlaceEnemies()
@@ -338,6 +438,9 @@ public class AIPlacer : MonoBehaviour
         positions = choosenPositions;
     }
 
+    public StringEvent onRate;
+    private int score = 0;
+
     public void RateBoard()
     {
         //gets the bot point of view
@@ -354,7 +457,7 @@ public class AIPlacer : MonoBehaviour
         Debug.Log($"Red units: {red.Count}, Blue units: {blue.Count}");
         Debug.Log($"Red units over line: {redOverLine}, Blue units over line: {blueOverLine}");
 
-        var score = 0;
+        score = 0;
         Debug.Log($"AI is Red: {!isRed} ");
 
         if (!isRed)
@@ -430,5 +533,7 @@ public class AIPlacer : MonoBehaviour
 
             Debug.Log($"Final Board Score: {score}");
         }
+
+        onRate?.Invoke(score.ToString());
     }
 }
