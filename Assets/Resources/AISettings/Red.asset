@@ -18,5 +18,5 @@ MonoBehaviour:
     enemyUnits: -1
     alliedUnitsOverLine: 5
     enemyUnitsOverLine: -5
-    alliedWin: 100
+    alliedWin: 0
     enemyWin: -100
