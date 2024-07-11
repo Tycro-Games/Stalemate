@@ -16,7 +16,7 @@ MonoBehaviour:
   pointSystem:
     alliedUnits: 1
     enemyUnits: -1
-    alliedUnitsOverLine: 5
+    alliedUnitsOverLine: 0
     enemyUnitsOverLine: -5
     alliedWin: 0
     enemyWin: -100
