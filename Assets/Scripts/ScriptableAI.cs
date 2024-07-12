@@ -25,13 +25,13 @@ public class ScriptableAIEditor : Editor
 [System.Serializable]
 public struct AIPointSystem
 {
-    [Range(0, 100)] public int alliedUnits;
-    [Range(-100, 0)] public int enemyUnits;
+    [Range(-100, 100)] public int alliedUnits;
+    [Range(-100, 100)] public int enemyUnits;
 
-    [Range(0, 100)] public int alliedUnitsOverLine;
-    [Range(-100, 0)] public int enemyUnitsOverLine;
-    [Range(0, 100)] public int alliedWin;
-    [Range(-100, 0)] public int enemyWin;
+    [Range(-100, 100)] public int alliedUnitsOverLine;
+    [Range(-100, 100)] public int enemyUnitsOverLine;
+    [Range(-100, 100)] public int alliedWin;
+    [Range(-100, 100)] public int enemyWin;
 
 
     public AIPointSystem(int defaultAlliedUnits = 1, int defaultEnemyUnits = -1,
