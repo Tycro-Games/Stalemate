@@ -23,7 +23,7 @@ public class RedBlueTurn : MonoBehaviour
     [SerializeField] private UnityEvent onRedTurn;
     [SerializeField] private UnityEvent onBlueTurn;
 
-   
+
 
     private void OnEnable()
     {
@@ -32,7 +32,7 @@ public class RedBlueTurn : MonoBehaviour
         SwitchSides();
         SetValues();
     }
-    public void SetPoints(string  points)
+    public void SetPoints(string points)
     {
         maxPoints = int.Parse(points);
         currentPoints = maxPoints;
@@ -41,8 +41,8 @@ public class RedBlueTurn : MonoBehaviour
     public void SetValues()
     {
         //SwitchSides();
-        if (isRedFirst)
-            maxPoints++;
+        //if (isRedFirst)
+        maxPoints++;
         currentPoints = maxPoints;
         UpdateText();
     }
