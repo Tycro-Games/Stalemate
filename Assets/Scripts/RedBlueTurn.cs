@@ -29,6 +29,7 @@ public class RedBlueTurn : MonoBehaviour
     {
         isRedFirst = false;
         maxPoints = startingPoints;
+        SwitchSides();
         SetValues();
     }
     public void SetPoints(string  points)
@@ -39,11 +40,16 @@ public class RedBlueTurn : MonoBehaviour
     }
     public void SetValues()
     {
-        isRedFirst = !isRedFirst;
+        //SwitchSides();
         if (isRedFirst)
             maxPoints++;
         currentPoints = maxPoints;
         UpdateText();
+    }
+
+    public void SwitchSides()
+    {
+        isRedFirst = !isRedFirst;
     }
 
     public void NextTurn()

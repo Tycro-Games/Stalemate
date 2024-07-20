@@ -250,8 +250,8 @@ public class AIPlacer : MonoBehaviour
 
     private void DisplaySpawning(Spawning toDisplay)
     {
-        Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " +
-                  toDisplay.placement[3]);
+        //Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " +
+        //          toDisplay.placement[3]);
     }
 
     private string MakeString(Spawning toDisplay)

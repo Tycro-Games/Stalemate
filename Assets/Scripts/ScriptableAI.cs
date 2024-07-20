@@ -34,9 +34,9 @@ public struct AIPointSystem
     [Range(-100, 100)] public int enemyWin;
 
 
-    public AIPointSystem(int defaultAlliedUnits = 1, int defaultEnemyUnits = -1,
-        int defaultAlliedUnitsOverLine = 5, int defaultEnemyUnitsOverLine = -5,
-        int defaultAlliedWin = 100, int defaultEnemyWin = -100)
+    public AIPointSystem(int defaultAlliedUnits , int defaultEnemyUnits ,
+        int defaultAlliedUnitsOverLine, int defaultEnemyUnitsOverLine ,
+        int defaultAlliedWin, int defaultEnemyWin)
     {
         alliedUnits = defaultAlliedUnits;
         enemyUnits = defaultEnemyUnits;
@@ -54,19 +54,4 @@ public class ScriptableAI : ScriptableObject
 
     public AIPointSystem pointSystem = new();
 
-    //public int val;
-    private void OnEnable()
-    {
-        // Initialize AIPointSystem with default values if it's the default instance
-        if (pointSystem.Equals(default(AIPointSystem)))
-            pointSystem = new AIPointSystem
-            {
-                alliedUnits = 1,
-                enemyUnits = -1,
-                alliedUnitsOverLine = 5,
-                enemyUnitsOverLine = -5,
-                alliedWin = 100,
-                enemyWin = -100
-            };
-    }
 }
