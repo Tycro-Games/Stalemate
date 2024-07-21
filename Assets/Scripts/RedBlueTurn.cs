@@ -8,10 +8,13 @@ public class RedBlueTurn : MonoBehaviour
     public static int maxPoints;
     public static int currentPoints { get; set; }
     [SerializeField] private int endWave = 7;
-    private static bool isRedFirst;
+    private static bool isPlayerFirst;
     [SerializeField] private UnityEvent onWin;
 
-    public static bool IsRedFirst()
+    public static bool IsPlayerFirst()
+    {
+        return isPlayerFirst;
+    }  public static bool IsRedFirst()
     {
         return isRedFirst;
     }
@@ -24,12 +27,97 @@ public class RedBlueTurn : MonoBehaviour
     [SerializeField] private UnityEvent onBlueTurn;
 
 
+    private static bool isRedFirst = true;
+    [SerializeField] private UnityEvent onPlayerDeploy;
+    [SerializeField] private UnityEvent onPlayerAct;
+    [SerializeField] private UnityEvent onAIDeploy;
+    [SerializeField] private UnityEvent onAIAct;
+
+    private bool isPriorityNationDone = false;
+    public void TriggerNationActions()
+    {
+
+        if (isPriorityNationDone)
+        {
+            //do the other
+            if (!isRedFirst)
+            {
+                if (isPlayerFirst)
+                {
+                    //do red
+                    CallPlayerActions();
+                }
+                else
+                {
+                    CallAIActions();
+                }
+            }
+            else
+            {
+                if (!isPlayerFirst)
+                {
+                    //do red
+                    CallPlayerActions();
+                }
+                else
+                {
+                    CallAIActions();
+                }
+                
+            }
+            isPriorityNationDone = false;
+        }
+        else
+        {
+            if (isRedFirst)
+            {
+                if (isPlayerFirst)
+                {
+                    //do red
+                    CallPlayerActions();
+                }
+                else
+                {
+                    CallAIActions();
+                }
+            }
+            else
+            {
+                if (!isPlayerFirst)
+                {
+                    //do red
+                    CallPlayerActions();
+                }
+                else
+                {
+                    CallAIActions();
+                }
+                //do blue
+            }
+            isPriorityNationDone = true;
+        }
+    }
+
+    private void CallAIActions()
+    {
+        onAIDeploy?.Invoke();
+        
+        onAIAct?.Invoke();
+    }
+
+    private void CallPlayerActions()
+    {
+        onPlayerDeploy?.Invoke();
+        onPlayerAct?.Invoke();
+    }
 
     private void OnEnable()
     {
-        isRedFirst = false;
+        isPlayerFirst = true;
+        debugPlayerFirst = true;
+        isRedFirst=true;
+        debugRedFirst = true;
         maxPoints = startingPoints;
-        //SwitchSides();
         //SetValues();
     }
     public void SetPoints(string points)
@@ -41,15 +129,25 @@ public class RedBlueTurn : MonoBehaviour
     public void SetValues()
     {
         //SwitchSides();
-        //if (isRedFirst)
-        maxPoints++;
+        //if (isPlayerFirst)
+        if (isRedFirst)
+            maxPoints++;
         currentPoints = maxPoints;
         UpdateText();
     }
 
+    private bool debugPlayerFirst=false;
+    private bool debugRedFirst=false;
     public void SwitchSides()
     {
+        isPlayerFirst = !isPlayerFirst;
+        debugPlayerFirst = isPlayerFirst;
+    }
+    public void SwitchPriorityNation()
+    {
         isRedFirst = !isRedFirst;
+        isPriorityNationDone = false;
+        debugRedFirst = isRedFirst;
     }
 
     public void NextTurn()
@@ -57,7 +155,7 @@ public class RedBlueTurn : MonoBehaviour
         if (currentPoints == endWave)
             onWin?.Invoke();
 
-        if (isRedFirst)
+        if (isPlayerFirst)
             onRedTurn?.Invoke();
         else
             onBlueTurn?.Invoke();

@@ -35,7 +35,7 @@ public class Peak : MonoBehaviour
     public void StepAhead()
     {
         GetCurrentPieces();
-        var currentUnits = RedBlueTurn.IsRedFirst() ? red : blue;
+        var currentUnits = RedBlueTurn.IsPlayerFirst() ? red : blue;
 
         unitManager.MoveUnits(ref currentUnits);
         unitManager.AttackUnits(ref currentUnits);
@@ -83,8 +83,8 @@ public class Peak : MonoBehaviour
             {
                 GetCurrentPieces();
 
-                var currentUnits = RedBlueTurn.IsRedFirst() ? red : blue;
-                var otherUnits = !RedBlueTurn.IsRedFirst() ? red : blue;
+                var currentUnits = RedBlueTurn.IsPlayerFirst() ? red : blue;
+                var otherUnits = !RedBlueTurn.IsPlayerFirst() ? red : blue;
                 MoveAttackBoostUnits(currentUnits);
                 unitManager.CleanNullEnemies(ref otherUnits);
             }
@@ -92,8 +92,8 @@ public class Peak : MonoBehaviour
             {
                 red = Board.GetAllPieces(SquareType.RED, ref currentBoard);
                 blue = Board.GetAllPieces(SquareType.BLUE, ref currentBoard);
-                var currentUnits = RedBlueTurn.IsRedFirst() ? red : blue;
-                var otherUnits = !RedBlueTurn.IsRedFirst() ? red : blue;
+                var currentUnits = RedBlueTurn.IsPlayerFirst() ? red : blue;
+                var otherUnits = !RedBlueTurn.IsPlayerFirst() ? red : blue;
                 MoveAttackBoostUnits(otherUnits);
 
                 unitManager.CleanNullEnemies(ref currentUnits);

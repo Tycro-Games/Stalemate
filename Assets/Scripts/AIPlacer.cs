@@ -102,7 +102,7 @@ public class AIPlacer : MonoBehaviour
 
     private void ChooseEnemies()
     {
-        isRed = RedBlueTurn.IsRedFirst();
+        isRed = RedBlueTurn.IsPlayerFirst();
         var aiSettings = isRed ? blueAI : redAI;
 
         enemyIndicies = new List<int>();
@@ -127,7 +127,7 @@ public class AIPlacer : MonoBehaviour
                 return;
 
             weight = Mathf.Min(weight, positions.Count * 5);
-            enemyList = RedBlueTurn.IsRedFirst() ? blueUnits : redUnits;
+            enemyList =isRed? blueUnits : redUnits;
             //call to recursive backtracking
             indexEnemy = new List<int>();
 
@@ -312,7 +312,7 @@ public class AIPlacer : MonoBehaviour
             return true;
         }
 
-        enemyList = RedBlueTurn.IsRedFirst() ? blueUnits : redUnits;
+        enemyList = RedBlueTurn.IsPlayerFirst() ? blueUnits : redUnits;
         //choose some random enemies
         while (positions.Count > 0 && weight > 0)
         {
@@ -444,7 +444,7 @@ public class AIPlacer : MonoBehaviour
     public void RateBoard()
     {
         //gets the bot point of view
-        isRed = RedBlueTurn.IsRedFirst();
+        isRed = RedBlueTurn.IsPlayerFirst();
         var aiSettings = isRed ? blueAI : redAI;
         var pointSystem = aiSettings.pointSystem;
         var currentBoard = board.pieces;

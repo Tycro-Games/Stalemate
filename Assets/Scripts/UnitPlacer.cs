@@ -68,11 +68,22 @@ public class UnitPlacer : MonoBehaviour
         else
             onNotValidTurn?.Invoke();
     }
+    public void MakeSelectedUnitUnkillable()
+    {
+        foreach (var square in placedSquares)
+        {
+            square.MakeUnkillable();
+        }
 
+    }
     public void SetNewUnitsToBoard()
     {
         foreach (var square in placedSquares)
+        {
+           square.MakeKillable();
             onClick?.Invoke(square);
+        }
+
         placedSquares.Clear();
     }
 
@@ -140,9 +151,9 @@ public class UnitPlacer : MonoBehaviour
 
         string nameTurn;
         if (placeOnOppositeSide)
-            nameTurn = !RedBlueTurn.IsRedFirst() ? "Red" : "Blue";
+            nameTurn = !RedBlueTurn.IsPlayerFirst() ? "Red" : "Blue";
         else
-            nameTurn = !RedBlueTurn.IsRedFirst() ? "Blue" : "Red";
+            nameTurn = !RedBlueTurn.IsPlayerFirst() ? "Blue" : "Red";
 
         selectedRenderer = place.transform.GetChild(0).GetComponent<SpriteRenderer>();
         if (selectedRenderer.sprite != null)

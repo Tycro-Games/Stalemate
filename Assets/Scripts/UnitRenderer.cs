@@ -18,15 +18,19 @@ public struct UnitBoardInfo
     {
         unitSettings = settings;
         this.isRed = isRed;
+        isKillable = true;
     }
 
     public ScriptableUnitSettings unitSettings;
     public bool isRed;
+    public bool isKillable;
+   
 
     public void Reset()
     {
         isRed = true;
         unitSettings = null;
+        isKillable = true;
     }
 }
 
@@ -53,6 +57,14 @@ public class UnitRenderer : MonoBehaviour
         return clone;
     }
 
+    public void MakeKillable()
+    {
+        unitSettings.isKillable = true;
+    }
+    public void MakeUnkillable()
+    {
+        unitSettings.isKillable = false;
+    }
 
     public UnitBoardInfo GetUnitSettings()
     {

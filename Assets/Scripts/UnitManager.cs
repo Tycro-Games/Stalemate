@@ -24,10 +24,22 @@ public class UnitManager : MonoBehaviour
     [HideInInspector] public List<Transform> positions;
     private int redUnitsOnY = 0;
     private int blueUnitsOnY = 0;
-
+    private bool hasMovedPriorityNation = false;
     public void SetCurrentSide(bool playerTurn)
     {
-        isPlayerTurn = playerTurn;
+        if (hasMovedPriorityNation)
+        {
+            hasMovedPriorityNation = false;
+            isPlayerTurn = !RedBlueTurn.IsRedFirst();
+
+        }
+        else
+        {
+            hasMovedPriorityNation = true;
+            isPlayerTurn = RedBlueTurn.IsRedFirst();
+        }
+
+
     }
 
     public void UpdateWinningCounts()
@@ -72,42 +84,38 @@ public class UnitManager : MonoBehaviour
 
     public void MoveCurrentSide()
     {
-        if (isPlayerTurn)
-            StartCoroutine(Movement(RedBlueTurn.IsRedFirst()));
-        else
-            MoveOtherSide();
+
+        StartCoroutine(Movement(isPlayerTurn));
+
+
     }
 
     public void AttackCurrentSide()
     {
-        if (isPlayerTurn)
-            StartCoroutine(Attack(RedBlueTurn.IsRedFirst()));
-        else
-            AttackOtherSide();
+        StartCoroutine(Attack(isPlayerTurn));
+
     }
 
     public void BoostCurrentSide()
     {
-        if (isPlayerTurn)
-            StartCoroutine(Boost(RedBlueTurn.IsRedFirst()));
-        else
-            BoostOtherSide();
+        StartCoroutine(Boost(isPlayerTurn));
+
     }
 
 
     private void MoveOtherSide()
     {
-        StartCoroutine(Movement(!RedBlueTurn.IsRedFirst()));
+
     }
 
     private void AttackOtherSide()
     {
-        StartCoroutine(Attack(!RedBlueTurn.IsRedFirst()));
+
     }
 
     private void BoostOtherSide()
     {
-        StartCoroutine(Boost(!RedBlueTurn.IsRedFirst()));
+
     }
 
 
@@ -185,7 +193,7 @@ public class UnitManager : MonoBehaviour
                     board.pieces);
                 if (newSquare == null)
                     continue;
-                Debug.Log("unit " + units[i].name + " moved to:" + newSquare.name);
+                //Debug.Log("unit " + units[i].name + " moved to:" + newSquare.name);
 
 
                 if (newSquare.GetUnitSettings().unitSettings != null)
@@ -281,7 +289,7 @@ public class UnitManager : MonoBehaviour
                 if (newSquare == null) continue;
                 //Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);
                 var attackedSquareSettings = newSquare.GetUnitSettings();
-                if (attackedSquareSettings.unitSettings == null || attackedSquareSettings.isRed == settings.isRed)
+                if (attackedSquareSettings.unitSettings == null ||!attackedSquareSettings.isKillable|| attackedSquareSettings.isRed == settings.isRed)
                     continue;
 
                 //check health of the unit
