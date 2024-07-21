@@ -250,8 +250,8 @@ public class AIPlacer : MonoBehaviour
 
     private void DisplaySpawning(Spawning toDisplay)
     {
-        //Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " +
-        //          toDisplay.placement[3]);
+        Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " +
+                  toDisplay.placement[3]);
     }
 
     private string MakeString(Spawning toDisplay)
@@ -298,7 +298,7 @@ public class AIPlacer : MonoBehaviour
         positions = new List<UnitRenderer>(board.GetEmptySquares(isRed ? SquareType.BLUE : SquareType.RED));
         countEnemies = Mathf.Min(countEnemies, positions.Count);
         GetListOfPositions(ref positions, countEnemies);
-        //Debug.Log(positions);
+        Debug.Log(positions);
 
         var fogOfWar = isRed ? fogOfWarBlue : fogOfWarRed;
         foreach (var unitRenderer in positions) unitRenderer.SetUnitSettings(fogOfWar);
