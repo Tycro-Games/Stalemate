@@ -6,7 +6,8 @@ public class RedBlueTurn : MonoBehaviour
 {
     [SerializeField] private int startingPoints = 0;
     public static int maxPoints;
-    public static int currentPoints { get; set; }
+    public static int currentPoints;
+    public static int currentTurn;
     [SerializeField] private int endWave = 7;
     private static bool isPlayerFirst;
     [SerializeField] private UnityEvent onWin;
@@ -113,6 +114,7 @@ public class RedBlueTurn : MonoBehaviour
 
     private void OnEnable()
     {
+        currentTurn = 0;
         isPlayerFirst = true;
         debugPlayerFirst = true;
         isRedFirst=true;
@@ -130,6 +132,7 @@ public class RedBlueTurn : MonoBehaviour
     {
         //SwitchSides();
         //if (isPlayerFirst)
+        currentTurn++;
         if (isRedFirst)
             maxPoints++;
         currentPoints = maxPoints;
