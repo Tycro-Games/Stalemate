@@ -17,11 +17,13 @@ namespace Bogadanul.Assets.Scripts.Utility
         [SerializeField]
         private PlayerInput playerInput;
         private Mouse virtualMouse;
+        private Mouse currentMouse;
         [SerializeField] private float padding = 35.0f;
         private bool previousMouseState;
         [SerializeField] private float controllerCursorSpeed = 1000.0f;
         private void OnEnable()
         {
+            currentMouse = Mouse.current;
             if (virtualMouse == null)
             {
                 virtualMouse = (Mouse)InputSystem.AddDevice("VirtualMouse");
@@ -40,7 +42,8 @@ namespace Bogadanul.Assets.Scripts.Utility
 
         private void OnDisable()
         {
-            InputSystem.RemoveDevice(virtualMouse);
+            if (virtualMouse != null && virtualMouse.added)
+                InputSystem.RemoveDevice(virtualMouse);
             InputSystem.onAfterUpdate -= UpdateMotion;
             //playerInput.onControlsChanged -= OnControlsChanged;
 
@@ -73,10 +76,28 @@ namespace Bogadanul.Assets.Scripts.Utility
             AnchorCursor(newPosition);
         }
 
+        private string previosScheme = "";
+        private const string gamepadScheme = "Gamepad";
+        private const string keyboardScheme = "Keyboard&Mouse";
+
+        public void OnControlsChanged(PlayerInput input)
+        {
+            if (playerInput.currentControlScheme == keyboardScheme && previosScheme != keyboardScheme)
+            {
+                currentMouse.WarpCursorPosition(virtualMouse.position.ReadValue());
+                previosScheme = keyboardScheme;
+            }
+            else if (playerInput.currentControlScheme == gamepadScheme && previosScheme != gamepadScheme)
+            {
+                InputState.Change(virtualMouse.position, currentMouse.position.ReadValue());
+                transform.position = mainCam.ScreenToWorldPoint(currentMouse.position.ReadValue());
+                previosScheme = gamepadScheme;
+            }
+        }
         private void AnchorCursor(Vector2 position)
         {
-            lastPos = mainCam.ScreenToWorldPoint(position);
-            OnMovement?.Invoke(position);
+            //lastPos = mainCam.ScreenToWorldPoint(position);
+            //OnMovement?.Invoke(position);
         }
         public void MousePosition(InputAction.CallbackContext context)
         {
@@ -93,6 +114,7 @@ namespace Bogadanul.Assets.Scripts.Utility
 
         private void Start()
         {
+            Cursor.visible = false;
             mainCam = Camera.main;
         }
     }
