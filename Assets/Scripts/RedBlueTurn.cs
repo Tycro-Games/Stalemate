@@ -19,7 +19,8 @@ public class RedBlueTurn : MonoBehaviour
     public static bool IsPlayerFirst()
     {
         return isPlayerFirst;
-    }  public static bool IsRedFirst()
+    }
+    public static bool IsRedFirst()
     {
         return isRedFirst;
     }
@@ -29,6 +30,7 @@ public class RedBlueTurn : MonoBehaviour
     [SerializeField] private UnityEvent onFinishPlacement;
     [SerializeField] private StringEvent onScoreChange;
     [SerializeField] private StringEvent onTurnChange;
+    [SerializeField] private StringEvent onSideChange;
     [SerializeField] private UnityEvent onRedTurn;
     [SerializeField] private UnityEvent onBlueTurn;
 
@@ -69,7 +71,7 @@ public class RedBlueTurn : MonoBehaviour
                 {
                     CallAIActions();
                 }
-                
+
             }
             isPriorityNationDone = false;
         }
@@ -107,7 +109,7 @@ public class RedBlueTurn : MonoBehaviour
     private void CallAIActions()
     {
         onAIDeploy?.Invoke();
-        
+
         onAIAct?.Invoke();
     }
 
@@ -121,8 +123,10 @@ public class RedBlueTurn : MonoBehaviour
     {
         currentTurn = startingTurn;
         isPlayerFirst = true;
+        onSideChange?.Invoke("Red");
+
         debugPlayerFirst = true;
-        isRedFirst=true;
+        isRedFirst = true;
         debugRedFirst = true;
 
         maxPoints = startingPoints;
@@ -140,23 +144,38 @@ public class RedBlueTurn : MonoBehaviour
         //if (isPlayerFirst)
         currentTurn++;
         if (isRedFirst)
+        {
             maxPoints++;
+        }
+
+
         currentPoints = maxPoints;
         UpdateText();
     }
 
-    private bool debugPlayerFirst=false;
-    private bool debugRedFirst=false;
+    private bool debugPlayerFirst = false;
+    private bool debugRedFirst = false;
     public void SwitchSides()
     {
         isPlayerFirst = !isPlayerFirst;
         debugPlayerFirst = isPlayerFirst;
+        if (isPlayerFirst)
+        {
+            onSideChange?.Invoke("Red");
+
+        }
+        else
+        {
+            onSideChange?.Invoke("Blue");
+        }
     }
     public void SwitchPriorityNation()
     {
         isRedFirst = !isRedFirst;
         isPriorityNationDone = false;
         debugRedFirst = isRedFirst;
+
+
     }
 
     public void NextTurn()
