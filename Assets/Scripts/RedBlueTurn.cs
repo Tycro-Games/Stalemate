@@ -4,11 +4,15 @@ using UnityEngine.Events;
 
 public class RedBlueTurn : MonoBehaviour
 {
+    [SerializeField] private int startingTurn = 0;
+
+    public static int currentTurn;
+
     [SerializeField] private int startingPoints = 0;
     public static int maxPoints;
     public static int currentPoints;
-    public static int currentTurn;
-    [SerializeField] private int endWave = 7;
+
+    [SerializeField] private int endTurn = 7;
     private static bool isPlayerFirst;
     [SerializeField] private UnityEvent onWin;
 
@@ -24,6 +28,7 @@ public class RedBlueTurn : MonoBehaviour
     [SerializeField] private UnityEvent onNextTurn;
     [SerializeField] private UnityEvent onFinishPlacement;
     [SerializeField] private StringEvent onScoreChange;
+    [SerializeField] private StringEvent onTurnChange;
     [SerializeField] private UnityEvent onRedTurn;
     [SerializeField] private UnityEvent onBlueTurn;
 
@@ -114,11 +119,12 @@ public class RedBlueTurn : MonoBehaviour
 
     private void OnEnable()
     {
-        currentTurn = 0;
+        currentTurn = startingTurn;
         isPlayerFirst = true;
         debugPlayerFirst = true;
         isRedFirst=true;
         debugRedFirst = true;
+
         maxPoints = startingPoints;
         //SetValues();
     }
@@ -155,7 +161,7 @@ public class RedBlueTurn : MonoBehaviour
 
     public void NextTurn()
     {
-        if (currentPoints == endWave)
+        if (currentTurn == endTurn)
             onWin?.Invoke();
 
         if (isPlayerFirst)
@@ -169,6 +175,7 @@ public class RedBlueTurn : MonoBehaviour
     public void UpdateText()
     {
         onScoreChange?.Invoke(currentPoints.ToString());
+        onTurnChange?.Invoke(currentTurn.ToString());
     }
 
     public void FinishPlacement()
