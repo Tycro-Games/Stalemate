@@ -1330,6 +1330,7 @@ MonoBehaviour:
   redParent: {fileID: 1836911921}
   blueParent: {fileID: 173351231}
   fogOfWar: {fileID: 11400000, guid: 2a494778d5fc5f147929f880bd74e574, type: 2}
+  persistentPath: 
   onStart:
     m_PersistentCalls:
       m_Calls:
@@ -2442,6 +2443,90 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1589283922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1589283924}
+  - component: {fileID: 1589283923}
+  m_Layer: 0
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1589283923
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589283922}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -1000
+  m_Sprite: {fileID: 21300000, guid: 7c38910adaf2f6541a1b3ede0526455c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3.24, y: 1.98}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1589283924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589283922}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.74, y: 0.57, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1658211167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3363,7 +3448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8470445901414882332}
   unitSettings: {fileID: 11400000, guid: ce4149615b84913468c07545a8d1681e, type: 2}
-  onUnitSettingsChanged:
+  onUnitInfoChanged:
     m_PersistentCalls:
       m_Calls: []
   isRed: 0
@@ -3381,7 +3466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8470445901706301867}
   unitSettings: {fileID: 11400000, guid: 562fa03a6bc5b8c4cace4bb8f48a95b4, type: 2}
-  onUnitSettingsChanged:
+  onUnitInfoChanged:
     m_PersistentCalls:
       m_Calls: []
   isRed: 0
@@ -3399,7 +3484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8470445901985254767}
   unitSettings: {fileID: 11400000, guid: 2a52b057dce9a864d959b63368527407, type: 2}
-  onUnitSettingsChanged:
+  onUnitInfoChanged:
     m_PersistentCalls:
       m_Calls: []
   isRed: 0
@@ -3417,21 +3502,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8470445901936663517}
   unitSettings: {fileID: 11400000, guid: ed9a1ca8be86298438af70be1effaf97, type: 2}
-  onUnitSettingsChanged:
+  onUnitInfoChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnitPlacer, Assembly-CSharp
-        m_MethodName: SetUnitSettings
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   isRed: 1
 --- !u!114 &2951711316587816223
 MonoBehaviour:
@@ -3447,21 +3520,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8470445902276711205}
   unitSettings: {fileID: 11400000, guid: ed9a1ca8be86298438af70be1effaf97, type: 2}
-  onUnitSettingsChanged:
+  onUnitInfoChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnitPlacer, Assembly-CSharp
-        m_MethodName: SetUnitSettings
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   isRed: 1
 --- !u!114 &2951711316602697874
 MonoBehaviour:
@@ -3477,7 +3538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8470445902294732456}
   unitSettings: {fileID: 11400000, guid: cf43c12574d8aab49a3fd96cfc9344f5, type: 2}
-  onUnitSettingsChanged:
+  onUnitInfoChanged:
     m_PersistentCalls:
       m_Calls: []
   isRed: 0
@@ -3495,21 +3556,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8470445900464458748}
   unitSettings: {fileID: 11400000, guid: ed9a1ca8be86298438af70be1effaf97, type: 2}
-  onUnitSettingsChanged:
+  onUnitInfoChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnitPlacer, Assembly-CSharp
-        m_MethodName: SetUnitSettings
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   isRed: 1
 --- !u!114 &2951711317119158986
 MonoBehaviour:
@@ -3525,7 +3574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8470445900668943600}
   unitSettings: {fileID: 11400000, guid: c99501eb5fa691d4d8895f2d6e896827, type: 2}
-  onUnitSettingsChanged:
+  onUnitInfoChanged:
     m_PersistentCalls:
       m_Calls: []
   isRed: 0
@@ -3543,21 +3592,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8470445901048817725}
   unitSettings: {fileID: 11400000, guid: ed9a1ca8be86298438af70be1effaf97, type: 2}
-  onUnitSettingsChanged:
+  onUnitInfoChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnitPlacer, Assembly-CSharp
-        m_MethodName: SetUnitSettings
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   isRed: 1
 --- !u!114 &2951711317422387266
 MonoBehaviour:
@@ -3573,7 +3610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8470445900905072248}
   unitSettings: {fileID: 11400000, guid: ed9a1ca8be86298438af70be1effaf97, type: 2}
-  onUnitSettingsChanged:
+  onUnitInfoChanged:
     m_PersistentCalls:
       m_Calls: []
   isRed: 1
@@ -4648,3 +4685,4 @@ SceneRoots:
   - {fileID: 1125151188}
   - {fileID: 1299471665}
   - {fileID: 1574798735}
+  - {fileID: 1589283924}
