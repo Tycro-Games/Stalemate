@@ -23,6 +23,7 @@ namespace Bogadanul.Assets.Scripts.Utility
         [SerializeField] private float controllerCursorSpeed = 1000.0f;
         private void OnEnable()
         {
+            mainCam = Camera.main;
             currentMouse = Mouse.current;
             if (virtualMouse == null)
             {
@@ -38,6 +39,7 @@ namespace Bogadanul.Assets.Scripts.Utility
             InputSystem.onAfterUpdate += UpdateMotion;
 
             InputState.Change(virtualMouse.position, transform.position);
+
         }
 
         private void OnDisable()
@@ -82,6 +84,8 @@ namespace Bogadanul.Assets.Scripts.Utility
 
         public void OnControlsChanged(PlayerInput input)
         {
+            if (currentMouse == null)
+                return;
             if (playerInput.currentControlScheme == keyboardScheme && previosScheme != keyboardScheme)
             {
                 currentMouse.WarpCursorPosition(virtualMouse.position.ReadValue());
@@ -115,7 +119,6 @@ namespace Bogadanul.Assets.Scripts.Utility
         private void Start()
         {
             Cursor.visible = false;
-            mainCam = Camera.main;
         }
     }
 }

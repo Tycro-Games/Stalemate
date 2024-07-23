@@ -29,8 +29,10 @@ public class Board : MonoBehaviour
 
 {
     //board
-    [SerializeField] private static int sizeX = 4;
-    [SerializeField] private static int sizeY = 5;
+    private static int sizeX = 4;
+    private static int sizeY = 5;
+    [SerializeField] private  int startingSizeX = 4;
+    [SerializeField] private  int startingSizeY = 5;
 
     [SerializeField] private Sprite[] spritesOrder;
     [SerializeField] private Sprite middleVerticalLines;
@@ -71,6 +73,8 @@ public class Board : MonoBehaviour
 
     private void CreateBoard()
     {
+        sizeX = startingSizeX;
+        sizeY = startingSizeY;
         if (sizeY == 0 || sizeX == 0)
             return;
         DeleteBoard();
@@ -81,83 +85,83 @@ public class Board : MonoBehaviour
         squares = new List<GameObject>(sizeX * sizeY);
         pieces = new List<UnitRenderer>(sizeX * sizeY);
         for (var y = 0; y < sizeY; y++)
-        for (var x = 0; x < sizeX; x++)
-        {
-            // Create square
-            var index = x + y * sizeX;
-
-            squares.Add(new GameObject());
-            var piece = new GameObject("Piece" + (x, y));
-            piece.transform.localScale = new Vector3(pieceSize, pieceSize, 1.0f);
-
-            piece.transform.parent = squares[index].transform;
-            pieces.Add(piece.AddComponent<UnitRenderer>());
-
-            squares[index].layer = LayerMask.NameToLayer("Grid");
-            squares[index].AddComponent<BoxCollider>();
-
-            var square = squares[index].transform;
-            square.parent = transform;
-            square.name = (x, y).ToString();
-            square.position = new Vector2(x, y);
-
-            if (y == sizeY / 2)
+            for (var x = 0; x < sizeX; x++)
             {
-                var spriteObj = new GameObject();
-                spriteObj.name = "Middle square";
-                spriteObj.transform.parent = square;
-                for (var j = 0; j < 2; j++)
+                // Create square
+                var index = x + y * sizeX;
+
+                squares.Add(new GameObject());
+                var piece = new GameObject("Piece" + (x, y));
+                piece.transform.localScale = new Vector3(pieceSize, pieceSize, 1.0f);
+
+                piece.transform.parent = squares[index].transform;
+                pieces.Add(piece.AddComponent<UnitRenderer>());
+
+                squares[index].layer = LayerMask.NameToLayer("Grid");
+                squares[index].AddComponent<BoxCollider>();
+
+                var square = squares[index].transform;
+                square.parent = transform;
+                square.name = (x, y).ToString();
+                square.position = new Vector2(x, y);
+
+                if (y == sizeY / 2)
                 {
-                    float sign = j == 0 ? 1 : -1;
+                    var spriteObj = new GameObject();
+                    spriteObj.name = "Middle square";
+                    spriteObj.transform.parent = square;
+                    for (var j = 0; j < 2; j++)
+                    {
+                        float sign = j == 0 ? 1 : -1;
 
-                    if (dotLinesCoordinates.Contains(new DotLineCoordinates(x, y, sign)))
-                        continue;
-                    var spriteRenderer = new GameObject().AddComponent<SpriteRenderer>();
-                    spriteRenderer.transform.parent = spriteObj.transform;
+                        if (dotLinesCoordinates.Contains(new DotLineCoordinates(x, y, sign)))
+                            continue;
+                        var spriteRenderer = new GameObject().AddComponent<SpriteRenderer>();
+                        spriteRenderer.transform.parent = spriteObj.transform;
 
-                    spriteRenderer.transform.localPosition = new Vector2(0.0f, 0.5f * sign);
+                        spriteRenderer.transform.localPosition = new Vector2(0.0f, 0.5f * sign);
 
+                        spriteRenderer.sprite = spritesOrder[y];
+                    }
+
+                    var middle = spriteObj.AddComponent<SpriteRenderer>();
+                    middle.transform.parent = spriteObj.transform;
+
+
+                    middle.transform.localPosition = new Vector2(0.0f, 0.0f);
+
+                    middle.sprite = middleVerticalLines;
+                }
+                else
+                {
+                    var spriteRenderer = new GameObject("Grid" + (x, y)).AddComponent<SpriteRenderer>();
+                    spriteRenderer.transform.parent = squares[index].transform;
+                    spriteRenderer.transform.localPosition = new Vector2(0.0f, 0.0f);
                     spriteRenderer.sprite = spritesOrder[y];
+                    switch (y)
+                    {
+                        //blue
+                        case 0:
+                            spriteRenderer.name = "Blue";
+                            break;
+                        //red
+                        case 4:
+                            spriteRenderer.name = "Red";
+
+                            break;
+                        default:
+                            break;
+                    }
                 }
-
-                var middle = spriteObj.AddComponent<SpriteRenderer>();
-                middle.transform.parent = spriteObj.transform;
-
-
-                middle.transform.localPosition = new Vector2(0.0f, 0.0f);
-
-                middle.sprite = middleVerticalLines;
+                //var squareMaterial = ResetSquareColours(squareShader, index);
+                //squareRenderers[x, y] = square.gameObject.GetComponent<MeshRenderer>();
+                //squareRenderers[x, y].material = squareMaterial;
+                //// Create piece sprite renderer for current square
+                //var pieceRenderer = new GameObject("Piece").AddComponent<SpriteRenderer>();
+                //pieceRenderer.transform.parent = square;
+                //pieceRenderer.transform.position = square.position;
+                //squarePieceRenderers[x, y] = pieceRenderer;
             }
-            else
-            {
-                var spriteRenderer = new GameObject("Grid" + (x, y)).AddComponent<SpriteRenderer>();
-                spriteRenderer.transform.parent = squares[index].transform;
-                spriteRenderer.transform.localPosition = new Vector2(0.0f, 0.0f);
-                spriteRenderer.sprite = spritesOrder[y];
-                switch (y)
-                {
-                    //blue
-                    case 0:
-                        spriteRenderer.name = "Blue";
-                        break;
-                    //red
-                    case 4:
-                        spriteRenderer.name = "Red";
-
-                        break;
-                    default:
-                        break;
-                }
-            }
-            //var squareMaterial = ResetSquareColours(squareShader, index);
-            //squareRenderers[x, y] = square.gameObject.GetComponent<MeshRenderer>();
-            //squareRenderers[x, y].material = squareMaterial;
-            //// Create piece sprite renderer for current square
-            //var pieceRenderer = new GameObject("Piece").AddComponent<SpriteRenderer>();
-            //pieceRenderer.transform.parent = square;
-            //pieceRenderer.transform.position = square.position;
-            //squarePieceRenderers[x, y] = pieceRenderer;
-        }
 
         //add the text script for win conditions here
         for (var i = 0; i < dotLinesCoordinates.Count; i++)
