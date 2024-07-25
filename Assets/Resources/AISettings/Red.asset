@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   random: 0
   pointSystem:
-    alliedUnits: 18
+    alliedUnits: -1
     enemyUnits: -2
-    alliedUnitsOverLine: 6
-    enemyUnitsOverLine: -5
+    alliedUnitsOverLine: 0
+    enemyUnitsOverLine: 0
     alliedWin: 100
-    enemyWin: -100
+    enemyWin: 0
