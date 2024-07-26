@@ -105,7 +105,8 @@ namespace Bogadanul.Assets.Scripts.Utility
         }
         public void MousePosition(InputAction.CallbackContext context)
         {
-
+            if (mainCam == null)
+                return;
             var mousePos = context.ReadValue<Vector2>();
             lastPos = mainCam.ScreenToWorldPoint(mousePos);
             OnMovement?.Invoke(mousePos);
