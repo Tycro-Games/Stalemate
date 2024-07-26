@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-
+[RequireComponent(typeof(UnitMover))]
 public class UnitManager : MonoBehaviour
 {
     private List<UnitRenderer> redUnits = new();
@@ -15,6 +15,7 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private UnityEvent onAttackEnd;
     [SerializeField] private UnityEvent onBoostEnd;
     private Board board;
+    private UnitMover mover;
 
     private bool isPlayerTurn = true;
 
@@ -25,6 +26,9 @@ public class UnitManager : MonoBehaviour
     private int redUnitsOnY = 0;
     private int blueUnitsOnY = 0;
     private bool hasMovedPriorityNation = false;
+
+    private List<UnitRenderer> initialUnitSpace = new();
+    private List<UnitRenderer> finalUnitSpace = new();
     public void SetCurrentSide(bool playerTurn)
     {
         if (hasMovedPriorityNation)
@@ -72,6 +76,7 @@ public class UnitManager : MonoBehaviour
     private void Start()
     {
         board = GetComponent<Board>();
+        mover = GetComponent<UnitMover>();
     }
 
 
@@ -127,8 +132,27 @@ public class UnitManager : MonoBehaviour
         else
             MoveUnits(ref blueUnits);
 
+        //trigger animation and hide unit
+        List<UnitData> tempSettings = new();
+        List<UnitRenderer> copyFin = finalUnitSpace;
+        for (int i = 0; i < finalUnitSpace.Count; i++)
+        {
+            
 
+
+            tempSettings.Add(finalUnitSpace[i].Clone());
+            finalUnitSpace[i].SetUnitSettings(new UnitBoardInfo());
+
+        }
+        yield return StartCoroutine(mover.MoveUnits(initialUnitSpace, copyFin));
+        
         yield return new WaitForSeconds(timeAfterMove);
+
+        //place the unit on the final position
+        for (int i = 0; i < finalUnitSpace.Count; i++)
+        {
+            finalUnitSpace[i].SetUnitData(tempSettings[i]);
+        }
         onMoveEnd?.Invoke();
         onUnitManipulation?.Invoke();
         UpdateWinningCounts();
@@ -177,8 +201,11 @@ public class UnitManager : MonoBehaviour
                 units.RemoveAt(i);
     }
 
+
     public void MoveUnits(ref List<UnitRenderer> units)
     {
+        initialUnitSpace = new();
+        finalUnitSpace = new();
         if (units.Count == 0)
             return;
         SortUnits(ref units);
@@ -189,21 +216,30 @@ public class UnitManager : MonoBehaviour
             //get settings
             for (var j = 0; j < settings.unitSettings.movePositions.Length; j++)
             {
-                var newSquare = Board.PieceInFrontWithPadding(units[i], settings.unitSettings.movePositions[j] * sign,
+                UnitRenderer newSquare = Board.PieceInFrontWithPadding(units[i], settings.unitSettings.movePositions[j] * sign,
                     board.pieces);
                 if (newSquare == null)
                     continue;
-                //Debug.Log("unit " + units[i].name + " moved to:" + newSquare.name);
 
 
                 if (newSquare.GetUnitSettings().unitSettings != null)
                     continue;
                 newSquare.SetUnitSettings(settings);
 
+
+                initialUnitSpace.Add(units[i]);
+                finalUnitSpace.Add(newSquare);
+
                 units[i].SetUnitSettings(new UnitBoardInfo());
+
                 units[i] = newSquare;
+
+
+
             }
         }
+
+        
     }
 
     private static void SortUnits(ref List<UnitRenderer> units)
@@ -289,7 +325,7 @@ public class UnitManager : MonoBehaviour
                 if (newSquare == null) continue;
                 //Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);
                 var attackedSquareSettings = newSquare.GetUnitSettings();
-                if (attackedSquareSettings.unitSettings == null ||!attackedSquareSettings.isKillable|| attackedSquareSettings.isRed == settings.isRed)
+                if (attackedSquareSettings.unitSettings == null || !attackedSquareSettings.isKillable || attackedSquareSettings.isRed == settings.isRed)
                     continue;
 
                 //check health of the unit

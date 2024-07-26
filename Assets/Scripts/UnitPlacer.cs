@@ -51,6 +51,11 @@ public class UnitPlacer : MonoBehaviour
         onUnitInfoChanged?.Invoke(settings);
     }
 
+    public void SetNullUnitSettings()
+    {
+        SetUnitSettings(new UnitBoardInfo());
+    }
+
     private void Reset()
     {
         SetUnitSettings(new UnitBoardInfo());
