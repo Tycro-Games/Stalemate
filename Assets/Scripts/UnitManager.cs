@@ -132,27 +132,12 @@ public class UnitManager : MonoBehaviour
         else
             MoveUnits(ref blueUnits);
 
-        //trigger animation and hide unit
-        List<UnitData> tempSettings = new();
-        List<UnitRenderer> copyFin = finalUnitSpace;
-        for (int i = 0; i < finalUnitSpace.Count; i++)
-        {
-            
+      
+        yield return StartCoroutine(mover.MoveUnits(initialUnitSpace, finalUnitSpace));
 
-
-            tempSettings.Add(finalUnitSpace[i].Clone());
-            finalUnitSpace[i].SetUnitSettings(new UnitBoardInfo());
-
-        }
-        yield return StartCoroutine(mover.MoveUnits(initialUnitSpace, copyFin));
-        
         yield return new WaitForSeconds(timeAfterMove);
 
-        //place the unit on the final position
-        for (int i = 0; i < finalUnitSpace.Count; i++)
-        {
-            finalUnitSpace[i].SetUnitData(tempSettings[i]);
-        }
+
         onMoveEnd?.Invoke();
         onUnitManipulation?.Invoke();
         UpdateWinningCounts();
@@ -204,15 +189,19 @@ public class UnitManager : MonoBehaviour
 
     public void MoveUnits(ref List<UnitRenderer> units)
     {
-        initialUnitSpace = new();
-        finalUnitSpace = new();
         if (units.Count == 0)
             return;
+        initialUnitSpace = new List<UnitRenderer>(new UnitRenderer[units.Count]);
+        finalUnitSpace = new List<UnitRenderer>(new UnitRenderer[units.Count]);
+
         SortUnits(ref units);
         for (var i = 0; i < units.Count; i++)
         {
             var settings = units[i].GetUnitSettings();
             var sign = settings.isRed ? 1 : -1;
+
+            if (initialUnitSpace[i] == null)
+                initialUnitSpace[i] = units[i];
             //get settings
             for (var j = 0; j < settings.unitSettings.movePositions.Length; j++)
             {
@@ -227,19 +216,16 @@ public class UnitManager : MonoBehaviour
                 newSquare.SetUnitSettings(settings);
 
 
-                initialUnitSpace.Add(units[i]);
-                finalUnitSpace.Add(newSquare);
+                finalUnitSpace[i] = newSquare;
 
                 units[i].SetUnitSettings(new UnitBoardInfo());
 
                 units[i] = newSquare;
 
-
-
             }
         }
 
-        
+
     }
 
     private static void SortUnits(ref List<UnitRenderer> units)
