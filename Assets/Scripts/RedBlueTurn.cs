@@ -155,6 +155,10 @@ public class RedBlueTurn : MonoBehaviour
 
     private bool debugPlayerFirst = false;
     private bool debugRedFirst = false;
+    [SerializeField]
+    private UnityEvent onSwitchPriorityToRed;
+    [SerializeField]
+    private UnityEvent onSwitchPriorityToBlue;
     public void SwitchSides()
     {
         isPlayerFirst = !isPlayerFirst;
@@ -174,7 +178,14 @@ public class RedBlueTurn : MonoBehaviour
         isRedFirst = !isRedFirst;
         isPriorityNationDone = false;
         debugRedFirst = isRedFirst;
-
+        if (isRedFirst)
+        {
+            onSwitchPriorityToRed?.Invoke();
+        }
+        else
+        {
+            onSwitchPriorityToBlue?.Invoke();
+        }
 
     }
 
