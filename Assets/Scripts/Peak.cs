@@ -35,7 +35,7 @@ public class Peak : MonoBehaviour
     public void StepAhead()
     {
         GetCurrentPieces();
-        var currentUnits = RedBlueTurn.IsPlayerFirst() ? red : blue;
+        var currentUnits = RedBlueTurn.IsRedFirst() ? red : blue;
 
         unitManager.MoveUnits(ref currentUnits);
         unitManager.AttackUnits(ref currentUnits);
