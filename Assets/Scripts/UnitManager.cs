@@ -151,9 +151,9 @@ public class UnitManager : MonoBehaviour
         initialUnitSpace.Clear();
         finalUnitSpace.Clear();
     }
-    private IEnumerator AttackFeedback()
+    private IEnumerator AttackFeedback(bool isRed)
     {
-        yield return StartCoroutine(attacker.AttackUnits(attackPositions));
+        yield return StartCoroutine(attacker.AttackUnits(attackPositions, isRed));
         attackPositions.Clear();
         
     }
@@ -167,7 +167,7 @@ public class UnitManager : MonoBehaviour
             BoostUnits(ref blueUnits);
 
         yield return StartCoroutine(MovementFeedback());
-        yield return StartCoroutine(AttackFeedback());
+        yield return StartCoroutine(AttackFeedback(isRed));
 
 
 
@@ -190,7 +190,7 @@ public class UnitManager : MonoBehaviour
             AttackUnits(ref blueUnits);
             CleanNullEnemies(ref redUnits);
         }
-        yield return StartCoroutine(AttackFeedback());
+        yield return StartCoroutine(AttackFeedback(isRed));
 
 
         yield return new WaitForSeconds(timeAfterMove);

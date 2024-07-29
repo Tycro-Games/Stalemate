@@ -98,7 +98,8 @@ public class UnitRenderer : MonoBehaviour
         spriteRenderer.material = new Material(Resources.Load<Material>("Materials/UnitMaterial"));
         spriteRenderer.material.SetFloat("_Opacity", alpha);
     }
-
+    //only changes the material instance color
+  
     public void Draw()
     {
         var settings = unitSettings.unitSettings;

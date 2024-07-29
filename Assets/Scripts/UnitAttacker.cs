@@ -10,7 +10,6 @@ public enum AttackTypes
 public class UnitAttacker : MonoBehaviour
 {
     //[SerializeField] private AnimationCurve animationCurve;
-    [SerializeField] private float timeToDestroy = 1.0f;
     [SerializeField] private GameObject emptyAttackAnimation;
 
     private List<GameObject> spriteGameObject = new();
@@ -19,17 +18,16 @@ public class UnitAttacker : MonoBehaviour
     {
 
 
-        spriteGameObject.Add(Instantiate(emptyAttackAnimation, transform));
+        //spriteGameObject.Add(Instantiate(emptyAttackAnimation, transform));
 
     }
-    public IEnumerator AttackUnits(List<Tuple<Vector2, AttackTypes>> attackPositions)
+    public IEnumerator AttackUnits(List<Tuple<Vector2, AttackTypes>> attackPositions, bool isRed)
     {
         for (int i = 0; i < attackPositions.Count; i++)
         {
             //add based on type
             GameObject exp = Instantiate(emptyAttackAnimation, attackPositions[i].Item1, Quaternion.identity, transform);
-            spriteGameObject.Add(exp);
-            Destroy(exp, timeToDestroy);
+            exp.GetComponent<ExplosionRenderer>().DrawColor(isRed);
         }
         yield return null;
     }
