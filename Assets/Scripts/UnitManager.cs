@@ -153,7 +153,7 @@ public class UnitManager : MonoBehaviour
     }
     private IEnumerator AttackFeedback()
     {
-        yield return StartCoroutine(attacker.e, finalUnitSpace);
+        yield return StartCoroutine(attacker.AttackUnits(attackPositions));
         attackPositions.Clear();
         
     }
@@ -318,6 +318,7 @@ public class UnitManager : MonoBehaviour
     {
         if (units.Count == 0)
             return;
+        attackPositions = new List<Tuple<Vector2, AttackTypes>>();
         SortUnits(ref units);
         for (var i = 0; i < units.Count; i++)
         {
