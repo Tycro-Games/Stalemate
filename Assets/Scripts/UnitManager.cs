@@ -4,7 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+
+public class Ref<T>
+{
+    private T backing;
+    public T Value { get { return backing; } }
+    public Ref(T reference)
+    {
+        backing = reference;
+    }
+}
+
 [RequireComponent(typeof(UnitMover))]
+[RequireComponent(typeof(UnitAttacker))]
 public class UnitManager : MonoBehaviour
 {
     private List<UnitRenderer> redUnits = new();
@@ -16,6 +28,7 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private UnityEvent onBoostEnd;
     private Board board;
     private UnitMover mover;
+    private UnitAttacker attacker;
 
     private bool isPlayerTurn = true;
 
@@ -27,8 +40,11 @@ public class UnitManager : MonoBehaviour
     private int blueUnitsOnY = 0;
     private bool hasMovedPriorityNation = false;
 
+    //auxialiary lists for feedback systems
     private List<UnitRenderer> initialUnitSpace = new();
     private List<UnitRenderer> finalUnitSpace = new();
+
+    private List<Tuple<Vector2, AttackTypes>> attackPositions;
     public void SetCurrentSide(bool playerTurn)
     {
         if (hasMovedPriorityNation)
@@ -77,6 +93,7 @@ public class UnitManager : MonoBehaviour
     {
         board = GetComponent<Board>();
         mover = GetComponent<UnitMover>();
+        attacker = GetComponent<UnitAttacker>();
     }
 
 
@@ -108,21 +125,6 @@ public class UnitManager : MonoBehaviour
     }
 
 
-    private void MoveOtherSide()
-    {
-
-    }
-
-    private void AttackOtherSide()
-    {
-
-    }
-
-    private void BoostOtherSide()
-    {
-
-    }
-
 
     private IEnumerator Movement(bool isRed)
     {
@@ -132,8 +134,8 @@ public class UnitManager : MonoBehaviour
         else
             MoveUnits(ref blueUnits);
 
-      
-        yield return StartCoroutine(mover.MoveUnits(initialUnitSpace, finalUnitSpace));
+
+        yield return StartCoroutine(MovementFeedback());
 
         yield return new WaitForSeconds(timeAfterMove);
 
@@ -143,6 +145,19 @@ public class UnitManager : MonoBehaviour
         UpdateWinningCounts();
     }
 
+    private IEnumerator MovementFeedback()
+    {
+        yield return StartCoroutine(mover.MoveUnits(initialUnitSpace, finalUnitSpace));
+        initialUnitSpace.Clear();
+        finalUnitSpace.Clear();
+    }
+    private IEnumerator AttackFeedback()
+    {
+        yield return StartCoroutine(attacker.e, finalUnitSpace);
+        attackPositions.Clear();
+        
+    }
+
     private IEnumerator Boost(bool isRed)
     {
         yield return new WaitForSeconds(timeBeforeMove);
@@ -150,6 +165,10 @@ public class UnitManager : MonoBehaviour
             BoostUnits(ref redUnits);
         else
             BoostUnits(ref blueUnits);
+
+        yield return StartCoroutine(MovementFeedback());
+        yield return StartCoroutine(AttackFeedback());
+
 
 
         yield return new WaitForSeconds(timeAfterMove);
@@ -171,6 +190,7 @@ public class UnitManager : MonoBehaviour
             AttackUnits(ref blueUnits);
             CleanNullEnemies(ref redUnits);
         }
+        yield return StartCoroutine(AttackFeedback());
 
 
         yield return new WaitForSeconds(timeAfterMove);
@@ -308,10 +328,18 @@ public class UnitManager : MonoBehaviour
             {
                 var newSquare = Board.PieceInFront(units[i], settings.unitSettings.attackPositions[j] * sign,
                     board.pieces);
+                //outside bounds
                 if (newSquare == null) continue;
                 //Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);
+
                 var attackedSquareSettings = newSquare.GetUnitSettings();
-                if (attackedSquareSettings.unitSettings == null || !attackedSquareSettings.isKillable || attackedSquareSettings.isRed == settings.isRed)
+                attackPositions.Add(Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.EMPTY_SPACE));
+
+                if (attackedSquareSettings.unitSettings == null)
+                    continue;
+                if (!attackedSquareSettings.isKillable)
+                    continue;
+                if (attackedSquareSettings.isRed == settings.isRed)
                     continue;
 
                 //check health of the unit

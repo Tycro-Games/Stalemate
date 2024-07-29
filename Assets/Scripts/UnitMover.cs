@@ -32,6 +32,8 @@ public class UnitMover : MonoBehaviour
     }
     public IEnumerator MoveUnits(List<UnitRenderer> init, List<UnitRenderer> fin)
     {
+        if (init.Count == 0)
+            yield break;
         countDone = init.Count;
         for (int i = 0; i < fin.Count; i++)
         {
@@ -61,7 +63,7 @@ public class UnitMover : MonoBehaviour
 
         for (int i = 0; i < init.Count; i++)
         {
-  
+
 
             Debug.Log(init[i].name + " " + fin[i].name);
 
