@@ -334,10 +334,14 @@ public class UnitManager : MonoBehaviour
                 //Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);
 
                 var attackedSquareSettings = newSquare.GetUnitSettings();
-                attackPositions.Add(Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.EMPTY_SPACE));
 
                 if (attackedSquareSettings.unitSettings == null)
+                {
+                    attackPositions.Add(Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.EMPTY_SPACE));
+
                     continue;
+                }
+
                 if (!attackedSquareSettings.isKillable)
                     continue;
                 if (attackedSquareSettings.isRed == settings.isRed)
@@ -346,7 +350,17 @@ public class UnitManager : MonoBehaviour
                 //check health of the unit
 
                 //if health is 0, remove the unit
-                if (newSquare.TryToKill()) newSquare.SetUnitSettings(new UnitBoardInfo());
+                if (newSquare.TryToKill())
+                {
+                    attackPositions.Add(Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.DESTROY_UNIT));
+
+                    newSquare.SetUnitSettings(new UnitBoardInfo());
+                }
+                else
+                {
+                    attackPositions.Add(Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.HIT_UNIT));
+
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2876424322665970166}
   - component: {fileID: 505101473877021908}
   m_Layer: 0
-  m_Name: EmptyExplosion
+  m_Name: DestroyExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4836,7 +4836,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 797fea407607d6444820fdcc50884a80, type: 2}
+  - {fileID: 2100000, guid: c9b7aa598d6b4df48b1ef612c21949dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
