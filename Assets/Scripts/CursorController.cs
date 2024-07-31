@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -13,6 +14,7 @@ namespace Bogadanul.Assets.Scripts.Utility
         private Vector2 lastPos = Vector2.zero;
         private Camera mainCam;
         public event Action<Vector3> OnMovement;
+        [SerializeField] private Vector3Event OnMovementEvent;
 
         [SerializeField]
         private PlayerInput playerInput;
@@ -109,6 +111,7 @@ namespace Bogadanul.Assets.Scripts.Utility
                 return;
             var mousePos = context.ReadValue<Vector2>();
             lastPos = mainCam.ScreenToWorldPoint(mousePos);
+            OnMovementEvent?.Invoke(lastPos);
             OnMovement?.Invoke(mousePos);
         }
 

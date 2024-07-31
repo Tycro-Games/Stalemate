@@ -11,8 +11,13 @@ public class HoverMover : MonoBehaviour
         transform.position = pos;
     }
 
+    public void MoveClamped(Vector3 pos)
+    {
+        transform.position = new Vector3(Mathf.RoundToInt(Mathf.Clamp(pos.x, minLimits.x, maxLimits.x)),
+            Mathf.RoundToInt(Mathf.Clamp(pos.y, minLimits.y, maxLimits.y)), 0);
+    }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireCube(new Vector3(0.0f, 0.0f), minLimits + maxLimits);
+        Gizmos.DrawWireCube(transform.position + (Vector3)((minLimits + maxLimits) / 2.0f), (maxLimits));
     }
 }
