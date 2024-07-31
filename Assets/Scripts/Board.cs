@@ -180,10 +180,14 @@ public class Board : MonoBehaviour
         }
     }
 
-    public static UnitRenderer PieceInFront(UnitRenderer piece, Vector2Int inFront, List<UnitRenderer> pieces)
+    public static UnitRenderer PieceInFront(UnitRenderer piece, Vector2Int inFront, ref List<UnitRenderer> pieces)
     {
-        var index = pieces.FindIndex(p => p == piece);
+
+        int index = pieces.IndexOf(piece);
+        if (index == -1) return null; // Piece not found
         //at the edges
+
+
         if (index % sizeX == 3 && inFront.x == 1)
             return null;
         if (index % sizeX == 0 && inFront.x == -1)
@@ -199,9 +203,11 @@ public class Board : MonoBehaviour
 
 
     public static UnitRenderer PieceInFrontWithPadding(UnitRenderer piece, Vector2Int inFront,
-        List<UnitRenderer> pieces)
+        ref List<UnitRenderer> pieces)
     {
-        var index = pieces.FindIndex(p => p == piece);
+        int index = pieces.IndexOf(piece);
+        if (index == -1) return null; // Piece not found
+
         var newIndex = index + inFront.x + inFront.y * sizeX;
 
         // Check if the new index is within bounds
@@ -233,7 +239,7 @@ public class Board : MonoBehaviour
     {
         if (type == SquareType.RED)
             return pieces.FindAll(x => x.GetUnitSettings().unitSettings != null && x.GetUnitSettings().isRed);
-        else if (type == SquareType.BLUE)
+        if (type == SquareType.BLUE)
             return pieces.FindAll(x => x.GetUnitSettings().unitSettings != null && !x.GetUnitSettings().isRed);
 
         Debug.Assert(false, "Invalid square type");

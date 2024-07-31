@@ -127,7 +127,7 @@ public class AIPlacer : MonoBehaviour
                 return;
 
             weight = Mathf.Min(weight, positions.Count * 5);
-            enemyList =isRed? blueUnits : redUnits;
+            enemyList = isRed ? blueUnits : redUnits;
             //call to recursive backtracking
             indexEnemy = new List<int>();
 
@@ -250,8 +250,8 @@ public class AIPlacer : MonoBehaviour
 
     private void DisplaySpawning(Spawning toDisplay)
     {
-        Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " +
-                  toDisplay.placement[3]);
+        //Debug.Log(toDisplay.placement[0] + " " + toDisplay.placement[1] + " " + toDisplay.placement[2] + " " +
+        //          toDisplay.placement[3]);
     }
 
     private string MakeString(Spawning toDisplay)
@@ -298,7 +298,7 @@ public class AIPlacer : MonoBehaviour
         positions = new List<UnitRenderer>(board.GetEmptySquares(isRed ? SquareType.BLUE : SquareType.RED));
         countEnemies = Mathf.Min(countEnemies, positions.Count);
         GetListOfPositions(ref positions, countEnemies);
-        Debug.Log(positions);
+        //Debug.Log(positions);
 
         var fogOfWar = isRed ? fogOfWarBlue : fogOfWarRed;
         foreach (var unitRenderer in positions) unitRenderer.SetUnitSettings(fogOfWar);
@@ -341,30 +341,35 @@ public class AIPlacer : MonoBehaviour
                 if (enemyIndicies[randomIndex] + 1 > 5)
                     continue;
                 enemyIndicies[randomIndex]++;
-                Debug.Log(enemyIndicies);
+                //Debug.Log(enemyIndicies);
                 weight--;
-                Debug.Log("Remaining weight:" + weight);
+                //Debug.Log("Remaining weight:" + weight);
             }
         }
 
         return false;
     }
 
-    private void ChooseSpawning(float index)
+    private void ChooseSpawning(int index)
     {
         //clear previous placement
-        for (var i = 0; i < positions.Count; i++) positions[i].SetUnitSettings(new UnitBoardInfo());
+        var emptyInfo = new UnitBoardInfo();
+        foreach (var position in positions)
+        {
+            position.SetUnitSettings(emptyInfo);
+        }
 
-        var placement = validSpawns[int.Parse(index.ToString())];
+        var placement = validSpawns[index];
         DisplaySpawning(placement);
 
-        var indexEnemy = 0;
-        foreach (var unitSlot in positions)
-        {
-            if (placement.placement[indexEnemy] > 0)
-                SetUnitRenderer(unitSlot, enemyList[placement.placement[indexEnemy] - 1]);
 
-            indexEnemy++;
+        for (int i = 0; i < positions.Count; i++)
+        {
+            int placementIndex = placement.placement[i];
+            if (placementIndex > 0)
+            {
+                SetUnitRenderer(positions[i], enemyList[placementIndex - 1]);
+            }
         }
     }
 
@@ -454,11 +459,11 @@ public class AIPlacer : MonoBehaviour
         var redOverLine = UpdateWinCounts.winCounts.x;
         var blueOverLine = UpdateWinCounts.winCounts.y;
 
-        Debug.Log($"Red units: {red.Count}, Blue units: {blue.Count}");
-        Debug.Log($"Red units over line: {redOverLine}, Blue units over line: {blueOverLine}");
+        //Debug.Log($"Red units: {red.Count}, Blue units: {blue.Count}");
+        //Debug.Log($"Red units over line: {redOverLine}, Blue units over line: {blueOverLine}");
 
         score = 0;
-        Debug.Log($"AI is Red: {!isRed} ");
+        //Debug.Log($"AI is Red: {!isRed} ");
 
         if (!isRed)
         {
@@ -473,10 +478,10 @@ public class AIPlacer : MonoBehaviour
             score += redOverLineScore;
             score += blueOverLineScore;
 
-            Debug.Log($"Score from red units: {redScore}");
-            Debug.Log($"Score from blue units: {blueScore}");
-            Debug.Log($"Score from red units over line: {redOverLineScore}");
-            Debug.Log($"Score from blue units over line: {blueOverLineScore}");
+            //Debug.Log($"Score from red units: {redScore}");
+            //Debug.Log($"Score from blue units: {blueScore}");
+            //Debug.Log($"Score from red units over line: {redOverLineScore}");
+            //Debug.Log($"Score from blue units over line: {blueOverLineScore}");
 
             // Assuming there's a win condition check that can be represented by a boolean
             var redWins = UpdateWinCounts.redBlueWinMaxCounts.x <= redOverLine;
@@ -486,16 +491,16 @@ public class AIPlacer : MonoBehaviour
             if (redWins)
             {
                 score += pointSystem.alliedWin;
-                Debug.Log($"Red wins! Adding {pointSystem.alliedWin} to score.");
+                //Debug.Log($"Red wins! Adding {pointSystem.alliedWin} to score.");
             }
 
             if (blueWins)
             {
                 score += pointSystem.enemyWin;
-                Debug.Log($"Blue wins! Subtracting {pointSystem.enemyWin} from score.");
+                //Debug.Log($"Blue wins! Subtracting {pointSystem.enemyWin} from score.");
             }
 
-            Debug.Log($"Final Board Score: {score}");
+            //Debug.Log($"Final Board Score: {score}");
         }
         else
         {
@@ -510,10 +515,10 @@ public class AIPlacer : MonoBehaviour
             score += blueOverLineScore;
             score += redOverLineScore;
 
-            Debug.Log($"Score from blue units: {blueScore}");
-            Debug.Log($"Score from red units: {redScore}");
-            Debug.Log($"Score from blue units over line: {blueOverLineScore}");
-            Debug.Log($"Score from red units over line: {redOverLineScore}");
+            //Debug.Log($"Score from blue units: {blueScore}");
+            //Debug.Log($"Score from red units: {redScore}");
+            //Debug.Log($"Score from blue units over line: {blueOverLineScore}");
+            //Debug.Log($"Score from red units over line: {redOverLineScore}");
 
             // Assuming there's a win condition check that can be represented by a boolean
             var blueWins = UpdateWinCounts.redBlueWinMaxCounts.y <= blueOverLine; // Blue win condition
@@ -522,16 +527,16 @@ public class AIPlacer : MonoBehaviour
             if (blueWins)
             {
                 score += pointSystem.alliedWin; // Blue wins
-                Debug.Log($"Blue wins! Adding {pointSystem.alliedWin} to score.");
+                //Debug.Log($"Blue wins! Adding {pointSystem.alliedWin} to score.");
             }
 
             if (redWins)
             {
                 score += pointSystem.enemyWin; // Red wins
-                Debug.Log($"Red wins! Subtracting {pointSystem.enemyWin} from score.");
+                //Debug.Log($"Red wins! Subtracting {pointSystem.enemyWin} from score.");
             }
 
-            Debug.Log($"Final Board Score: {score}");
+            //Debug.Log($"Final Board Score: {score}");
         }
 
         onRate?.Invoke(score.ToString());

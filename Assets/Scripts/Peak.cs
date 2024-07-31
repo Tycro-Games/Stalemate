@@ -48,7 +48,8 @@ public class Peak : MonoBehaviour
 
     public void GoBack()
     {
-        for (var i = 0; i < previosBoard.Count; i++) board.pieces[i].SetUnitData(previosBoard[i]);
+        for (var i = 0; i < previosBoard.Count; i++)
+            board.pieces[i].SetUnitData(previosBoard[i]);
         unitManager.ResetRedBlueUnitLists();
     }
 
@@ -79,12 +80,13 @@ public class Peak : MonoBehaviour
         }
         else
         {
+            bool isPlayerFirst = RedBlueTurn.IsPlayerFirst();
             if (moveCurrentUnits)
             {
                 GetCurrentPieces();
 
-                var currentUnits = RedBlueTurn.IsPlayerFirst() ? red : blue;
-                var otherUnits = !RedBlueTurn.IsPlayerFirst() ? red : blue;
+                var currentUnits = isPlayerFirst ? red : blue;
+                var otherUnits = !isPlayerFirst ? red : blue;
                 MoveAttackBoostUnits(currentUnits);
                 unitManager.CleanNullEnemies(ref otherUnits);
             }
@@ -92,8 +94,8 @@ public class Peak : MonoBehaviour
             {
                 red = Board.GetAllPieces(SquareType.RED, ref currentBoard);
                 blue = Board.GetAllPieces(SquareType.BLUE, ref currentBoard);
-                var currentUnits = RedBlueTurn.IsPlayerFirst() ? red : blue;
-                var otherUnits = !RedBlueTurn.IsPlayerFirst() ? red : blue;
+                var currentUnits = isPlayerFirst ? red : blue;
+                var otherUnits = !isPlayerFirst ? red : blue;
                 MoveAttackBoostUnits(otherUnits);
 
                 unitManager.CleanNullEnemies(ref currentUnits);

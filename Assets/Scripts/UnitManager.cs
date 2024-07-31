@@ -66,17 +66,55 @@ public class UnitManager : MonoBehaviour
     {
         redUnitsOnY = 0;
         blueUnitsOnY = 0;
-        foreach (var middleLine in positions)
+        var middleLineXs = new List<int>();
+        var middleLineYs = new List<float>();
+        foreach (var position in positions)
         {
-            foreach (var redUnit in redUnits.FindAll(x => (int)x.transform.position.x == (int)middleLine.position.x))
-                if ((int)redUnit.transform.position.y <= middleLine.position.y)
+            middleLineXs.Add((int)position.transform.position.x);
+            middleLineYs.Add(position.transform.position.y);
+        }
+        var redUnitXs = new List<int>();
+        var redUnitYs = new List<int>();
+        foreach (var redUnit in redUnits)
+        {
+            redUnitXs.Add((int)redUnit.transform.position.x);
+            redUnitYs.Add((int)redUnit.transform.position.y);
+        }
+
+        var blueUnitXs = new List<int>();
+        var blueUnitYs = new List<int>();
+        foreach (var blueUnit in blueUnits)
+        {
+            blueUnitXs.Add((int)blueUnit.transform.position.x);
+            blueUnitYs.Add((int)blueUnit.transform.position.y);
+        }
+        for (int i = 0; i < middleLineXs.Count; i++)
+        {
+            int middleLineX = middleLineXs[i];
+            float middleLineY = middleLineYs[i];
+
+            // Count red units on Y axis
+            for (int j = 0; j < redUnitXs.Count; j++)
+            {
+                if (redUnitXs[j] == middleLineX && redUnitYs[j] <= middleLineY)
+                {
                     redUnitsOnY++;
-            foreach (var blueUnit in blueUnits.FindAll(x => (int)x.transform.position.x == (int)middleLine.position.x))
-                if ((int)blueUnit.transform.position.y >= middleLine.position.y)
+                }
+            }
+
+            // Count blue units on Y axis
+            for (int j = 0; j < blueUnitXs.Count; j++)
+            {
+                if (blueUnitXs[j] == middleLineX && blueUnitYs[j] >= middleLineY)
+                {
                     blueUnitsOnY++;
+                }
+            }
         }
 
         onWinConditionChange?.Invoke(redUnitsOnY, blueUnitsOnY);
+
+
     }
 
     public List<UnitRenderer> GetRedUnits()
@@ -155,7 +193,7 @@ public class UnitManager : MonoBehaviour
     {
         yield return StartCoroutine(attacker.AttackUnits(attackPositions, isRed));
         attackPositions.Clear();
-        
+
     }
 
     private IEnumerator Boost(bool isRed)
@@ -226,7 +264,7 @@ public class UnitManager : MonoBehaviour
             for (var j = 0; j < settings.unitSettings.movePositions.Length; j++)
             {
                 UnitRenderer newSquare = Board.PieceInFrontWithPadding(units[i], settings.unitSettings.movePositions[j] * sign,
-                    board.pieces);
+                    ref board.pieces);
                 if (newSquare == null)
                     continue;
 
@@ -273,7 +311,7 @@ public class UnitManager : MonoBehaviour
             for (var j = 0; j < settings.unitSettings.boostPositions.Length; j++)
             {
                 var newSquare = Board.PieceInFront(units[i], settings.unitSettings.boostPositions[j] * sign,
-                    board.pieces);
+                    ref board.pieces);
                 if (newSquare == null)
                     continue;
 
@@ -281,14 +319,14 @@ public class UnitManager : MonoBehaviour
                 //move itself
                 if (attackedSquareSettings.unitSettings == null || attackedSquareSettings.isRed != settings.isRed)
                 {
-                    Debug.Log("unit " + units[i].name + "boosted itself");
+                    //Debug.Log("unit " + units[i].name + "boosted itself");
 
                     piecesToBoost.Add(units[i]);
                 }
                 //boost what is in the boost positions
                 else
                 {
-                    Debug.Log("unit " + units[i].name + "boosted" + newSquare.name);
+                    //Debug.Log("unit " + units[i].name + "boosted" + newSquare.name);
 
                     piecesToBoost.Add(newSquare);
                 }
@@ -324,11 +362,11 @@ public class UnitManager : MonoBehaviour
         {
             var settings = units[i].GetUnitSettings();
             var sign = settings.isRed ? 1 : -1;
-
+            
             for (var j = 0; j < settings.unitSettings.attackPositions.Length; j++)
             {
                 var newSquare = Board.PieceInFront(units[i], settings.unitSettings.attackPositions[j] * sign,
-                    board.pieces);
+                    ref board.pieces);
                 //outside bounds
                 if (newSquare == null) continue;
                 //Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);

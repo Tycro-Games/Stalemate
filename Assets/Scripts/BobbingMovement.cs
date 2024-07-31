@@ -13,6 +13,11 @@ public class Unit : MonoBehaviour
         EmptyParent = new GameObject($"{gameObject.name} Offset Parent");
         EmptyParent.transform.parent = gameObject.transform.parent;
         gameObject.transform.parent = EmptyParent.transform;
+#if UNITY_EDITOR
+        Debug.unityLogger.logEnabled = true;
+#else
+ Debug.unityLogger.logEnabled = false;
+#endif
     }
 
     // Update is called once per frame
