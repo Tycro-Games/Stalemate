@@ -14141,7 +14141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingTurn: 0
-  startingPoints: 6
+  startingPoints: 0
   endTurn: 7
   onWin:
     m_PersistentCalls:
