@@ -244,7 +244,10 @@ public class UnitManager : MonoBehaviour
                 units.RemoveAt(i);
     }
 
-
+    public void GetAttackingSquares(out List<Tuple<Vector2, AttackTypes>> attackingPos)
+    {
+        attackingPos = attackPositions;
+    }
     public void MoveUnits(ref List<UnitRenderer> units)
     {
         if (units.Count == 0)

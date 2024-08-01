@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,11 +17,12 @@ public class Peak : MonoBehaviour
     private bool goBack = false;
     [SerializeField] private UnityEvent onPeak;
     [SerializeField] private UnityEvent onUnPeak;
-
+    private UnitAttacker unitAttacker;
     private void Start()
     {
         board = GetComponent<Board>();
         unitManager = GetComponent<UnitManager>();
+        unitAttacker = GetComponent<UnitAttacker>();
     }
 
     public void GetCurrentPieces()
@@ -39,6 +41,15 @@ public class Peak : MonoBehaviour
 
         unitManager.MoveUnits(ref currentUnits);
         unitManager.AttackUnits(ref currentUnits);
+        if (currentUnits.Count > 0)
+        {
+            unitManager.GetAttackingSquares(out List<Tuple<Vector2, AttackTypes>> attackingPos);
+            if (attackingPos != null && attackingPos.Count > 0)
+            {
+                StartCoroutine(unitAttacker.PreviewAttackUnits(attackingPos, RedBlueTurn.IsRedFirst()));
+            }
+        }
+
         unitManager.BoostUnits(ref currentUnits);
         //just change 
         board.pieces = currentBoard;
@@ -51,6 +62,7 @@ public class Peak : MonoBehaviour
         for (var i = 0; i < previosBoard.Count; i++)
             board.pieces[i].SetUnitData(previosBoard[i]);
         unitManager.ResetRedBlueUnitLists();
+        unitAttacker.DeleteAllPreviews();
     }
 
     public void Peaking()
@@ -110,8 +122,10 @@ public class Peak : MonoBehaviour
 
     private void MoveAttackBoostUnits(List<UnitRenderer> currentUnits)
     {
+        if (currentUnits.Count == 0) return;
         unitManager.MoveUnits(ref currentUnits);
         unitManager.AttackUnits(ref currentUnits);
+
         unitManager.BoostUnits(ref currentUnits);
     }
 }
