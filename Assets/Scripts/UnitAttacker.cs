@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Utility;
+using FMODUnity;
 using UnityEngine;
 
 public enum AttackTypes
@@ -17,6 +19,7 @@ public class UnitAttacker : MonoBehaviour
 
     [SerializeField] private GameObject previewAttack;
     private List<GameObject> previewAttacks = new List<GameObject>();
+    [SerializeField] private EventReference shootSound;
 
     private void Start()
     {
@@ -51,6 +54,7 @@ public class UnitAttacker : MonoBehaviour
             GameObject exp = Instantiate(explosionEffect, attackPositions[i].Item1, Quaternion.identity, transform);
             exp.GetComponent<ExplosionRenderer>().DrawColor(isRed);
         }
+        AudioManager.instance.PlayOneShot(shootSound);
         yield return null;
     }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using FMODUnity;
 using UnityEngine.Events;
 using UnityEngine;
 
@@ -17,6 +18,10 @@ namespace Assets.Scripts.Utility
 
     [Serializable]
     public class StringEvent : UnityEvent<string>
+    {
+    }
+    [Serializable]
+    public class AudioEvent : UnityEvent<EventReference>
     {
     }
 
