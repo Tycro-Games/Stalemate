@@ -30,6 +30,8 @@ public class UnitAttacker : MonoBehaviour
     }
     public IEnumerator AttackUnits(List<Tuple<Vector2, AttackTypes>> attackPositions, bool isRed)
     {
+        if(attackPositions.Count==0)
+            yield break;
         attackPositions = attackPositions.GroupBy(x => new { x.Item1, x.Item2 })
             .Select(x => x.First())
             .ToList();
