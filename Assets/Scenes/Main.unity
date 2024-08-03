@@ -6021,10 +6021,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1485981508}
-        m_TargetAssemblyTypeName: UnitRenderer, Assembly-CSharp
-        m_MethodName: SetUnitSettings
-        m_Mode: 0
+      - m_Target: {fileID: 924948677}
+        m_TargetAssemblyTypeName: AudioPlay, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
