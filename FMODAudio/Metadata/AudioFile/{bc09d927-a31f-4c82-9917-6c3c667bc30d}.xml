@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{bc09d927-a31f-4c82-9917-6c3c667bc30d}">
 		<property name="assetPath">
-			<value>Audio/laserRetro_001.ogg</value>
+			<value>SCIFI/laserRetro_001.ogg</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>

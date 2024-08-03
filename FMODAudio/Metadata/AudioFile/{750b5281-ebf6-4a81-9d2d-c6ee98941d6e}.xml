@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{750b5281-ebf6-4a81-9d2d-c6ee98941d6e}">
 		<property name="assetPath">
-			<value>Audio/engineCircular_002.ogg</value>
+			<value>SCIFI/engineCircular_002.ogg</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>

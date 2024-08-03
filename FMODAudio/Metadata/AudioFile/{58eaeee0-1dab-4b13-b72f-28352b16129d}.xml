@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{58eaeee0-1dab-4b13-b72f-28352b16129d}">
 		<property name="assetPath">
-			<value>Audio/forceField_004.ogg</value>
+			<value>SCIFI/forceField_004.ogg</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>

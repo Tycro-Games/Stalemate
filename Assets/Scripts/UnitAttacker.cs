@@ -19,7 +19,6 @@ public class UnitAttacker : MonoBehaviour
 
     [SerializeField] private GameObject previewAttack;
     private List<GameObject> previewAttacks = new List<GameObject>();
-    [SerializeField] private EventReference shootSound;
 
     private void Start()
     {
@@ -56,7 +55,7 @@ public class UnitAttacker : MonoBehaviour
             GameObject exp = Instantiate(explosionEffect, attackPositions[i].Item1, Quaternion.identity, transform);
             exp.GetComponent<ExplosionRenderer>().DrawColor(isRed);
         }
-        AudioManager.instance.PlayOneShot(shootSound);
+        AudioManager.instance.PlayOneShot(AudioManager.instance.shootSound);
         yield return null;
     }
 

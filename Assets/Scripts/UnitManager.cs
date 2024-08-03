@@ -45,6 +45,8 @@ public class UnitManager : MonoBehaviour
     private List<UnitRenderer> finalUnitSpace = new();
 
     private List<Tuple<Vector2, AttackTypes>> attackPositions;
+    private List<UnitRenderer> piecesToBoost;
+
     public void SetCurrentSide(bool playerTurn)
     {
         if (hasMovedPriorityNation)
@@ -200,20 +202,29 @@ public class UnitManager : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBeforeMove);
         if (isRed)
+        {
             BoostUnits(ref redUnits);
+
+        }
         else
+        {
             BoostUnits(ref blueUnits);
+
+        }
 
         yield return StartCoroutine(MovementFeedback());
         yield return StartCoroutine(AttackFeedback(isRed));
 
-
+        if (piecesToBoost.Count > 0)
+            AudioManager.instance.PlayOneShot(AudioManager.instance.boostSound);
 
         yield return new WaitForSeconds(timeAfterMove);
         onBoostEnd?.Invoke();
         onUnitManipulation?.Invoke();
         UpdateWinningCounts();
     }
+
+
 
     private IEnumerator Attack(bool isRed)
     {
@@ -303,7 +314,7 @@ public class UnitManager : MonoBehaviour
         if (units.Count == 0)
             return;
         SortUnits(ref units);
-        var piecesToBoost = new List<UnitRenderer>();
+        piecesToBoost = new List<UnitRenderer>();
         for (var i = 0; i < units.Count; i++)
         {
             var settings = units[i].GetUnitSettings();
@@ -365,7 +376,7 @@ public class UnitManager : MonoBehaviour
         {
             var settings = units[i].GetUnitSettings();
             var sign = settings.isRed ? 1 : -1;
-            
+
             for (var j = 0; j < settings.unitSettings.attackPositions.Length; j++)
             {
                 var newSquare = Board.PieceInFront(units[i], settings.unitSettings.attackPositions[j] * sign,

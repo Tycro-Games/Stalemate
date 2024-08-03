@@ -34,6 +34,7 @@ public class UnitMover : MonoBehaviour
     {
         if (init.Count == 0)
             yield break;
+        AudioManager.instance.PlayOneShot(AudioManager.instance.moveSound);
         countDone = init.Count;
         for (int i = 0; i < fin.Count; i++)
         {

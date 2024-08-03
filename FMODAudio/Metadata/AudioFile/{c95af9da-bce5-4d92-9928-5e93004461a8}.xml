@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{c95af9da-bce5-4d92-9928-5e93004461a8}">
 		<property name="assetPath">
-			<value>Audio/impactMetal_003.ogg</value>
+			<value>SCIFI/impactMetal_003.ogg</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>

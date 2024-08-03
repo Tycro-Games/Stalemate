@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{1253ed16-f4dc-40a7-9f4e-0e982e7e3d2a}">
 		<property name="assetPath">
-			<value>Audio/thrusterFire_003.ogg</value>
+			<value>SCIFI/thrusterFire_003.ogg</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>

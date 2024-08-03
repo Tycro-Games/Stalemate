@@ -79,6 +79,8 @@ public class Peak : MonoBehaviour
             goBack = true;
             onPeak?.Invoke();
         }
+        AudioManager.instance.PlayOneShot(AudioManager.instance.peakSound);
+
     }
 
     //true means the non_AI side is moving
