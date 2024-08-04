@@ -175,37 +175,8 @@ public class UnitPlacer : MonoBehaviour
             return;
         }
 
-        ////there is something selected
-        //if (selectedRenderer.sprite != null)
-        //{
-        //    if (Input.GetMouseButtonDown(0))
-        //    {
-        //        var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
-        //        var substraction = selectedPiece.GetUnitSettings().unitSettings.cost;
-        //        if (unitSettings.unitSettings == null)
-        //            SetUnitSettings(selectedPiece.GetUnitSettings());
-        //        RedBlueTurn.currentPoints += substraction;
-        //        placedSquares.Remove(selectedPiece);
-        //        selectedPiece.SetUnitSettings(new UnitBoardInfo());
-        //        onPlace?.Invoke();
-        //        return;
-        //    }
-
-
-        //    onNoHover?.Invoke();
-        //}
-
-
         onHover?.Invoke(place.transform.position);
 
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    var selectedPiece = place.transform.GetChild(0).GetComponent<UnitRenderer>();
-        //    selectedPiece.SetUnitSettings(unitSettings);
-        //    RedBlueTurn.currentPoints -= unitSettings.unitSettings.cost;
-        //    CheckRemainingPoints();
-        //    onPlace?.Invoke();
-        //    placedSquares.Add(selectedPiece);
-        //}
+      
     }
 }

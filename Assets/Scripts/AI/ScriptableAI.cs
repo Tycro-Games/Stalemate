@@ -17,8 +17,6 @@ public class ScriptableAIEditor : Editor
 
         // Draw default properties
         DrawDefaultInspector();
-
-        // Check if boost is true
     }
 }
 #endif

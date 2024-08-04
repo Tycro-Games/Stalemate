@@ -125,12 +125,9 @@ public class RedBlueTurn : MonoBehaviour
         isPlayerFirst = true;
         onSideChange?.Invoke("Red");
 
-        debugPlayerFirst = true;
         isRedFirst = true;
-        debugRedFirst = true;
 
         maxPoints = startingPoints;
-        //SetValues();
     }
     public void SetPoints(string points)
     {
@@ -140,21 +137,17 @@ public class RedBlueTurn : MonoBehaviour
     }
     public void SetValues()
     {
-        //SwitchSides();
-        //if (isPlayerFirst)
         currentTurn++;
         if (isRedFirst)
         {
             maxPoints++;
         }
 
-
         currentPoints = maxPoints;
         UpdateText();
     }
 
-    private bool debugPlayerFirst = false;
-    private bool debugRedFirst = false;
+
     [SerializeField]
     private UnityEvent onSwitchPriorityToRed;
     [SerializeField]
@@ -162,7 +155,6 @@ public class RedBlueTurn : MonoBehaviour
     public void SwitchSides()
     {
         isPlayerFirst = !isPlayerFirst;
-        debugPlayerFirst = isPlayerFirst;
         if (isPlayerFirst)
         {
             onSideChange?.Invoke("Red");
@@ -177,7 +169,6 @@ public class RedBlueTurn : MonoBehaviour
     {
         isRedFirst = !isRedFirst;
         isPriorityNationDone = false;
-        debugRedFirst = isRedFirst;
         if (isRedFirst)
         {
             onSwitchPriorityToRed?.Invoke();

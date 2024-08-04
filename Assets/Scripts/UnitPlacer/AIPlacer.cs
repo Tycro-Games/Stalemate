@@ -171,9 +171,6 @@ public class AIPlacer : MonoBehaviour
 
                 indexUnit++;
             }
-
-            //foreach (var unitRenderer in placement.placement) unitRenderer.SetUnitSettings(fogOfWar);
-            //ClearPositions();
         }
     }
 
@@ -284,10 +281,6 @@ public class AIPlacer : MonoBehaviour
                 Backtracking(k + 1, ref spawning);
             }
         }
-    }
-
-    public void SpawnCurrentSpawn()
-    {
     }
 
     private bool RandomSpawn(bool isRed)

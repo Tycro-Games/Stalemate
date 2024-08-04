@@ -46,14 +46,9 @@ public class UnitMover : MonoBehaviour
 
         }
 
-        List<UnitData> unitDatas = new List<UnitData>();
-        List<Sprite> unitSprites = new List<Sprite>();
-
         for (int i = 0; i < fin.Count; i++)
         {
             var unitData = fin[i].GetUnitSettings();
-            //unitDatas.Add(unitData);
-            //unitSprites.Add(unitData.spriteRenderer.sprite);
 
             spriteGameObject[i].SetActive(true);
             spriteGameObject[i].transform.position = init[i].transform.position;
@@ -91,17 +86,14 @@ public class UnitMover : MonoBehaviour
         currentTime += Time.deltaTime;
         return currentTime / maxAccelerationTime; //return values from 0 to 1
     }
-    private IEnumerator MoveToTarget(Transform toMoveTransoform, Transform target)
+    private IEnumerator MoveToTarget(Transform toMoveTransform, Transform target)
     {
         float currentTime = 0.0f;
         //this function just moves a thing from point A to B
-        var initialPosition = toMoveTransoform.position;
-        while (toMoveTransoform.position != target.position)
+        var initialPosition = toMoveTransform.position;
+        while (toMoveTransform.position != target.position)
         {
             var time = TimeManagement(ref currentTime);
-
-
-            //set
 
             var pos = Vector3.Lerp(initialPosition, target.position,
                 speedCurve.Evaluate(time)); //magic animation curve
@@ -110,8 +102,7 @@ public class UnitMover : MonoBehaviour
             var deviationLen = Mathf.Lerp(0.0f, deviationMax, deviationCurve.Evaluate(time));
             var deviation = deviationAxis * deviationLen;
             // Visualize the path using Gizmos.DrawLine
-            //Debug.Log(deviation);
-            toMoveTransoform.position = pos + deviation;
+            toMoveTransform.position = pos + deviation;
             if (time >= 1.0f)
                 break;
             yield return null;

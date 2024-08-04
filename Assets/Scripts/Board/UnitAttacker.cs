@@ -23,9 +23,6 @@ public class UnitAttacker : MonoBehaviour
     private void Start()
     {
 
-
-        //spriteGameObject.Add(Instantiate(emptyAttackEffect, transform));
-
     }
     public IEnumerator AttackUnits(List<Tuple<Vector2, AttackTypes>> attackPositions, bool isRed)
     {
@@ -73,11 +70,9 @@ public class UnitAttacker : MonoBehaviour
         attackPositions = attackPositions.GroupBy(x => new { x.Item1, x.Item2 })
             .Select(x => x.First())
             .ToList();
-        for (int i = 0; i < attackPositions.Count; i++)
+        foreach (var attackPosition in attackPositions)
         {
-            //add based on type
-
-            GameObject exp = Instantiate(previewAttack, attackPositions[i].Item1, Quaternion.identity, transform);
+            GameObject exp = Instantiate(previewAttack, attackPosition.Item1, Quaternion.identity, transform);
             previewAttacks.Add(exp);
         }
         yield return null;

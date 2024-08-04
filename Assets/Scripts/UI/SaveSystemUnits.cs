@@ -37,8 +37,7 @@ public class SaveSystemUnits : MonoBehaviour
         allUnits = GetAllUnitSettings();
         allUnits.Remove(fogOfWar);
         onStart?.Invoke();
-        //load stuff
-        //load winner
+
     }
 
     public void SerializeWinner()

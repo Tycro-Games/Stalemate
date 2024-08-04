@@ -9,7 +9,7 @@ public class Peak : MonoBehaviour
 {
     private List<UnitRenderer> red;
     private List<UnitRenderer> blue;
-    private List<UnitData> previosBoard;
+    private List<UnitData> previousBoard;
     private List<UnitRenderer> currentBoard;
 
     private Board board;
@@ -28,8 +28,8 @@ public class Peak : MonoBehaviour
     public void GetCurrentPieces()
     {
         currentBoard = board.pieces;
-        previosBoard = new List<UnitData>();
-        foreach (var unit in currentBoard) previosBoard.Add(unit.Clone());
+        previousBoard = new List<UnitData>();
+        foreach (var unit in currentBoard) previousBoard.Add(unit.Clone());
         red = Board.GetAllPieces(SquareType.RED, ref currentBoard);
         blue = Board.GetAllPieces(SquareType.BLUE, ref currentBoard);
     }
@@ -59,8 +59,8 @@ public class Peak : MonoBehaviour
 
     public void GoBack()
     {
-        for (var i = 0; i < previosBoard.Count; i++)
-            board.pieces[i].SetUnitData(previosBoard[i]);
+        for (var i = 0; i < previousBoard.Count; i++)
+            board.pieces[i].SetUnitData(previousBoard[i]);
         unitManager.ResetRedBlueUnitLists();
         unitAttacker.DeleteAllPreviews();
     }

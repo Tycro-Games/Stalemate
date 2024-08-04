@@ -4,8 +4,7 @@ using UnityEngine.Events;
 
 public class Timeline : MonoBehaviour
 {
-    private List<UnitRenderer> red;
-    private List<UnitRenderer> blue;
+
     private List<List<UnitData>> previosBoard = new();
     private List<UnitRenderer> currentBoard;
 
@@ -33,8 +32,7 @@ public class Timeline : MonoBehaviour
         var prevBoard = new List<UnitData>();
         foreach (var unit in currentBoard) prevBoard.Add(unit.Clone());
         previosBoard.Add(prevBoard);
-        red = Board.GetAllPieces(SquareType.RED, ref currentBoard);
-        blue = Board.GetAllPieces(SquareType.BLUE, ref currentBoard);
+
     }
 
     public void StepAhead()

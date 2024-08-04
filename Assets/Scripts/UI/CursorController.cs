@@ -68,16 +68,6 @@ namespace Bogadanul.Assets.Scripts.Utility
             InputState.Change(virtualMouse.position, newPosition);
             InputState.Change(virtualMouse.delta, deltaValue);
 
-            //bool aButtonIsPressed = Gamepad.current.aButton.IsPressed();
-            //if (previousMouseState != aButtonIsPressed)
-            //{
-            //    virtualMouse.CopyState<MouseState>(out var mouseState);
-            //    mouseState.WithButton(MouseButton.Left, aButtonIsPressed);
-            //    InputState.Change(virtualMouse, mouseState);
-            //    previousMouseState = aButtonIsPressed;
-            //}
-
-            AnchorCursor(newPosition);
         }
 
         private string previosScheme = "";
@@ -100,11 +90,7 @@ namespace Bogadanul.Assets.Scripts.Utility
                 previosScheme = gamepadScheme;
             }
         }
-        private void AnchorCursor(Vector2 position)
-        {
-            //lastPos = mainCam.ScreenToWorldPoint(position);
-            //OnMovement?.Invoke(position);
-        }
+        
         public void MousePosition(InputAction.CallbackContext context)
         {
             if (mainCam == null)

@@ -79,9 +79,6 @@ public class Board : MonoBehaviour
             return;
         DeleteBoard();
 
-        var squareShader = Shader.Find("Unlit/Color");
-        var squareRenderers = new MeshRenderer[sizeX, sizeY];
-        //var squarePieceRenderers = new SpriteRenderer[sizeX, sizeY];
         squares = new List<GameObject>(sizeX * sizeY);
         pieces = new List<UnitRenderer>(sizeX * sizeY);
         for (var y = 0; y < sizeY; y++)
@@ -153,14 +150,7 @@ public class Board : MonoBehaviour
                             break;
                     }
                 }
-                //var squareMaterial = ResetSquareColours(squareShader, index);
-                //squareRenderers[x, y] = square.gameObject.GetComponent<MeshRenderer>();
-                //squareRenderers[x, y].material = squareMaterial;
-                //// Create piece sprite renderer for current square
-                //var pieceRenderer = new GameObject("Piece").AddComponent<SpriteRenderer>();
-                //pieceRenderer.transform.parent = square;
-                //pieceRenderer.transform.position = square.position;
-                //squarePieceRenderers[x, y] = pieceRenderer;
+
             }
 
         //add the text script for win conditions here
@@ -221,7 +211,7 @@ public class Board : MonoBehaviour
     {
         if (type == SquareType.RED)
             return pieces.TakeLast(sizeX).Where(x => x.GetUnitSettings().unitSettings == null).ToArray();
-        else if (type == SquareType.BLUE)
+        if (type == SquareType.BLUE)
             return pieces.Take(sizeX).Where(x => x.GetUnitSettings().unitSettings == null).ToArray();
         Debug.Assert(false, "Invalid square type");
         return null;
@@ -230,7 +220,7 @@ public class Board : MonoBehaviour
     {
         if (type == SquareType.RED)
             return pieces.TakeLast(sizeX).ToArray();
-        else if (type == SquareType.BLUE)
+        if (type == SquareType.BLUE)
             return pieces.Take(sizeX).ToArray();
         Debug.Assert(false, "Invalid square type");
         return null;

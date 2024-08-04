@@ -98,7 +98,6 @@ public class UnitRenderer : MonoBehaviour
         spriteRenderer.material = new Material(Resources.Load<Material>("Materials/UnitMaterial"));
         spriteRenderer.material.SetFloat("_Opacity", alpha);
     }
-    //only changes the material instance color
   
     public void Draw()
     {
@@ -114,10 +113,6 @@ public class UnitRenderer : MonoBehaviour
         spriteRenderer.material.SetFloat("_IsRed", unitSettings.isRed ? 1.0f : 0.0f);
                 spriteRenderer.material.SetFloat("_IsFlipped", unitSettings.unitSettings.flip ? 1.0f : 0.0f);
 
-        //spriteRenderer.material.SetFloat("_Opacity", alpha);
-        //var color = unitSettings.color;
-        //spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
-        //spriteRenderer.flipY = unitSettings.flipY;
     }
 
     public void SetUnitData(UnitData unitData)

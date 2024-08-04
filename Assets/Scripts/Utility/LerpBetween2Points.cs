@@ -18,7 +18,6 @@ namespace Utility
         [SerializeField] private float speed = 2.0f;
 
         private bool AtB = true;
-        private bool move = false;
 
 
         private void OnEnable()

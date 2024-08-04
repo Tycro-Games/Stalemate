@@ -5,16 +5,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Ref<T>
-{
-    private T backing;
-    public T Value { get { return backing; } }
-    public Ref(T reference)
-    {
-        backing = reference;
-    }
-}
-
 [RequireComponent(typeof(UnitMover))]
 [RequireComponent(typeof(UnitAttacker))]
 public class UnitManager : MonoBehaviour
