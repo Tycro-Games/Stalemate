@@ -20,7 +20,7 @@ public class UnitMover : MonoBehaviour
     private int countDone = 0;
     private void Start()
     {
-        GameObject sprite = new GameObject();
+        GameObject sprite = new GameObject("Sprite");
         sprite.AddComponent<SpriteRenderer>();
         sprite.AddComponent<UnitRenderer>();
         sprite.transform.localScale = Vector3.one * 5;
@@ -29,6 +29,7 @@ public class UnitMover : MonoBehaviour
         {
             spriteGameObject.Add(Instantiate(sprite, transform));
         }
+        Destroy(sprite);
     }
     public IEnumerator MoveUnits(List<UnitRenderer> init, List<UnitRenderer> fin)
     {
