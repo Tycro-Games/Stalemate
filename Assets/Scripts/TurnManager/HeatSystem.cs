@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using Assets.Scripts.Utility;
 using UnityEngine;
 using UnityEngine.Events;
-
 public class HeatSystem : MonoBehaviour
 {
     [SerializeField] private int redHeat;
     [SerializeField] private int blueHeat;
+    [SerializeField] private int decreaseAmount = 2;
     [SerializeField] private int maxHeat = 3;
+
     [SerializeField] private int minHeat = 0;
 
 
@@ -20,62 +21,65 @@ public class HeatSystem : MonoBehaviour
     [SerializeField] private UnityEvent onMaxHeat;
     [SerializeField] private UnityEvent onNoMaxHeat;
 
-    public void ResetValuesToZero()
+    public void DecreaseRedBlue()
     {
-        ResetBlueToZero();
-        ResetRedToZero();
+        DecreaseBlue();
+        DecreaseRed();
     }
 
-    public void ResetRedToZero()
+    public void DecreaseRed()
     {
-        redHeat = minHeat;
+        redHeat -= decreaseAmount;
+        if (redHeat < minHeat)
+            redHeat = minHeat; ;
     }
-    public void ResetBlueToZero()
+    public void DecreaseBlue()
     {
-        blueHeat = minHeat;
+        blueHeat -= decreaseAmount;
+        if (blueHeat < minHeat)
+            blueHeat = minHeat;
     }
 
     public void IncreaseHeatRed()
     {
         redHeat++;
-        if (redHeat >= maxHeat)
-        {
-            onMaxHeat?.Invoke();
-        }
-        else
-        {
-            onNoMaxHeat?.Invoke();
-        }
+        onRedIncrement?.Invoke();
+        onBlueReset?.Invoke();
+
     }
     public void IncreaseHeatBlue()
     {
         blueHeat++;
-        if (blueHeat >= maxHeat)
-        {
-            onMaxHeat?.Invoke();
-        }
-        else
-        {
-            onNoMaxHeat?.Invoke();
+        onBlueIncrement?.Invoke();
+        onRedReset?.Invoke();
 
-        }
+    }
+
+    public void IncreaseHeat(string side)
+    {
+        IncrementHeat(side.Equals("Red"));
     }
     public void IncrementHeat(bool isRed)
     {
         if (isRed)
         {
-            onRedIncrement?.Invoke();
-            onBlueReset?.Invoke();
+            IncreaseHeatRed();
         }
         else
         {
-            onBlueIncrement?.Invoke();
-            onRedReset?.Invoke();
+            IncreaseHeatBlue();
         }
     }
 
     public void TriggerNationChoice()
     {
+        onNoMaxHeat?.Invoke();
 
+        if (redHeat >= maxHeat || blueHeat >= maxHeat)
+        {
+            onMaxHeat?.Invoke();
+            Debug.Log("Full heat");
+        }
+        
     }
 }
