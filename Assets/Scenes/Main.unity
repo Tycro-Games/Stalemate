@@ -15032,6 +15032,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1921679246}
   - component: {fileID: 1921679245}
+  - component: {fileID: 1921679248}
   - component: {fileID: 1921679247}
   m_Layer: 0
   m_Name: TurnManager
@@ -15053,7 +15054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingTurn: 0
-  startingPoints: 6
+  startingPoints: 0
   endTurn: 7
   onWin:
     m_PersistentCalls:
@@ -15346,6 +15347,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1921679248}
+        m_TargetAssemblyTypeName: HeatSystem, Assembly-CSharp
+        m_MethodName: IncreaseHeatRed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onSwitchPriorityToBlue:
     m_PersistentCalls:
       m_Calls:
@@ -15365,6 +15378,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1921679248}
+        m_TargetAssemblyTypeName: HeatSystem, Assembly-CSharp
+        m_MethodName: IncreaseHeatBlue
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15416,6 +15441,112 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1921679248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921679244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3cba114bdb2b604fb13899101c8b72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redHeat: 0
+  blueHeat: 0
+  maxHeat: 3
+  minHeat: 0
+  onRedIncrement:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1921679248}
+        m_TargetAssemblyTypeName: HeatSystem, Assembly-CSharp
+        m_MethodName: IncreaseHeatRed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onBlueIncrement:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1921679248}
+        m_TargetAssemblyTypeName: HeatSystem, Assembly-CSharp
+        m_MethodName: IncreaseHeatBlue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onRedReset:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1921679248}
+        m_TargetAssemblyTypeName: HeatSystem, Assembly-CSharp
+        m_MethodName: ResetRedToZero
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onBlueReset:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1921679248}
+        m_TargetAssemblyTypeName: HeatSystem, Assembly-CSharp
+        m_MethodName: ResetBlueToZero
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onMaxHeat:
+    m_PersistentCalls:
+      m_Calls: []
+  onNoMaxHeat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 616064322}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 638345789}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &1931520217
 GameObject:
@@ -16767,22 +16898,10 @@ MonoBehaviour:
     OnStart:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 616064322}
-          m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-          m_MethodName: set_interactable
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 638345789}
-          m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-          m_MethodName: set_interactable
-          m_Mode: 6
+        - m_Target: {fileID: 1921679248}
+          m_TargetAssemblyTypeName: HeatSystem, Assembly-CSharp
+          m_MethodName: TriggerNationChoice
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
