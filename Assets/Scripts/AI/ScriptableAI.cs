@@ -31,10 +31,13 @@ public struct AIPointSystem
     [Range(-100, 100)] public int alliedWin;
     [Range(-100, 100)] public int enemyWin;
 
+    [Range(0, 100)] public int topScoresToBeUsed;
 
-    public AIPointSystem(int defaultAlliedUnits , int defaultEnemyUnits ,
-        int defaultAlliedUnitsOverLine, int defaultEnemyUnitsOverLine ,
-        int defaultAlliedWin, int defaultEnemyWin)
+
+
+    public AIPointSystem(int defaultAlliedUnits, int defaultEnemyUnits,
+        int defaultAlliedUnitsOverLine, int defaultEnemyUnitsOverLine,
+        int defaultAlliedWin, int defaultEnemyWin, int defaultTopScores)
     {
         alliedUnits = defaultAlliedUnits;
         enemyUnits = defaultEnemyUnits;
@@ -42,6 +45,7 @@ public struct AIPointSystem
         enemyUnitsOverLine = defaultEnemyUnitsOverLine;
         alliedWin = defaultAlliedWin;
         enemyWin = defaultEnemyWin;
+        topScoresToBeUsed = defaultTopScores;
     }
 }
 

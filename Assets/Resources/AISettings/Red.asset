@@ -20,3 +20,4 @@ MonoBehaviour:
     enemyUnitsOverLine: 0
     alliedWin: 100
     enemyWin: 0
+    topScoresToBeUsed: 10

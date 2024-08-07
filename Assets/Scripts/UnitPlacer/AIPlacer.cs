@@ -176,14 +176,19 @@ public class AIPlacer : MonoBehaviour
 
     public void ChooseMaximalSpawning(ref int index)
     {
+        var scriptableSettings = RedBlueTurn.IsPlayerFirst() ? redAI : blueAI;
+
+        int topScores = scriptableSettings.pointSystem.topScoresToBeUsed;
         index = -1;
         // Assuming spawnsScore is sorted and validSpawns is aligned with it
-        var highestScore = spawnsScore.First().Item2; // Get the highest score
+        var highestScore = spawnsScore.First().Item2 - topScores; // Get the highest score and substract the first ones
+        if (highestScore < 0)
+            highestScore = 0;
 
         var highestScoreIndices = new List<int>();
 
         for (var i = 0; i < spawnsScore.Count; i++)
-            if (spawnsScore[i].Item2 == highestScore)
+            if (spawnsScore[i].Item2 >= highestScore)
                 highestScoreIndices.Add(i); // Add index to list
             else
                 break; // Since spawnsScore is sorted, no need to check further once a lower score is found
@@ -529,7 +534,7 @@ public class AIPlacer : MonoBehaviour
                 //Debug.Log($"Red wins! Subtracting {pointSystem.enemyWin} from score.");
             }
 
-            //Debug.Log($"Final Board Score: {score}");
+            Debug.Log($"Final Board Score: {score}");
         }
 
         onRate?.Invoke(score.ToString());
