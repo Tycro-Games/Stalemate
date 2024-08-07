@@ -176,14 +176,13 @@ public class AIPlacer : MonoBehaviour
 
     public void ChooseMaximalSpawning(ref int index)
     {
-        var scriptableSettings = RedBlueTurn.IsPlayerFirst() ? redAI : blueAI;
+        var scriptableSettings = !RedBlueTurn.IsPlayerFirst() ? redAI : blueAI;
 
         int topScores = scriptableSettings.pointSystem.topScoresToBeUsed;
         index = -1;
         // Assuming spawnsScore is sorted and validSpawns is aligned with it
         var highestScore = spawnsScore.First().Item2 - topScores; // Get the highest score and substract the first ones
-        if (highestScore < 0)
-            highestScore = 0;
+
 
         var highestScoreIndices = new List<int>();
 
