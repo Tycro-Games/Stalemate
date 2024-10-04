@@ -22,7 +22,7 @@ public class HoverMover : MonoBehaviour
         }
 
         Vector3 newPos = new Vector3(Mathf.RoundToInt(Mathf.Clamp(pos.x, minLimits.x, maxLimits.x)),
-            Mathf.RoundToInt(Mathf.Clamp(pos.y, minLimits.y, maxLimits.y)), 0);
+            Mathf.RoundToInt(Mathf.Clamp(pos.y, minLimits.y, maxLimits.y)), 0.0f);
         if (needsSound)
         {
             needsSound = false;
