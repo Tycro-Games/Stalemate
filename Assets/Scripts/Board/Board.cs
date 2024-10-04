@@ -69,6 +69,10 @@ public class Board : MonoBehaviour
     shouldUpdate = true;
   }
 
+  void Awake() {
+    sizeX = startingSizeX;
+    sizeY = startingSizeY;
+  }
   private void CreateBoard() {
     sizeX = startingSizeX;
     sizeY = startingSizeY;
@@ -132,18 +136,11 @@ public class Board : MonoBehaviour
           spriteRenderer.transform.localPosition = new Vector2(0.0f, 0.0f);
           spriteRenderer.transform.localRotation = Quaternion.identity;
           spriteRenderer.sprite = spritesOrder[y];
-          switch (y) {
-            // blue
-            case 0:
-              spriteRenderer.name = "Blue";
-              break;
-            // red
-            case 4:
-              spriteRenderer.name = "Red";
+          if (y == 0) {
+            spriteRenderer.name = "Blue";
 
-              break;
-            default:
-              break;
+          } else if (y == startingSizeY - 1) {
+            spriteRenderer.name = "Red";
           }
         }
       }
@@ -172,9 +169,9 @@ public class Board : MonoBehaviour
       return null;  // Piece not found
     // at the edges
 
-    if (index % sizeX == 3 && inFront.x == 1)
+    if (index % sizeX == sizeX - 1 && inFront.x == 1)  // Right edge
       return null;
-    if (index % sizeX == 0 && inFront.x == -1)
+    if (index % sizeX == 0 && inFront.x == -1)  // Left edge
       return null;
     var newIndex = index + inFront.x + inFront.y * sizeX;
 

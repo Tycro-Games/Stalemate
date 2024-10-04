@@ -13,7 +13,7 @@ public class SimpleFollow: MonoBehaviour
         transform.position = pos;
     }
 
-   
+    
    
     private void OnDrawGizmosSelected()
     {
