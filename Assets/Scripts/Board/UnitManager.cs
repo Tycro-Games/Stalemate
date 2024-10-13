@@ -7,403 +7,344 @@ using UnityEngine.Events;
 
 [RequireComponent(typeof(UnitMover))]
 [RequireComponent(typeof(UnitAttacker))]
-public class UnitManager : MonoBehaviour
-{
-    private List<UnitRenderer> redUnits = new();
-    private List<UnitRenderer> blueUnits = new();
-    [SerializeField] private float timeBeforeMove = 1.0f;
-    [SerializeField] private float timeAfterMove = 1.0f;
-    [SerializeField] private UnityEvent onMoveEnd;
-    [SerializeField] private UnityEvent onAttackEnd;
-    [SerializeField] private UnityEvent onBoostEnd;
-    private Board board;
-    private UnitMover mover;
-    private UnitAttacker attacker;
+public class UnitManager : MonoBehaviour {
+  private List<UnitRenderer> redUnits = new();
+  private List<UnitRenderer> blueUnits = new();
+  [SerializeField]
+  private float timeBeforeMove = 1.0f;
+  [SerializeField]
+  private float timeAfterMove = 1.0f;
+  [SerializeField]
+  private UnityEvent onMoveEnd;
+  [SerializeField]
+  private UnityEvent onAttackEnd;
+  [SerializeField]
+  private UnityEvent onBoostEnd;
+  private Board board;
+  private UnitMover mover;
+  private UnitAttacker attacker;
 
-    private bool isPlayerTurn = true;
+  private bool isPlayerTurn = true;
 
-    public static Action onUnitManipulation;
-    public static Action<int, int> onWinConditionChange;
+  public static Action onUnitManipulation;
+  public static Action<int, int> onWinConditionChange;
 
-    [HideInInspector] public List<Transform> positions;
-    private int redUnitsOnY = 0;
-    private int blueUnitsOnY = 0;
-    private bool hasMovedPriorityNation = false;
+  [HideInInspector]
+  public List<Transform> positions;
+  private int redUnitsOnY = 0;
+  private int blueUnitsOnY = 0;
+  private bool hasMovedPriorityNation = false;
 
-    //auxialiary lists for feedback systems
-    private List<UnitRenderer> initialUnitSpace = new();
-    private List<UnitRenderer> finalUnitSpace = new();
+  // auxialiary lists for feedback systems
+  private List<UnitRenderer> initialUnitSpace = new();
+  private List<UnitRenderer> finalUnitSpace = new();
 
-    private List<Tuple<Vector2, AttackTypes>> attackPositions;
-    private List<UnitRenderer> piecesToBoost;
+  private List<Tuple<Vector2, AttackTypes>> attackPositions;
+  private List<UnitRenderer> piecesToBoost;
 
-    public void SetCurrentSide(bool playerTurn)
-    {
-        if (hasMovedPriorityNation)
-        {
-            hasMovedPriorityNation = false;
-            isPlayerTurn = !RedBlueTurn.IsRedFirst();
+  public void SetCurrentSide(bool playerTurn) {
+    if (hasMovedPriorityNation) {
+      hasMovedPriorityNation = false;
+      isPlayerTurn = !RedBlueTurn.IsRedFirst();
 
+    } else {
+      hasMovedPriorityNation = true;
+      isPlayerTurn = RedBlueTurn.IsRedFirst();
+    }
+  }
+
+  public void UpdateWinningCounts() {
+    redUnitsOnY = 0;
+    blueUnitsOnY = 0;
+    var middleLineXs = new List<int>();
+    var middleLineYs = new List<float>();
+    foreach (var position in positions) {
+      middleLineXs.Add((int)position.transform.position.x);
+      middleLineYs.Add(position.transform.position.y);
+    }
+    var redUnitXs = new List<int>();
+    var redUnitYs = new List<int>();
+    foreach (var redUnit in redUnits) {
+      redUnitXs.Add((int)redUnit.transform.position.x);
+      redUnitYs.Add((int)redUnit.transform.position.y);
+    }
+
+    var blueUnitXs = new List<int>();
+    var blueUnitYs = new List<int>();
+    foreach (var blueUnit in blueUnits) {
+      blueUnitXs.Add((int)blueUnit.transform.position.x);
+      blueUnitYs.Add((int)blueUnit.transform.position.y);
+    }
+    for (int i = 0; i < middleLineXs.Count; i++) {
+      int middleLineX = middleLineXs[i];
+      float middleLineY = middleLineYs[i];
+
+      // Count red units on Y axis
+      for (int j = 0; j < redUnitXs.Count; j++) {
+        if (redUnitXs[j] == middleLineX && redUnitYs[j] <= middleLineY) {
+          redUnitsOnY++;
         }
-        else
-        {
-            hasMovedPriorityNation = true;
-            isPlayerTurn = RedBlueTurn.IsRedFirst();
+      }
+
+      // Count blue units on Y axis
+      for (int j = 0; j < blueUnitXs.Count; j++) {
+        if (blueUnitXs[j] == middleLineX && blueUnitYs[j] >= middleLineY) {
+          blueUnitsOnY++;
         }
-
-
+      }
     }
 
-    public void UpdateWinningCounts()
-    {
-        redUnitsOnY = 0;
-        blueUnitsOnY = 0;
-        var middleLineXs = new List<int>();
-        var middleLineYs = new List<float>();
-        foreach (var position in positions)
-        {
-            middleLineXs.Add((int)position.transform.position.x);
-            middleLineYs.Add(position.transform.position.y);
+    onWinConditionChange?.Invoke(redUnitsOnY, blueUnitsOnY);
+  }
+
+  public List<UnitRenderer> GetRedUnits() {
+    return redUnits;
+  }
+
+  public List<UnitRenderer> GetBlueUnits() {
+    return blueUnits;
+  }
+
+  private void Start() {
+    board = GetComponent<Board>();
+    mover = GetComponent<UnitMover>();
+    attacker = GetComponent<UnitAttacker>();
+  }
+
+  public void ResetRedBlueUnitLists() {
+    redUnits = Board.GetAllPieces(SquareType.RED, ref board.pieces);
+    blueUnits = Board.GetAllPieces(SquareType.BLUE, ref board.pieces);
+    UpdateWinningCounts();
+  }
+
+  public void MoveCurrentSide() {
+    StartCoroutine(Movement(isPlayerTurn));
+  }
+
+  public void AttackCurrentSide() {
+    StartCoroutine(Attack(isPlayerTurn));
+  }
+
+  public void BoostCurrentSide() {
+    StartCoroutine(Boost(isPlayerTurn));
+  }
+
+  private IEnumerator Movement(bool isRed) {
+    yield return new WaitForSeconds(timeBeforeMove);
+    if (isRed)
+      MoveUnits(ref redUnits);
+    else
+      MoveUnits(ref blueUnits);
+
+    yield return StartCoroutine(MovementFeedback());
+
+    yield return new WaitForSeconds(timeAfterMove);
+
+    onMoveEnd?.Invoke();
+    onUnitManipulation?.Invoke();
+    UpdateWinningCounts();
+  }
+
+  private IEnumerator MovementFeedback() {
+    yield return StartCoroutine(mover.MoveUnits(initialUnitSpace, finalUnitSpace));
+    initialUnitSpace.Clear();
+    finalUnitSpace.Clear();
+  }
+  private IEnumerator AttackFeedback(bool isRed) {
+    yield return StartCoroutine(attacker.AttackUnits(attackPositions, isRed));
+    attackPositions.Clear();
+  }
+
+  private IEnumerator Boost(bool isRed) {
+    yield return new WaitForSeconds(timeBeforeMove);
+    if (isRed) {
+      BoostUnits(ref redUnits);
+
+    } else {
+      BoostUnits(ref blueUnits);
+    }
+
+    yield return StartCoroutine(MovementFeedback());
+    yield return StartCoroutine(AttackFeedback(isRed));
+
+    if (piecesToBoost.Count > 0)
+      AudioManager.instance.PlayOneShot(AudioManager.instance.boostSound);
+
+    yield return new WaitForSeconds(timeAfterMove);
+    onBoostEnd?.Invoke();
+    onUnitManipulation?.Invoke();
+    UpdateWinningCounts();
+  }
+
+  private IEnumerator Attack(bool isRed) {
+    yield return new WaitForSeconds(timeBeforeMove);
+    if (isRed) {
+      AttackUnits(ref redUnits);
+      CleanNullEnemies(ref blueUnits);
+    } else {
+      AttackUnits(ref blueUnits);
+      CleanNullEnemies(ref redUnits);
+    }
+    yield return StartCoroutine(AttackFeedback(isRed));
+
+    yield return new WaitForSeconds(timeAfterMove);
+    onAttackEnd?.Invoke();
+    onUnitManipulation?.Invoke();
+    UpdateWinningCounts();
+  }
+
+  public void CleanNullEnemies(ref List<UnitRenderer> units) {
+    for (var i = units.Count - 1; i >= 0; i--)
+      if (units[i].GetUnitSettings().unitSettings == null)
+        units.RemoveAt(i);
+  }
+
+  public void GetAttackingSquares(out List<Tuple<Vector2, AttackTypes>> attackingPos) {
+    attackingPos = attackPositions;
+  }
+  public void GetInitialMovementSquares(out List<UnitRenderer> movePos) {
+    movePos = initialUnitSpace;
+  }
+  public void GetFinalMovementSquares(out List<UnitRenderer> movePos) {
+    movePos = finalUnitSpace;
+  }
+  public void MoveUnits(ref List<UnitRenderer> units) {
+    if (units.Count == 0)
+      return;
+    initialUnitSpace = new List<UnitRenderer>(new UnitRenderer[units.Count]);
+    finalUnitSpace = new List<UnitRenderer>(new UnitRenderer[units.Count]);
+
+    SortUnits(ref units);
+    for (var i = 0; i < units.Count; i++) {
+      var settings = units[i].GetUnitSettings();
+      var sign = settings.isRed ? 1 : -1;
+
+      if (initialUnitSpace[i] == null)
+        initialUnitSpace[i] = units[i];
+      // get settings
+      for (var j = 0; j < settings.unitSettings.movePositions.Length; j++) {
+        UnitRenderer newSquare = Board.PieceInFrontWithPadding(
+            units[i], settings.unitSettings.movePositions[j] * sign, ref board.pieces);
+        if (newSquare == null)
+          continue;
+
+        if (newSquare.GetUnitSettings().unitSettings != null)
+          continue;
+        newSquare.SetUnitSettings(settings);
+
+        finalUnitSpace[i] = newSquare;
+
+        units[i].SetUnitSettings(new UnitBoardInfo());
+
+        units[i] = newSquare;
+      }
+    }
+  }
+
+  private static void SortUnits(ref List<UnitRenderer> units) {
+    var decreasingSortOrder = !units[0].GetUnitSettings().isRed;
+    if (decreasingSortOrder)
+      units.Sort((a, b) => b.transform.position.y.CompareTo(a.transform.position.y));
+    else
+      units.Sort((a, b) => a.transform.position.y.CompareTo(b.transform.position.y));
+  }
+
+  public void BoostUnits(ref List<UnitRenderer> units) {
+    if (units.Count == 0)
+      return;
+    SortUnits(ref units);
+    piecesToBoost = new List<UnitRenderer>();
+    for (var i = 0; i < units.Count; i++) {
+      var settings = units[i].GetUnitSettings();
+      if (!settings.unitSettings.boost)
+        continue;
+      var sign = settings.isRed ? 1 : -1;
+      // this should only be one
+      for (var j = 0; j < settings.unitSettings.boostPositions.Length; j++) {
+        var newSquare = Board.PieceInFront(units[i], settings.unitSettings.boostPositions[j] * sign,
+                                           ref board.pieces);
+        if (newSquare == null)
+          continue;
+
+        var attackedSquareSettings = newSquare.GetUnitSettings();
+        // move itself
+        if (attackedSquareSettings.unitSettings == null ||
+            attackedSquareSettings.isRed != settings.isRed) {
+          // Debug.Log("unit " + units[i].name + "boosted itself");
+
+          piecesToBoost.Add(units[i]);
         }
-        var redUnitXs = new List<int>();
-        var redUnitYs = new List<int>();
-        foreach (var redUnit in redUnits)
-        {
-            redUnitXs.Add((int)redUnit.transform.position.x);
-            redUnitYs.Add((int)redUnit.transform.position.y);
+        // boost what is in the boost positions
+        else {
+          // Debug.Log("unit " + units[i].name + "boosted" + newSquare.name);
+
+          piecesToBoost.Add(newSquare);
         }
-
-        var blueUnitXs = new List<int>();
-        var blueUnitYs = new List<int>();
-        foreach (var blueUnit in blueUnits)
-        {
-            blueUnitXs.Add((int)blueUnit.transform.position.x);
-            blueUnitYs.Add((int)blueUnit.transform.position.y);
-        }
-        for (int i = 0; i < middleLineXs.Count; i++)
-        {
-            int middleLineX = middleLineXs[i];
-            float middleLineY = middleLineYs[i];
-
-            // Count red units on Y axis
-            for (int j = 0; j < redUnitXs.Count; j++)
-            {
-                if (redUnitXs[j] == middleLineX && redUnitYs[j] <= middleLineY)
-                {
-                    redUnitsOnY++;
-                }
-            }
-
-            // Count blue units on Y axis
-            for (int j = 0; j < blueUnitXs.Count; j++)
-            {
-                if (blueUnitXs[j] == middleLineX && blueUnitYs[j] >= middleLineY)
-                {
-                    blueUnitsOnY++;
-                }
-            }
-        }
-
-        onWinConditionChange?.Invoke(redUnitsOnY, blueUnitsOnY);
-
-
+      }
     }
 
-    public List<UnitRenderer> GetRedUnits()
-    {
-        return redUnits;
-    }
+    if (piecesToBoost.Count == 0)
+      return;
+    piecesToBoost = piecesToBoost.Distinct().ToList();
+    var isRed = piecesToBoost[0].GetUnitSettings().isRed;
 
-    public List<UnitRenderer> GetBlueUnits()
-    {
-        return blueUnits;
-    }
+    MoveUnits(ref piecesToBoost);
+    AttackUnits(ref piecesToBoost);
 
-    private void Start()
-    {
-        board = GetComponent<Board>();
-        mover = GetComponent<UnitMover>();
-        attacker = GetComponent<UnitAttacker>();
-    }
+    CleanNullEnemies(ref redUnits);
+    CleanNullEnemies(ref blueUnits);
+    if (isRed)
+      redUnits.AddRange(piecesToBoost);
+    else
+      blueUnits.AddRange(piecesToBoost);
 
+    ResetRedBlueUnitLists();
+  }
 
-    public void ResetRedBlueUnitLists()
-    {
-        redUnits = Board.GetAllPieces(SquareType.RED, ref board.pieces);
-        blueUnits = Board.GetAllPieces(SquareType.BLUE, ref board.pieces);
-        UpdateWinningCounts();
-    }
+  public void AttackUnits(ref List<UnitRenderer> units) {
+    if (units.Count == 0)
+      return;
+    attackPositions = new List<Tuple<Vector2, AttackTypes>>();
+    SortUnits(ref units);
+    for (var i = 0; i < units.Count; i++) {
+      var settings = units[i].GetUnitSettings();
+      var sign = settings.isRed ? 1 : -1;
 
-    public void MoveCurrentSide()
-    {
+      for (var j = 0; j < settings.unitSettings.attackPositions.Length; j++) {
+        var newSquare = Board.PieceInFront(
+            units[i], settings.unitSettings.attackPositions[j] * sign, ref board.pieces);
+        // outside bounds
+        if (newSquare == null)
+          continue;
+        // Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);
 
-        StartCoroutine(Movement(isPlayerTurn));
+        var attackedSquareSettings = newSquare.GetUnitSettings();
 
+        if (attackedSquareSettings.unitSettings == null) {
+          attackPositions.Add(
+              Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.EMPTY_SPACE));
 
-    }
-
-    public void AttackCurrentSide()
-    {
-        StartCoroutine(Attack(isPlayerTurn));
-
-    }
-
-    public void BoostCurrentSide()
-    {
-        StartCoroutine(Boost(isPlayerTurn));
-
-    }
-
-
-
-    private IEnumerator Movement(bool isRed)
-    {
-        yield return new WaitForSeconds(timeBeforeMove);
-        if (isRed)
-            MoveUnits(ref redUnits);
-        else
-            MoveUnits(ref blueUnits);
-
-
-        yield return StartCoroutine(MovementFeedback());
-
-        yield return new WaitForSeconds(timeAfterMove);
-
-
-        onMoveEnd?.Invoke();
-        onUnitManipulation?.Invoke();
-        UpdateWinningCounts();
-    }
-
-    private IEnumerator MovementFeedback()
-    {
-        yield return StartCoroutine(mover.MoveUnits(initialUnitSpace, finalUnitSpace));
-        initialUnitSpace.Clear();
-        finalUnitSpace.Clear();
-    }
-    private IEnumerator AttackFeedback(bool isRed)
-    {
-        yield return StartCoroutine(attacker.AttackUnits(attackPositions, isRed));
-        attackPositions.Clear();
-
-    }
-
-    private IEnumerator Boost(bool isRed)
-    {
-        yield return new WaitForSeconds(timeBeforeMove);
-        if (isRed)
-        {
-            BoostUnits(ref redUnits);
-
-        }
-        else
-        {
-            BoostUnits(ref blueUnits);
-
-        }
-
-        yield return StartCoroutine(MovementFeedback());
-        yield return StartCoroutine(AttackFeedback(isRed));
-
-        if (piecesToBoost.Count > 0)
-            AudioManager.instance.PlayOneShot(AudioManager.instance.boostSound);
-
-        yield return new WaitForSeconds(timeAfterMove);
-        onBoostEnd?.Invoke();
-        onUnitManipulation?.Invoke();
-        UpdateWinningCounts();
-    }
-
-
-
-    private IEnumerator Attack(bool isRed)
-    {
-        yield return new WaitForSeconds(timeBeforeMove);
-        if (isRed)
-        {
-            AttackUnits(ref redUnits);
-            CleanNullEnemies(ref blueUnits);
-        }
-        else
-        {
-            AttackUnits(ref blueUnits);
-            CleanNullEnemies(ref redUnits);
-        }
-        yield return StartCoroutine(AttackFeedback(isRed));
-
-
-        yield return new WaitForSeconds(timeAfterMove);
-        onAttackEnd?.Invoke();
-        onUnitManipulation?.Invoke();
-        UpdateWinningCounts();
-    }
-
-    public void CleanNullEnemies(ref List<UnitRenderer> units)
-    {
-        for (var i = units.Count - 1; i >= 0; i--)
-            if (units[i].GetUnitSettings().unitSettings == null)
-                units.RemoveAt(i);
-    }
-
-    public void GetAttackingSquares(out List<Tuple<Vector2, AttackTypes>> attackingPos)
-    {
-        attackingPos = attackPositions;
-    }
-    public void MoveUnits(ref List<UnitRenderer> units)
-    {
-        if (units.Count == 0)
-            return;
-        initialUnitSpace = new List<UnitRenderer>(new UnitRenderer[units.Count]);
-        finalUnitSpace = new List<UnitRenderer>(new UnitRenderer[units.Count]);
-
-        SortUnits(ref units);
-        for (var i = 0; i < units.Count; i++)
-        {
-            var settings = units[i].GetUnitSettings();
-            var sign = settings.isRed ? 1 : -1;
-
-            if (initialUnitSpace[i] == null)
-                initialUnitSpace[i] = units[i];
-            //get settings
-            for (var j = 0; j < settings.unitSettings.movePositions.Length; j++)
-            {
-                UnitRenderer newSquare = Board.PieceInFrontWithPadding(units[i], settings.unitSettings.movePositions[j] * sign,
-                    ref board.pieces);
-                if (newSquare == null)
-                    continue;
-
-
-                if (newSquare.GetUnitSettings().unitSettings != null)
-                    continue;
-                newSquare.SetUnitSettings(settings);
-
-
-                finalUnitSpace[i] = newSquare;
-
-                units[i].SetUnitSettings(new UnitBoardInfo());
-
-                units[i] = newSquare;
-
-            }
-        }
-
-
-    }
-
-    private static void SortUnits(ref List<UnitRenderer> units)
-    {
-        var decreasingSortOrder = !units[0].GetUnitSettings().isRed;
-        if (decreasingSortOrder)
-            units.Sort((a, b) => b.transform.position.y.CompareTo(a.transform.position.y));
-        else
-            units.Sort((a, b) => a.transform.position.y.CompareTo(b.transform.position.y));
-    }
-
-    public void BoostUnits(ref List<UnitRenderer> units)
-    {
-        if (units.Count == 0)
-            return;
-        SortUnits(ref units);
-        piecesToBoost = new List<UnitRenderer>();
-        for (var i = 0; i < units.Count; i++)
-        {
-            var settings = units[i].GetUnitSettings();
-            if (!settings.unitSettings.boost)
-                continue;
-            var sign = settings.isRed ? 1 : -1;
-            //this should only be one
-            for (var j = 0; j < settings.unitSettings.boostPositions.Length; j++)
-            {
-                var newSquare = Board.PieceInFront(units[i], settings.unitSettings.boostPositions[j] * sign,
-                    ref board.pieces);
-                if (newSquare == null)
-                    continue;
-
-                var attackedSquareSettings = newSquare.GetUnitSettings();
-                //move itself
-                if (attackedSquareSettings.unitSettings == null || attackedSquareSettings.isRed != settings.isRed)
-                {
-                    //Debug.Log("unit " + units[i].name + "boosted itself");
-
-                    piecesToBoost.Add(units[i]);
-                }
-                //boost what is in the boost positions
-                else
-                {
-                    //Debug.Log("unit " + units[i].name + "boosted" + newSquare.name);
-
-                    piecesToBoost.Add(newSquare);
-                }
-            }
+          continue;
         }
 
-        if (piecesToBoost.Count == 0)
-            return;
-        piecesToBoost = piecesToBoost.Distinct().ToList();
-        var isRed = piecesToBoost[0].GetUnitSettings().isRed;
+        if (!attackedSquareSettings.isKillable)
+          continue;
+        if (attackedSquareSettings.isRed == settings.isRed)
+          continue;
 
+        // check health of the unit
 
-        MoveUnits(ref piecesToBoost);
-        AttackUnits(ref piecesToBoost);
+        // if health is 0, remove the unit
+        if (newSquare.TryToKill()) {
+          attackPositions.Add(
+              Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.DESTROY_UNIT));
 
-        CleanNullEnemies(ref redUnits);
-        CleanNullEnemies(ref blueUnits);
-        if (isRed)
-            redUnits.AddRange(piecesToBoost);
-        else
-            blueUnits.AddRange(piecesToBoost);
-
-        ResetRedBlueUnitLists();
-    }
-
-    public void AttackUnits(ref List<UnitRenderer> units)
-    {
-        if (units.Count == 0)
-            return;
-        attackPositions = new List<Tuple<Vector2, AttackTypes>>();
-        SortUnits(ref units);
-        for (var i = 0; i < units.Count; i++)
-        {
-            var settings = units[i].GetUnitSettings();
-            var sign = settings.isRed ? 1 : -1;
-
-            for (var j = 0; j < settings.unitSettings.attackPositions.Length; j++)
-            {
-                var newSquare = Board.PieceInFront(units[i], settings.unitSettings.attackPositions[j] * sign,
-                    ref board.pieces);
-                //outside bounds
-                if (newSquare == null) continue;
-                //Debug.Log("unit " + units[i].name + " attacked:" + newSquare.name);
-
-                var attackedSquareSettings = newSquare.GetUnitSettings();
-
-                if (attackedSquareSettings.unitSettings == null)
-                {
-                    attackPositions.Add(Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.EMPTY_SPACE));
-
-                    continue;
-                }
-
-                if (!attackedSquareSettings.isKillable)
-                    continue;
-                if (attackedSquareSettings.isRed == settings.isRed)
-                    continue;
-
-                //check health of the unit
-
-                //if health is 0, remove the unit
-                if (newSquare.TryToKill())
-                {
-                    attackPositions.Add(Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.DESTROY_UNIT));
-
-                    newSquare.SetUnitSettings(new UnitBoardInfo());
-                }
-                else
-                {
-                    attackPositions.Add(Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.HIT_UNIT));
-
-                }
-            }
+          newSquare.SetUnitSettings(new UnitBoardInfo());
+        } else {
+          attackPositions.Add(
+              Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.HIT_UNIT));
         }
+      }
     }
+  }
 }

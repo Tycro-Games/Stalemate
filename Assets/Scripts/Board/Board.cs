@@ -181,6 +181,41 @@ public class Board : MonoBehaviour
 
     return null;
   }
+  public static List<UnitRenderer> GetUnitRenderersBetween(UnitRenderer initial, UnitRenderer final,
+                                                           ref List<UnitRenderer> pieces) {
+    List<UnitRenderer> result = new List<UnitRenderer>();
+
+    // Find indices of the initial and final UnitRenderer
+    int initialIndex = pieces.IndexOf(initial);
+    int finalIndex = pieces.IndexOf(final);
+
+    if (initialIndex == -1 || finalIndex == -1)
+      return result;  // Return empty if any piece is not found
+
+    // Ensure they are in the same X position
+    int initialX = initialIndex % sizeX;
+    int finalX = finalIndex % sizeX;
+    if (initialX != finalX)
+      return result;  // Pieces are not in the same column
+
+    // Get Y position difference
+    int initialY = initialIndex / sizeX;
+    int finalY = finalIndex / sizeX;
+
+    // Ensure initial is "above" final
+    if (initialY > finalY)
+      (initialY, finalY) = (finalY, initialY);  // Swap if necessary
+
+    // Collect all pieces between the initial and final Y positions
+    for (int y = initialY + 1; y < finalY; y++) {
+      int index = initialX + y * sizeX;
+      if (index >= 0 && index < pieces.Count) {
+        result.Add(pieces[index]);
+      }
+    }
+
+    return result;
+  }
 
   public static UnitRenderer PieceInFrontWithPadding(UnitRenderer piece, Vector2Int inFront,
                                                      ref List<UnitRenderer> pieces) {
