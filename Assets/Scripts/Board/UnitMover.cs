@@ -67,9 +67,9 @@ public class UnitMover : MonoBehaviour {
     }
     init.RemoveAll(item => item == null);
     fin.RemoveAll(item => item == null);
-    foreach (var unit in init) {
-      SpawnMovementSquare(unit, startingMovementSprite, sign);
-    }
+    // foreach (var unit in init) {
+    //   SpawnMovementSquare(unit, startingMovementSprite, sign);
+    // }
     foreach (var unit in fin) {
       SpawnMovementSquare(unit, endingMovementSprite, sign);
     }

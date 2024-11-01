@@ -327,8 +327,12 @@ public class UnitManager : MonoBehaviour {
           continue;
         }
 
-        if (!attackedSquareSettings.isKillable)
+        if (!attackedSquareSettings.isKillable) {
+          attackPositions.Add(
+              Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.HIT_UNIT));
           continue;
+        }
+
         if (attackedSquareSettings.isRed == settings.isRed)
           continue;
 
