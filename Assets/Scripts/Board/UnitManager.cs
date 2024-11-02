@@ -304,10 +304,12 @@ public class UnitManager : MonoBehaviour {
   public void AttackUnits(ref List<UnitRenderer> units) {
     if (units.Count == 0)
       return;
+
     attackPositions = new List<Tuple<Vector2, AttackTypes>>();
     SortUnits(ref units);
     for (var i = 0; i < units.Count; i++) {
       var settings = units[i].GetUnitSettings();
+
       var sign = settings.isRed ? 1 : -1;
 
       for (var j = 0; j < settings.unitSettings.attackPositions.Length; j++) {
@@ -327,7 +329,7 @@ public class UnitManager : MonoBehaviour {
           continue;
         }
 
-        if (!attackedSquareSettings.isKillable) {
+        if (attackedSquareSettings.isKillable == false) {
           attackPositions.Add(
               Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.HIT_UNIT));
           continue;

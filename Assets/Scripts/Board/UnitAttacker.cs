@@ -10,14 +10,14 @@ public enum AttackTypes { EMPTY_SPACE, DESTROY_UNIT, HIT_UNIT }
 public class UnitAttacker : MonoBehaviour {
   //[SerializeField] private AnimationCurve animationCurve;
   [SerializeField]
-  private GameObject emptyAttackEffect;
+  private GameObject emptyAttackEffect = null;
   [SerializeField]
-  private GameObject destroyUnitEffect;
+  private GameObject destroyUnitEffect = null;
   [SerializeField]
-  private GameObject hitUnitEffect;
+  private GameObject hitUnitEffect = null;
 
   [SerializeField]
-  private GameObject previewAttack;
+  private GameObject previewAttack = null;
   private List<GameObject> previewAttacks = new List<GameObject>();
 
   private void Start() {}
