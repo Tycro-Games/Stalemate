@@ -61,11 +61,10 @@ public class UnitAttacker : MonoBehaviour {
     attackPositions =
         attackPositions.GroupBy(x => new { x.Item1, x.Item2 }).Select(x => x.First()).ToList();
     foreach (var attackPosition in attackPositions) {
-      if (attackPosition.Item2 == AttackTypes.DESTROY_UNIT) {
-        GameObject exp =
-            Instantiate(previewAttack, attackPosition.Item1, Quaternion.identity, transform);
-        previewAttacks.Add(exp);
-      }
+      // if (attackPosition.Item2 == AttackTypes.DESTROY_UNIT) {
+      GameObject exp =
+          Instantiate(previewAttack, attackPosition.Item1, Quaternion.identity, transform);
+      previewAttacks.Add(exp);
     }
     yield return null;
   }

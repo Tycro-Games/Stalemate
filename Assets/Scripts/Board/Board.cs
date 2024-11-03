@@ -102,7 +102,7 @@ public class Board : MonoBehaviour
 
         piece.transform.parent = squares[index].transform;
         pieces.Add(piece.AddComponent<UnitRenderer>());
-
+        piece.AddComponent<UnitHealthBar>();
         squares[index].layer = LayerMask.NameToLayer("Grid");
         squares[index].AddComponent<BoxCollider>().size = new Vector3(squareSize, squareSize);
 

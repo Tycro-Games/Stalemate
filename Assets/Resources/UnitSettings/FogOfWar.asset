@@ -18,7 +18,7 @@ MonoBehaviour:
   movePositions: []
   attackPositions: []
   cost: 0
-  hitsToDiePerTurn: 999
+  hitsToDiePerTurn: 0
   boost: 0
   flip: 0
   boostPositions: []

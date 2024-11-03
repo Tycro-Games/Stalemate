@@ -8,6 +8,6 @@ public static class GlobalSettings {
     if (modifiers == null) {
       modifiers = Resources.Load<GlobalModifiers>("GlobalModifiersData");
     }
-    return modifiers != null ? modifiers.HpModifier : 1;
+    return modifiers != null ? modifiers.HpModifier : 0;
   }
 }

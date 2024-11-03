@@ -39,7 +39,8 @@ public class UnitRenderer : MonoBehaviour {
   private float alpha = 1.0f;
 
   private int hp;
-
+  public event Action<int> onDamageTaken;
+  public event Action<int> onUnitSetHp;
   public UnitData Clone() {
     var clone = new UnitData { spriteRenderer = spriteRenderer, unitSettings = unitSettings,
                                alpha = alpha, hp = hp };
@@ -60,6 +61,7 @@ public class UnitRenderer : MonoBehaviour {
 
   public bool TryToKill(int i = 1) {
     hp -= i;
+    onDamageTaken?.Invoke(i);
     if (hp <= 0)
       return true;
 
@@ -87,10 +89,15 @@ public class UnitRenderer : MonoBehaviour {
     var settings = unitSettings.unitSettings;
     if (settings == null) {
       spriteRenderer.sprite = null;
+      hp = 0;
+      onUnitSetHp?.Invoke(hp);
+
       return;
     }
 
     hp = settings.hitsToDiePerTurn + GlobalSettings.GetHpModifier();
+    onUnitSetHp?.Invoke(hp);
+
     spriteRenderer.sprite = settings.sprite;
     spriteRenderer.material.SetFloat("_IsRed", unitSettings.isRed ? 1.0f : 0.0f);
     spriteRenderer.material.SetFloat("_IsFlipped", unitSettings.unitSettings.flip ? 1.0f : 0.0f);
@@ -99,7 +106,7 @@ public class UnitRenderer : MonoBehaviour {
   public void SetUnitData(UnitData unitData) {
     spriteRenderer = unitData.spriteRenderer;
     alpha = unitData.alpha;
-    hp = unitData.hp;
+
     SetUnitSettings(unitData.unitSettings);
   }
 }

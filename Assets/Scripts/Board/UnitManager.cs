@@ -56,39 +56,39 @@ public class UnitManager : MonoBehaviour {
   public void UpdateWinningCounts() {
     redUnitsOnY = 0;
     blueUnitsOnY = 0;
-    var middleLineXs = new List<int>();
+    var middleLineXs = new List<float>();
     var middleLineYs = new List<float>();
     foreach (var position in positions) {
-      middleLineXs.Add((int)position.transform.position.x);
+      middleLineXs.Add(position.transform.position.x);
       middleLineYs.Add(position.transform.position.y);
     }
-    var redUnitXs = new List<int>();
-    var redUnitYs = new List<int>();
+    var redUnitXs = new List<float>();
+    var redUnitYs = new List<float>();
     foreach (var redUnit in redUnits) {
-      redUnitXs.Add((int)redUnit.transform.position.x);
-      redUnitYs.Add((int)redUnit.transform.position.y);
+      redUnitXs.Add(redUnit.transform.position.x);
+      redUnitYs.Add(redUnit.transform.position.y);
     }
 
-    var blueUnitXs = new List<int>();
-    var blueUnitYs = new List<int>();
+    var blueUnitXs = new List<float>();
+    var blueUnitYs = new List<float>();
     foreach (var blueUnit in blueUnits) {
-      blueUnitXs.Add((int)blueUnit.transform.position.x);
-      blueUnitYs.Add((int)blueUnit.transform.position.y);
+      blueUnitXs.Add(blueUnit.transform.position.x);
+      blueUnitYs.Add(blueUnit.transform.position.y);
     }
     for (int i = 0; i < middleLineXs.Count; i++) {
-      int middleLineX = middleLineXs[i];
+      float middleLineX = middleLineXs[i];
       float middleLineY = middleLineYs[i];
 
       // Count red units on Y axis
       for (int j = 0; j < redUnitXs.Count; j++) {
-        if (redUnitXs[j] == middleLineX && redUnitYs[j] <= middleLineY) {
+        if (Math.Abs(redUnitXs[j] - middleLineX) < 0.01f && redUnitYs[j] <= middleLineY) {
           redUnitsOnY++;
         }
       }
 
       // Count blue units on Y axis
       for (int j = 0; j < blueUnitXs.Count; j++) {
-        if (blueUnitXs[j] == middleLineX && blueUnitYs[j] >= middleLineY) {
+        if (Math.Abs(blueUnitXs[j] - middleLineX) < 0.01f && blueUnitYs[j] >= middleLineY) {
           blueUnitsOnY++;
         }
       }
