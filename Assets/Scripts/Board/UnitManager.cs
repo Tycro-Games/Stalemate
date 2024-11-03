@@ -230,7 +230,8 @@ public class UnitManager : MonoBehaviour {
 
         if (newSquare.GetUnitSettings().unitSettings != null)
           continue;
-        newSquare.SetUnitSettings(settings);
+
+        newSquare.SetUnitSettingsAndHp(settings, units[i].GetHp());
 
         finalUnitSpace[i] = newSquare;
 

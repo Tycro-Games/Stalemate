@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 532787fa1984a6547b9709022c0692ae, type: 3}
   m_Name: GlobalModifiersData
   m_EditorClassIdentifier: 
-  hpModifier: 0
+  hpModifier: 1

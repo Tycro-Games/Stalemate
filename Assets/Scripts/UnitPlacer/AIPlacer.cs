@@ -363,19 +363,24 @@ public class AIPlacer : MonoBehaviour {
     if (enemyIndicies.Count > 0)
       for (var i = 0; i < indexEnemy.Count; i++)
         if (unitRenderers[i].GetUnitSettings().unitSettings.cost < 5)
-          SetUnitRenderer(unitRenderers[i], enemyList[enemyIndicies[i]]);
+          SetUnitRendererAndInitializeHealth(unitRenderers[i], enemyList[enemyIndicies[i]]);
         else
           // just spawn the high cost one
-          SetUnitRenderer(unitRenderers[i], enemyList[enemyList.Count - 1]);
+          SetUnitRendererAndInitializeHealth(unitRenderers[i], enemyList[enemyList.Count - 1]);
     else
       for (var i = 0; i < unitRenderers.Count; i++)
-        SetUnitRenderer(unitRenderers[i], enemyList[indexEnemy[i]]);
+        SetUnitRendererAndInitializeHealth(unitRenderers[i], enemyList[indexEnemy[i]]);
 
     onEnemyEndTurn?.Invoke();
   }
 
   private void SetUnitRenderer(UnitRenderer unitRenderer, UnitBoardInfo settings) {
     unitRenderer.SetUnitSettings(settings);
+    onEnemyPlace?.Invoke(unitRenderer);
+  }
+  private void SetUnitRendererAndInitializeHealth(UnitRenderer unitRenderer,
+                                                  UnitBoardInfo settings) {
+    unitRenderer.SetUnitSettingsAndHp(settings, unitRenderer.GetHp());
     onEnemyPlace?.Invoke(unitRenderer);
   }
 

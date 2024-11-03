@@ -21,7 +21,6 @@ public struct UnitBoardInfo {
   public ScriptableUnitSettings unitSettings;
   public bool isRed;
   public bool isKillable;
-
   public void Reset() {
     isRed = true;
     unitSettings = null;
@@ -38,7 +37,11 @@ public class UnitRenderer : MonoBehaviour {
   [SerializeField]
   private float alpha = 1.0f;
 
-  private int hp;
+  private int hp = 0;
+
+  public int GetHp() {
+    return hp;
+  }
   public event Action<int> onDamageTaken;
   public event Action<int> onUnitSetHp;
   public UnitData Clone() {
@@ -67,10 +70,13 @@ public class UnitRenderer : MonoBehaviour {
 
     return false;
   }
-
   public void SetUnitSettings(UnitBoardInfo settings) {
     unitSettings = settings;
-
+    Draw();
+  }
+  public void SetUnitSettingsAndHp(UnitBoardInfo settings, int previousHp = 0) {
+    unitSettings = settings;
+    InitializeHealth(previousHp);
     Draw();
   }
 
@@ -94,19 +100,23 @@ public class UnitRenderer : MonoBehaviour {
 
       return;
     }
-
-    hp = settings.hitsToDiePerTurn + GlobalSettings.GetHpModifier();
-    onUnitSetHp?.Invoke(hp);
-
     spriteRenderer.sprite = settings.sprite;
     spriteRenderer.material.SetFloat("_IsRed", unitSettings.isRed ? 1.0f : 0.0f);
     spriteRenderer.material.SetFloat("_IsFlipped", unitSettings.unitSettings.flip ? 1.0f : 0.0f);
+  }
+
+  public void InitializeHealth(int Hp) {
+    if (unitSettings.unitSettings && unitSettings.unitSettings.hitsToDiePerTurn != 0) {
+      hp = hp == 0 ? unitSettings.unitSettings.hitsToDiePerTurn + GlobalSettings.GetHpModifier()
+                   : Hp;
+      onUnitSetHp?.Invoke(hp);
+    }
   }
 
   public void SetUnitData(UnitData unitData) {
     spriteRenderer = unitData.spriteRenderer;
     alpha = unitData.alpha;
 
-    SetUnitSettings(unitData.unitSettings);
+    SetUnitSettingsAndHp(unitData.unitSettings, unitData.hp);
   }
 }
