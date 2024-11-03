@@ -47,6 +47,15 @@ public class Board : MonoBehaviour
   public List<UnitRenderer> pieces;
   [SerializeField]
   private float pieceSize = 7.0f;
+  [SerializeField]
+  private float squareSize = 2.0f;
+
+  public float GetSquareSize() {
+    return squareSize;
+  }
+  public Vector2 GetBoardSize() {
+    return new Vector2(startingSizeX, startingSizeY);
+  }
 
 #if UNITY_EDITOR
   [CustomEditor(typeof(Board))]
@@ -95,13 +104,14 @@ public class Board : MonoBehaviour
         pieces.Add(piece.AddComponent<UnitRenderer>());
 
         squares[index].layer = LayerMask.NameToLayer("Grid");
-        squares[index].AddComponent<BoxCollider>();
+        squares[index].AddComponent<BoxCollider>().size = new Vector3(squareSize, squareSize);
 
         var square = squares[index].transform;
         square.parent = transform;
         square.localRotation = Quaternion.identity;
         square.name = (x, y).ToString();
-        square.localPosition = new Vector2(x, y);
+        float offset = squareSize;
+        square.localPosition = new Vector2(x * offset, y * offset);
 
         if (y == sizeY / 2) {
           var spriteObj = new GameObject();
@@ -128,13 +138,15 @@ public class Board : MonoBehaviour
 
           middle.transform.localPosition = new Vector2(0.0f, 0.0f);
           middle.transform.localRotation = Quaternion.identity;
-
+          middle.transform.localScale = new Vector2(squareSize, squareSize);
           middle.sprite = middleVerticalLines;
+
         } else {
           var spriteRenderer = new GameObject("Grid" + (x, y)).AddComponent<SpriteRenderer>();
           spriteRenderer.transform.parent = squares[index].transform;
           spriteRenderer.transform.localPosition = new Vector2(0.0f, 0.0f);
           spriteRenderer.transform.localRotation = Quaternion.identity;
+          spriteRenderer.transform.localScale = new Vector2(squareSize, squareSize);
           spriteRenderer.sprite = spritesOrder[y];
           if (y == 0) {
             spriteRenderer.name = "Blue";
