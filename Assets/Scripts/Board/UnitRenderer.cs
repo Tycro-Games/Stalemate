@@ -107,7 +107,7 @@ public class UnitRenderer : MonoBehaviour {
 
   public void InitializeHealth(int Hp) {
     if (unitSettings.unitSettings && unitSettings.unitSettings.hitsToDiePerTurn != 0) {
-      hp = hp == 0 ? unitSettings.unitSettings.hitsToDiePerTurn + GlobalSettings.GetHpModifier()
+      hp = Hp == 0 ? unitSettings.unitSettings.hitsToDiePerTurn + GlobalSettings.GetHpModifier()
                    : Hp;
       onUnitSetHp?.Invoke(hp);
     }
