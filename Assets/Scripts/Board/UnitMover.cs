@@ -105,7 +105,7 @@ public class UnitMover : MonoBehaviour {
       spriteGameObject[i].SetActive(true);
       spriteGameObject[i].transform.position = init[i].transform.position;
       UnitRenderer unitRenderer = spriteGameObject[i].GetComponent<UnitRenderer>();
-      unitRenderer.SetUnitSettingsAndHp(unitData, fin[i].GetHp());
+      unitRenderer.SetUnitSettingsAndHp(unitData, init[i].GetHp());
 
       fin[i].SetUnitSettings(new UnitBoardInfo());
     }
@@ -122,7 +122,7 @@ public class UnitMover : MonoBehaviour {
 
     for (int i = 0; i < init.Count; i++) {
       UnitRenderer unitRenderer = spriteGameObject[i].GetComponent<UnitRenderer>();
-      fin[i].SetUnitSettingsAndHp(unitRenderer.GetUnitSettings(), fin[i].GetHp());
+      fin[i].SetUnitSettingsAndHp(unitRenderer.GetUnitSettings(), unitRenderer.GetHp());
 
       spriteGameObject[i].SetActive(false);
     }
