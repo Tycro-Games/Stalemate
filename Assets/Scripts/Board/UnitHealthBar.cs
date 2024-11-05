@@ -54,7 +54,7 @@ public class UnitHealthBar : MonoBehaviour {
     }
 
     // Define spacing between health units
-    float spacing = 0.2f;
+    float spacing = 0.04f;
 
     // Calculate the total width of all units
     float totalWidth = (currentHp - 1) * spacing;
