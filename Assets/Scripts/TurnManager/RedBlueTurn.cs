@@ -14,6 +14,9 @@ public class RedBlueTurn : MonoBehaviour {
 
   [SerializeField]
   private int startingPoints = 0;
+  [SerializeField]
+  private int incrementPoints;
+
   public static int maxPoints;
   public static int currentPoints;
 
@@ -127,7 +130,7 @@ public class RedBlueTurn : MonoBehaviour {
   public void SetValues() {
     currentTurn++;
     if (increasePoints) {
-      maxPoints++;
+      maxPoints += incrementPoints;
       increasePoints = false;
     } else {
       increasePoints = true;
@@ -141,7 +144,9 @@ public class RedBlueTurn : MonoBehaviour {
   private UnityEvent onSwitchPriorityToRed;
   [SerializeField]
   private UnityEvent onSwitchPriorityToBlue;
-  public void SwitchSides() {
+
+  public void SwitchSides()
+  {
     isPlayerFirst = !isPlayerFirst;
     if (isPlayerFirst) {
       onSideChange?.Invoke("Red");
