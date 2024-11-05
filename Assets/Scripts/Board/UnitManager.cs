@@ -304,9 +304,16 @@ public class UnitManager : MonoBehaviour {
     {
       piece.hasPerformedAction = false;
     }
-    MoveUnits(ref piecesToBoost, GlobalSettings.GetOneActionPerUnit());
-    AttackUnits(ref piecesToBoost, GlobalSettings.GetOneActionPerUnit());
-
+    if (GlobalSettings.GetOneActionPerUnit())
+    {
+      AttackUnits(ref piecesToBoost, GlobalSettings.GetOneActionPerUnit());
+      MoveUnits(ref piecesToBoost, GlobalSettings.GetOneActionPerUnit());
+    }
+    else
+    {
+      MoveUnits(ref piecesToBoost);
+      AttackUnits(ref piecesToBoost);
+    }
     CleanNullEnemies(ref redUnits);
     CleanNullEnemies(ref blueUnits);
     if (isRed)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4_Tank
   m_EditorClassIdentifier: 
   title: tank
-  description: 'Takes two hits at once to kill '
+  description: Replace this with actual description
   sprite: {fileID: 21300000, guid: 919c492096a82434b8a3128b50f300ce, type: 3}
   movePositions:
   - {x: 0, y: -1}
@@ -22,4 +22,5 @@ MonoBehaviour:
   cost: 4
   hitsToDiePerTurn: 2
   boost: 0
+  flip: 0
   boostPositions: []
