@@ -118,23 +118,24 @@ public class UnitManager : MonoBehaviour {
   }
 
   public void MoveCurrentSide() {
-    StartCoroutine(Movement(isPlayerTurn));
+    StartCoroutine(Movement(isPlayerTurn, GlobalSettings.GetOneActionPerUnit()));
   }
 
   public void AttackCurrentSide() {
-    StartCoroutine(Attack(isPlayerTurn));
+    StartCoroutine(Attack(isPlayerTurn, GlobalSettings.GetOneActionPerUnit()));
   }
 
   public void BoostCurrentSide() {
     StartCoroutine(Boost(isPlayerTurn));
   }
 
-  private IEnumerator Movement(bool isRed) {
+  private IEnumerator Movement(bool isRed, bool canSetPerformAction)
+  {
     yield return new WaitForSeconds(timeBeforeMove);
     if (isRed)
-      MoveUnits(ref redUnits);
+      MoveUnits(ref redUnits, canSetPerformAction);
     else
-      MoveUnits(ref blueUnits);
+      MoveUnits(ref blueUnits, canSetPerformAction);
 
     yield return StartCoroutine(MovementFeedback());
 
@@ -176,13 +177,14 @@ public class UnitManager : MonoBehaviour {
     UpdateWinningCounts();
   }
 
-  private IEnumerator Attack(bool isRed) {
+  private IEnumerator Attack(bool isRed, bool canSetPerformAction)
+  {
     yield return new WaitForSeconds(timeBeforeMove);
     if (isRed) {
-      AttackUnits(ref redUnits);
+      AttackUnits(ref redUnits, canSetPerformAction);
       CleanNullEnemies(ref blueUnits);
     } else {
-      AttackUnits(ref blueUnits);
+      AttackUnits(ref blueUnits, canSetPerformAction);
       CleanNullEnemies(ref redUnits);
     }
     yield return StartCoroutine(AttackFeedback(isRed));
@@ -208,7 +210,8 @@ public class UnitManager : MonoBehaviour {
   public void GetFinalMovementSquares(out List<UnitRenderer> movePos) {
     movePos = finalUnitSpace;
   }
-  public void MoveUnits(ref List<UnitRenderer> units) {
+  public void MoveUnits(ref List<UnitRenderer> units, bool setPerformAction = false)
+  {
     if (units.Count == 0)
       return;
 
@@ -243,7 +246,10 @@ public class UnitManager : MonoBehaviour {
 
         units[i] = newSquare;
 
-        units[i].hasPerformedAction = true;
+        if (setPerformAction)
+        {
+          units[i].hasPerformedAction = true;
+        }
       }
     }
   }
@@ -294,9 +300,12 @@ public class UnitManager : MonoBehaviour {
       return;
     piecesToBoost = piecesToBoost.Distinct().ToList();
     var isRed = piecesToBoost[0].GetUnitSettings().isRed;
-
-    MoveUnits(ref piecesToBoost);
-    AttackUnits(ref piecesToBoost);
+    foreach (var piece in piecesToBoost)
+    {
+      piece.hasPerformedAction = false;
+    }
+    MoveUnits(ref piecesToBoost, GlobalSettings.GetOneActionPerUnit());
+    AttackUnits(ref piecesToBoost, GlobalSettings.GetOneActionPerUnit());
 
     CleanNullEnemies(ref redUnits);
     CleanNullEnemies(ref blueUnits);
@@ -308,7 +317,8 @@ public class UnitManager : MonoBehaviour {
     ResetRedBlueUnitLists();
   }
 
-  public void AttackUnits(ref List<UnitRenderer> units) {
+  public void AttackUnits(ref List<UnitRenderer> units, bool setPerformAction = false)
+  {
     if (units.Count == 0)
       return;
 
@@ -360,7 +370,10 @@ public class UnitManager : MonoBehaviour {
           attackPositions.Add(
               Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.HIT_UNIT));
         }
-        newSquare.hasPerformedAction = true;
+        if (setPerformAction)
+        {
+          units[i].hasPerformedAction = true;
+        }
       }
     }
   }

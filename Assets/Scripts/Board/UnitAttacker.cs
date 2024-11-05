@@ -26,13 +26,15 @@ public class UnitAttacker : MonoBehaviour {
       yield break;
     attackPositions =
         attackPositions.GroupBy(x => new { x.Item1, x.Item2 }).Select(x => x.First()).ToList();
+    bool anyHit = false;
     for (int i = 0; i < attackPositions.Count; i++) {
       // add based on type
       GameObject explosionEffect;
+      bool hasHit = true;
       switch (attackPositions[i].Item2) {
         case AttackTypes.EMPTY_SPACE:
           explosionEffect = emptyAttackEffect;
-
+          hasHit = false;
           break;
         case AttackTypes.DESTROY_UNIT:
           explosionEffect = destroyUnitEffect;
@@ -43,11 +45,16 @@ public class UnitAttacker : MonoBehaviour {
         default:
           throw new ArgumentOutOfRangeException();
       }
-      GameObject exp =
-          Instantiate(explosionEffect, attackPositions[i].Item1, Quaternion.identity, transform);
-      exp.GetComponent<ExplosionRenderer>().DrawColor(isRed);
+      if (hasHit)
+      {
+        anyHit = true;
+        GameObject exp =
+           Instantiate(explosionEffect, attackPositions[i].Item1, Quaternion.identity, transform);
+        exp.GetComponent<ExplosionRenderer>().DrawColor(isRed);
+      }
     }
-    AudioManager.instance.PlayOneShot(AudioManager.instance.shootSound);
+    if (anyHit)
+    { AudioManager.instance.PlayOneShot(AudioManager.instance.shootSound); }
     yield return null;
   }
 
