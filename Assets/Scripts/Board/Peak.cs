@@ -40,16 +40,10 @@ public class Peak : MonoBehaviour {
     GetCurrentPieces();
     var currentUnits = RedBlueTurn.IsRedFirst() ? red : blue;
 
-    if (GlobalSettings.GetMovesEachUnitIndividually() == false)
-    {
-      unitManager.MoveUnits(ref currentUnits);
-      unitManager.AttackUnits(ref currentUnits);
-    }
-    else
-    {
-      unitManager.AttackUnits(ref currentUnits);
-      unitManager.MoveUnits(ref currentUnits);
-    }
+
+    unitManager.AttackUnits(ref currentUnits);
+    unitManager.MoveUnits(ref currentUnits);
+
     if (currentUnits.Count > 0) {
       // move sprite
       unitManager.GetInitialMovementSquares(out var initialUnitSpace);
