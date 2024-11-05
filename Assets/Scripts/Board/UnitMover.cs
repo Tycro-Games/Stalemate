@@ -108,7 +108,7 @@ public class UnitMover : MonoBehaviour {
       spriteGameObject[i].SetActive(true);
       spriteGameObject[i].transform.position = init[i].transform.position;
       UnitRenderer unitRenderer = spriteGameObject[i].GetComponent<UnitRenderer>();
-      unitRenderer.SetUnitSettingsAndHp(unitData, init[i].GetHp());
+      unitRenderer.SetUnitSettingsAndHp(unitData, fin[i].GetHp());
 
       fin[i].SetUnitSettings(new UnitBoardInfo());
     }
@@ -134,6 +134,10 @@ public class UnitMover : MonoBehaviour {
         Debug.Log(init[i].name + " " + fin[i].name);
 
         yield return StartCoroutine(MoveToTarget(spriteGameObject[i].transform, fin[i].transform));
+      }
+      while (countDone > 0)
+      {
+        yield return null;
       }
     }
     for (int i = 0; i < init.Count; i++) {
