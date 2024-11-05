@@ -40,8 +40,16 @@ public class Peak : MonoBehaviour {
     GetCurrentPieces();
     var currentUnits = RedBlueTurn.IsRedFirst() ? red : blue;
 
-    unitManager.MoveUnits(ref currentUnits);
-    unitManager.AttackUnits(ref currentUnits);
+    if (GlobalSettings.GetMovesEachUnitIndividually() == false)
+    {
+      unitManager.MoveUnits(ref currentUnits);
+      unitManager.AttackUnits(ref currentUnits);
+    }
+    else
+    {
+      unitManager.AttackUnits(ref currentUnits);
+      unitManager.MoveUnits(ref currentUnits);
+    }
     if (currentUnits.Count > 0) {
       // move sprite
       unitManager.GetInitialMovementSquares(out var initialUnitSpace);
@@ -90,7 +98,12 @@ public class Peak : MonoBehaviour {
   public void Peaking() {
     unitAttacker.DeleteAllPreviews();
     unitMover.DeleteAllPreviews();
-    for (var i = 0; i < previousBoard.Count; i++) board.pieces[i].SetUnitData(previousBoard[i]);
+    for (var i = 0; i < previousBoard.Count; i++)
+    {
+      board.pieces[i].SetUnitData(previousBoard[i]);
+      board.pieces[i].hasPerformedAction = false;
+
+    }
     unitManager.ResetRedBlueUnitLists();
     StepAhead();
     onPeak?.Invoke();

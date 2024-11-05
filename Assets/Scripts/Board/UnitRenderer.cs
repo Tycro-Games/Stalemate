@@ -38,6 +38,7 @@ public class UnitRenderer : MonoBehaviour {
   private float alpha = 1.0f;
 
   private int hp = 0;
+  public bool hasPerformedAction = false;
 
   public int GetHp() {
     return hp;
@@ -50,7 +51,10 @@ public class UnitRenderer : MonoBehaviour {
 
     return clone;
   }
-
+  public bool GetHasPerformedAction()
+  {
+    return hasPerformedAction;
+  }
   public void MakeKillable() {
     unitSettings.isKillable = true;
   }
@@ -61,6 +65,7 @@ public class UnitRenderer : MonoBehaviour {
   public UnitBoardInfo GetUnitSettings() {
     return unitSettings;
   }
+
 
   public bool TryToKill(int i = 1) {
     hp -= i;

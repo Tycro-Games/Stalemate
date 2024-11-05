@@ -96,7 +96,9 @@ public class UnitMover : MonoBehaviour {
     for (int i = 0; i < fin.Count; i++) {
       if (fin[i] == null) {
         fin[i] = init[i];
+
       }
+
 
     }
 

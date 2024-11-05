@@ -32,6 +32,7 @@ public class UnitAttacker : MonoBehaviour {
       switch (attackPositions[i].Item2) {
         case AttackTypes.EMPTY_SPACE:
           explosionEffect = emptyAttackEffect;
+
           break;
         case AttackTypes.DESTROY_UNIT:
           explosionEffect = destroyUnitEffect;

@@ -211,16 +211,20 @@ public class UnitManager : MonoBehaviour {
   public void MoveUnits(ref List<UnitRenderer> units) {
     if (units.Count == 0)
       return;
+
     initialUnitSpace = new List<UnitRenderer>(new UnitRenderer[units.Count]);
     finalUnitSpace = new List<UnitRenderer>(new UnitRenderer[units.Count]);
 
     SortUnits(ref units);
     for (var i = 0; i < units.Count; i++) {
+
       var settings = units[i].GetUnitSettings();
       var sign = settings.isRed ? 1 : -1;
 
       if (initialUnitSpace[i] == null)
         initialUnitSpace[i] = units[i];
+      if (GlobalSettings.GetOneActionPerUnit() && units[i].hasPerformedAction)
+        continue;
       // get settings
       for (var j = 0; j < settings.unitSettings.movePositions.Length; j++) {
         UnitRenderer newSquare = Board.PieceInFrontWithPadding(
@@ -238,6 +242,8 @@ public class UnitManager : MonoBehaviour {
         units[i].SetUnitSettings(new UnitBoardInfo());
 
         units[i] = newSquare;
+
+        units[i].hasPerformedAction = true;
       }
     }
   }
@@ -309,6 +315,8 @@ public class UnitManager : MonoBehaviour {
     attackPositions = new List<Tuple<Vector2, AttackTypes>>();
     SortUnits(ref units);
     for (var i = 0; i < units.Count; i++) {
+      if (GlobalSettings.GetOneActionPerUnit() && units[i].hasPerformedAction)
+        continue;
       var settings = units[i].GetUnitSettings();
 
       var sign = settings.isRed ? 1 : -1;
@@ -330,11 +338,12 @@ public class UnitManager : MonoBehaviour {
           continue;
         }
 
-        if (attackedSquareSettings.isKillable == false) {
-          attackPositions.Add(
-              Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.HIT_UNIT));
-          continue;
-        }
+
+        // if (attackedSquareSettings.isKillable == false) {
+        //   attackPositions.Add(
+        //       Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.HIT_UNIT));
+        //   continue;
+        // }
 
         if (attackedSquareSettings.isRed == settings.isRed)
           continue;
@@ -351,6 +360,7 @@ public class UnitManager : MonoBehaviour {
           attackPositions.Add(
               Tuple.Create((Vector2)newSquare.transform.position, AttackTypes.HIT_UNIT));
         }
+        newSquare.hasPerformedAction = true;
       }
     }
   }
