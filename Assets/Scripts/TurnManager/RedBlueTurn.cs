@@ -15,7 +15,7 @@ public class RedBlueTurn : MonoBehaviour {
   [SerializeField]
   private int startingPoints = 0;
   [SerializeField]
-  private int incrementPoints;
+  private int incrementPoints = 1;
 
   public static int maxPoints;
   public static int currentPoints;
