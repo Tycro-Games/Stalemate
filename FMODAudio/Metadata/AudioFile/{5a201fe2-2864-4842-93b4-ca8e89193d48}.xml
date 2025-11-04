@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{5a201fe2-2864-4842-93b4-ca8e89193d48}">
+		<property name="assetPath">
+			<value>kenney_interface-sounds/Audio/glass_003.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.1236734693877551</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b5d29fa2-2d5c-4273-9978-0413f9fb5f69}</destination>
+		</relationship>
+	</object>
+</objects>

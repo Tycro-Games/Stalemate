@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f3480e8c-8eba-430e-8389-30865c410f86}">
+		<property name="assetPath">
+			<value>kenney_interface-sounds/Audio/maximize_004.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.4179591836734694</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b5d29fa2-2d5c-4273-9978-0413f9fb5f69}</destination>
+		</relationship>
+	</object>
+</objects>

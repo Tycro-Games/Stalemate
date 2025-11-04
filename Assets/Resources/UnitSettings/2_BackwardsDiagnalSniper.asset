@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
+  m_Name: 2_BackwardsDiagnalSniper
+  m_EditorClassIdentifier: 
+  title: Backwards Diagonal Sniper
+  description: Moves twice, then Hits 2 tiles behind it diagnally (Ask playtest host
+    for details if unclear)
+  sprite: {fileID: 21300000, guid: 1117445a2b3a7bb45be9c4c3f6e70a65, type: 3}
+  movePositions:
+  - {x: 0, y: -1}
+  - {x: 0, y: -1}
+  attackPositions:
+  - {x: 1, y: 1}
+  - {x: 2, y: 2}
+  - {x: -1, y: 1}
+  - {x: -2, y: 2}
+  cost: 2
+  hitsToDiePerTurn: 1
+  boost: 0
+  boostPositions: []

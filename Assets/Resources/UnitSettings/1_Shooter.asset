@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4af507ed6d88bd418a42aaaa51f8f80, type: 3}
+  m_Name: 1_Shooter
+  m_EditorClassIdentifier: 
+  title: Shooter
+  description: Moves on tile forward, then Shoots one tile forward
+  sprite: {fileID: 21300000, guid: ebf25b53b45756643adacd616a03bdc4, type: 3}
+  movePositions:
+  - {x: 0, y: -1}
+  attackPositions:
+  - {x: 0, y: -1}
+  cost: 1
+  hitsToDiePerTurn: 1
+  boost: 0
+  boostPositions: []
