@@ -27,7 +27,7 @@ Below is the `Phase System` that is used to configure each of the events mention
 <img width="508" height="894" alt="phase" src="https://github.com/user-attachments/assets/510e76fc-49b8-48a8-a5c8-938aaf0a0d2d" />
 
 ### AI system
-Stalemate is based on chess and it is using backtracking to generate all possible permutations of the 5 units that are available at a time. In the project there is a scene called `Backtracking` that showcases how the AI rates a board. In the video below you can see how the test scene is used to generate permutation using a max cost. These are sorted based on a developer defined rating. In the video below, blue side is configured to have a smaller rating if there are fewer units placed, thefore, the highest rating boards have a lot as many units as possible.
+Stalemate is based on chess and it is using **backtracking** to generate all possible permutations of the 5 units in the 4 squares that are available at a time. In the project there is a scene called **Backtracking** that showcases how the AI rates a board. In the video below you can see how the test scene is used to generate permutation using a max cost. These are sorted based on a developer defined rating. Blue side is configured to have a smaller rating if there are fewer units placed, therefore, the highest rating boards have as many units as possible.
 
 
 https://github.com/user-attachments/assets/4d294881-11e9-4b09-950e-336594f07d4c
